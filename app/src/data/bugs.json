@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Common Butterfly",
+        "thumbnail": "common_butterfly.png",
+        "location": "Flying",
+        "price": 160,
+        "times": [{"startTime": "0001-01-01T04:00:00.000Z", "endTime": "0001-01-01T18:59:59.000Z"}],
+        "northMonths": [8, 9, 10, 11, 0, 1, 2, 3, 4, 5],
+        "southMonths": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    }
+]
