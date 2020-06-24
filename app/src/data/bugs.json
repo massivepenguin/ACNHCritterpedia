@@ -1,11 +1,802 @@
 [
     {
+        "id": 1,
         "name": "Common Butterfly",
         "thumbnail": "common_butterfly.png",
-        "location": "Flying",
+        "location": "flying",
         "price": 160,
-        "times": [{"startTime": "0001-01-01T04:00:00.000Z", "endTime": "0001-01-01T18:59:59.000Z"}],
-        "northMonths": [8, 9, 10, 11, 0, 1, 2, 3, 4, 5],
-        "southMonths": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [9,10,11,12,1,2,3,4,5,6],
+        "southMonths": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    },
+    {
+        "id": 2,
+        "name": "Yellow Butterfly",
+        "thumbnail": "yellow_butterfly.png",
+        "location": "flying",
+        "price": 160,
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [3,4,5,8,9,10],
+        "southMonths": [4,8,9,10,11,12]
+    },
+    {
+        "id": 3,
+        "name": "Tiger Butterfly",
+        "thumbnail": "tiger_butterfly.png",
+        "location": "flying",
+        "price": 240,
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [3,4,5,6,7,8,9],
+        "southMonths": [9,10,11,1,2,3]
+    },
+    {
+        "id": 4,
+        "name": "Peacock Butterfly",
+        "thumbnail": "peacock_butterfly.png",
+        "location": "flyingHybridFlowers",
+        "price": 2500,
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [3,4,5,6],
+        "southMonths": [9,10,11,12]
+    },
+    {
+        "id": 5,
+        "name": "Common Bluebottle",
+        "thumbnail": "common_bluebottle.png",
+        "location": "flying",
+        "price": 300,
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8],
+        "southMonths": [10,11,1,2]
+    },
+    {
+        "id": 6,
+        "name": "Paper Kite Butterfly",
+        "thumbnail": "paper_kite.png",
+        "location": "flying",
+        "price": 1000,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 7,
+        "name": "Great Purple Emperor",
+        "thumbnail": "great_purple_emperor.png",
+        "location": "flying",
+        "price": 3000,
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [5,6,7,8],
+        "southMonths": [11,12,1,2]
+    },
+    {
+        "id": 8,
+        "name": "Monarch Butterfly",
+        "thumbnail": "monarch_butterfly.png",
+        "location": "flying",
+        "price": 140,
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [9,10,11],
+        "southMonths": [3,4,5]
+    },
+    {
+        "id": 9,
+        "name": "Emperor Butterfly",
+        "thumbnail": "emperor_butterfly.png",
+        "location": "flying",
+        "price": 4000,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [6,7,8,9],
+        "southMonths": [12,1,2,3]
+    },
+    {
+        "id": 10,
+        "name": "Agrias Butterfly",
+        "thumbnail": "agrias_butterfly.png",
+        "location": "flying",
+        "price": 3000,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8,9],
+        "southMonths": [11,12,1,2,3]
+    },
+    {
+        "id": 11,
+        "name": "Raja Brooke's Birdwing",
+        "thumbnail": "brookes_birdwing.png",
+        "location": "flyingPurple",
+        "price": 2500,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8,9,12,1,2],
+        "southMonths": [11,12,1,2,3,6,7,8]
+    },
+    {
+        "id": 12,
+        "name": "Queen Alexandra's Birdwing",
+        "thumbnail": "queen_birdwing.png",
+        "location": "flying",
+        "price": 4000,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T16:00:00.000Z"}],
+        "northMonths": [5,6,7,8,9],
+        "southMonths": [11,12,1,2,3]
+    },
+    {
+        "id": 13,
+        "name": "Moth",
+        "thumbnail": "moth.png",
+        "location": "flyingLight",
+        "price": 130,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T04:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 14,
+        "name": "Atlas Moth",
+        "thumbnail": "atlas_moth.png",
+        "location": "trees",
+        "price": 3000,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T04:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8,9],
+        "southMonths": [10,11,12,1,2,3]
+    },
+    {
+        "id": 15,
+        "name": "Madagascan Sunset Moth",
+        "thumbnail": "sunset_moth.png",
+        "location": "flying",
+        "price": 2500,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T16:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8,9],
+        "southMonths": [10,11,12,1,2,3]
+    },
+    {
+        "id": 16,
+        "name": "Long Locust",
+        "thumbnail": "long_locust.png",
+        "location": "ground",
+        "price": 200,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8,9,10,11],
+        "southMonths": [11,12,1,2,3,4,5]
+    },
+    {
+        "id": 17,
+        "name": "Migratory Locust",
+        "thumbnail": "migratory_locust.png",
+        "location": "ground",
+        "price": 600,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [8,9,10,11],
+        "southMonths": [2,3,4,5]
+    },
+    {
+        "id": 18,
+        "name": "Rice Grasshopper",
+        "thumbnail": "rice_grasshopper.png",
+        "location": "ground",
+        "price": 160,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [8,9,10,11],
+        "southMonths": [2,3,4,5]
+    },
+    {
+        "id": 19,
+        "name": "Grasshopper",
+        "thumbnail": "grasshopper.png",
+        "location": "ground",
+        "price": 160,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [7,8,9],
+        "southMonths": [1,2,3]
+    },
+    {
+        "id": 20,
+        "name": "Cricket",
+        "thumbnail": "cricket.png",
+        "location": "ground",
+        "price": 130,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [9,10,11],
+        "southMonths": [3,4,5]
+    },
+    {
+        "id": 21,
+        "name": "Bell Cricket",
+        "thumbnail": "bell_cricket.png",
+        "location": "ground",
+        "price": 430,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [9,10],
+        "southMonths": [3,4]
+    },
+    {
+        "id": 22,
+        "name": "Mantis",
+        "thumbnail": "mantis.png",
+        "location": "flowers",
+        "price": 430,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [3,4,5,6,7,8,9,10,11],
+        "southMonths": [9,10,11,12,1,2,3,4,5]
+    },
+    {
+        "id": 23,
+        "name": "Orchid Mantis",
+        "thumbnail": "orchid_mantis.png",
+        "location": "whiteFlowers",
+        "price": 430,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [3,4,5,6,7,8,9,10,11],
+        "southMonths": [9,10,11,12,1,2,3,4,5]
+    },
+    {
+        "id": 24,
+        "name": "Honeybee",
+        "thumbnail": "honeybee.png",
+        "location": "flying",
+        "price": 200,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [3,4,5,6,7],
+        "southMonths": [3,4,5,6,7]
+    },
+    {
+        "id": 25,
+        "name": "Wasp",
+        "thumbnail": "wasp.png",
+        "location": "shakeTrees",
+        "price": 2500,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 26,
+        "name": "Brown Cicada",
+        "thumbnail": "brown_cicada.png",
+        "location": "trees",
+        "price": 250,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 27,
+        "name": "Robust Cicada",
+        "thumbnail": "robust_cicada.png",
+        "location": "trees",
+        "price": 300,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 28,
+        "name": "Giant Cicada",
+        "thumbnail": "giant_cicada.png",
+        "location": "trees",
+        "price": 600,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 29,
+        "name": "Walker Cicada",
+        "thumbnail": "walker_cicada.png",
+        "location": "trees",
+        "price": 400,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [8,9],
+        "southMonths": [2,3]
+    },
+    {
+        "id": 30,
+        "name": "Evening Cicada",
+        "thumbnail": "evening_cicada.png",
+        "location": "trees",
+        "price": 660,
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}, {"startTime": "2000-01-01T16:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 31,
+        "name": "Cicada Shell",
+        "thumbnail": "cicada_shell.png",
+        "location": "trees",
+        "price": 10,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1, 2]
+    },
+    {
+        "id": 32,
+        "name": "Red Dragonfly",
+        "thumbnail": "red_dragonfly.png",
+        "location": "flying",
+        "price": 180,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [9,10],
+        "southMonths": [3,4]
+    },
+    {
+        "id": 33,
+        "name": "Darner Dragonfly",
+        "thumbnail": "darner_dragonfly.png",
+        "location": "flying",
+        "price": 230,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8,9,10],
+        "southMonths": [10,11,12,1,2,3,4]
+    },
+    {
+        "id": 34,
+        "name": "Banded Dragonfly",
+        "thumbnail": "banded_dragonfly.png",
+        "location": "flying",
+        "price": 4500,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [5,6,7,8,9,10],
+        "southMonths": [11,12,1,2,3,4]
+    },
+    {
+        "id": 35,
+        "name": "Damselfly",
+        "thumbnail": "damselfly.png",
+        "location": "flying",
+        "price": 500,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [11,12,1,2],
+        "southMonths": [5,6,7,8]
+    },
+    {
+        "id": 36,
+        "name": "Firefly",
+        "thumbnail": "firefly.png",
+        "location": "flying",
+        "price": 300,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T04:00:00.000Z"}],
+        "northMonths": [6],
+        "southMonths": [12]
+    },
+    {
+        "id": 37,
+        "name": "Mole Cricket",
+        "thumbnail": "mole_cricket.png",
+        "location": "underground",
+        "price": 500,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [11,12,1,2,3,4,5],
+        "southMonths": [5,6,7,8,9,10,11]
+    },
+    {
+        "id": 38,
+        "name": "Pondskater",
+        "thumbnail": "pondskater.png",
+        "location": "pondsSurface",
+        "price": 130,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [5,6,7,8,9],
+        "southMonths": [11,12,1,2,3]
+    },
+    {
+        "id": 39,
+        "name": "Diving Beetle",
+        "thumbnail": "diving_beetle.png",
+        "location": "pondsRiversSurface",
+        "price": 800,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [5,6,7,8,9],
+        "southMonths": [11,12,1,2,3]
+    },
+    {
+        "id": 40,
+        "name": "Giant Water Bug",
+        "thumbnail": "giant_water_bug.png",
+        "location": "pondsRiversSurface",
+        "price": 2000,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8,9],
+        "southMonths": [10,11,12,1,2,3]
+    },
+    {
+        "id": 41,
+        "name": "Stinkbug",
+        "thumbnail": "stinkbug.png",
+        "location": "flowers",
+        "price": 120,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [3,4,5,6,7,8,9,10,11],
+        "southMonths": [9,10,11,12,1,2,3,4]
+    },
+    {
+        "id": 42,
+        "name": "Man-faced Stink Bug",
+        "thumbnail": "man_faced_stink_bug.png",
+        "location": "flowers",
+        "price": 1000,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [3,4,5,6,7,8,9,10,11],
+        "southMonths": [9,10,11,12,1,2,3,4]
+    },
+    {
+        "id": 43,
+        "name": "Ladybug",
+        "thumbnail": "ladybug.png",
+        "location": "flowers",
+        "price": 200,
+        "times": [{"startTime": "2000-01-01T08:00:00.000Z", "endTime": "2000-01-01T17:00:00.000Z"}],
+        "northMonths": [3,4,5,6,10],
+        "southMonths": [9,10,11,12,4]
+    },
+    {
+        "id": 44,
+        "name": "Tiger Beetle",
+        "thumbnail": "tiger_beetle.png",
+        "location": "ground",
+        "price": 1500,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [2,3,4,5,6,7,8,9,10,11],
+        "southMonths": [8,9,10,11,12,1,2,3,4,5]
+    },
+    {
+        "id": 45,
+        "name": "Jewel Beetle",
+        "thumbnail": "jewel_beetle.png",
+        "location": "treeStumps",
+        "price": 2400,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8],
+        "southMonths": [10,11,12,1,2]
+    },
+    {
+        "id": 46,
+        "name": "Violin Beetle",
+        "thumbnail": "violin_beetle.png",
+        "location": "treeStumps",
+        "price": 450,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [5,6,9,10,11],
+        "southMonths": [11,12,3,4]
+    },
+    {
+        "id": 47,
+        "name": "Citrus Long-horned Beetle",
+        "thumbnail": "citrus_beetle.png",
+        "location": "treeStumps",
+        "price": 350,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 48,
+        "name": "Rosalia Batesi Beetle",
+        "thumbnail": "batesi_beetle.png",
+        "location": "treeStumps",
+        "price": 3000,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [5,6,7,8,9],
+        "southMonths": [11,12,1,2,3]
+    },
+    {
+        "id": 49,
+        "name": "Blue Weevil Beetle",
+        "thumbnail": "blue_weevil_beetle.png",
+        "location": "coconutTrees",
+        "price": 800,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 50,
+        "name": "Dung Beetle",
+        "thumbnail": "dung_beetle.png",
+        "location": "pushingSnowballs",
+        "price": 3000,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [12,1,2],
+        "southMonths": [6,7,8]
+    },
+    {
+        "id": 51,
+        "name": "Earth-boring Dung Beetle",
+        "thumbnail": "earth_boring_dung_beetle.png",
+        "location": "ground",
+        "price": 300,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [7,8,9],
+        "southMonths": [1,2,3]
+    },
+    {
+        "id": 52,
+        "name": "Scarab Beetle",
+        "thumbnail": "scarab_beetle.png",
+        "location": "trees",
+        "price": 10000,
+        "times": [{"startTime": "2000-01-01T23:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 53,
+        "name": "Drone Beetle",
+        "thumbnail": "drone_beetle.png",
+        "location": "trees",
+        "price": 200,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [6,7,8],
+        "southMonths": [12,1,2]
+    },
+    {
+        "id": 54,
+        "name": "Goliath Beetle",
+        "thumbnail": "goliath_beetle.png",
+        "location": "coconutTrees",
+        "price": 8000,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [6,7,8,9],
+        "southMonths": [12,1,2,3]
+    },
+    {
+        "id": 55,
+        "name": "Saw Stag",
+        "thumbnail": "saw_stag.png",
+        "location": "trees",
+        "price": 2000,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 56,
+        "name": "Miyama Stag",
+        "thumbnail": "miyama_stag.png",
+        "location": "trees",
+        "price": 1000,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 57,
+        "name": "Giant Stag",
+        "thumbnail": "giant_stag.png",
+        "location": "trees",
+        "price": 10000,
+        "times": [{"startTime": "2000-01-01T23:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 58,
+        "name": "Rainbow Stag",
+        "thumbnail": "rainbow_stag.png",
+        "location": "trees",
+        "price": 8000,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [6,7,8,9],
+        "southMonths": [12,1,2,3]
+    },
+    {
+        "id": 59,
+        "name": "Cyclommatus Stag",
+        "thumbnail": "cyclommatus_stag.png",
+        "location": "coconutTrees",
+        "price": 8000,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 60,
+        "name": "Golden Stag",
+        "thumbnail": "golden_stag.png",
+        "location": "coconutTrees",
+        "price": 12000,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 61,
+        "name": "Giraffe Stag",
+        "thumbnail": "giraffe_stag.png",
+        "location": "coconutTrees",
+        "price": 12000,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 62,
+        "name": "Horned Dynastid",
+        "thumbnail": "horned_dynastid.png",
+        "location": "trees",
+        "price": 1350,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 63,
+        "name": "Horned Atlas",
+        "thumbnail": "horned_atlas.png",
+        "location": "coconutTrees",
+        "price": 8000,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 64,
+        "name": "Horned Elephant",
+        "thumbnail": "horned_elephant.png",
+        "location": "coconutTrees",
+        "price": 8000,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 65,
+        "name": "Horned Herucles",
+        "thumbnail": "horned_hercules.png",
+        "location": "coconutTrees",
+        "price": 12000,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2]
+    },
+    {
+        "id": 66,
+        "name": "Walking Stick",
+        "thumbnail": "walking_stick.png",
+        "location": "trees",
+        "price": 600,
+        "times": [{"startTime": "2000-01-01T04:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}, {"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T19:00:00.000Z"}],
+        "northMonths": [7,8,9,10,11],
+        "southMonths": [1,2,3,4,5]
+    },
+    {
+        "id": 67,
+        "name": "Walking Leaf",
+        "thumbnail": "walking_leaf.png",
+        "location": "leafDisguise",
+        "price": 600,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [7,8],
+        "southMonths": [1,2,3]
+    },
+    {
+        "id": 68,
+        "name": "Bagworm",
+        "thumbnail": "bagworm.png",
+        "location": "shakeTrees",
+        "price": 600,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 69,
+        "name": "Ant",
+        "thumbnail": "ant.png",
+        "location": "rottenFood",
+        "price": 80,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 70,
+        "name": "Hermit Crab",
+        "thumbnail": "hermit_crab.png",
+        "location": "shellDisguise",
+        "price": 1000,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 71,
+        "name": "Wharf Roach",
+        "thumbnail": "wharf_roach.png",
+        "location": "rocksBeach",
+        "price": 200,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 72,
+        "name": "Fly",
+        "thumbnail": "fly.png",
+        "location": "onTrash",
+        "price": 60,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 73,
+        "name": "Mosquito",
+        "thumbnail": "mosquito.png",
+        "location": "flying",
+        "price": 130,
+        "times": [{"startTime": "2000-01-01T17:00:00.000Z", "endTime": "2000-01-01T04:00:00.000Z"}],
+        "northMonths": [6,7,8,9],
+        "southMonths": [12,1,2,3]
+    },
+    {
+        "id": 74,
+        "name": "Flea",
+        "thumbnail": "flea.png",
+        "location": "onVillagers",
+        "price": 70,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [4,5,6,7,8,9,10,11],
+        "southMonths": [10,11,12,1,2,3,4,5]
+    },
+    {
+        "id": 75,
+        "name": "Snail",
+        "thumbnail": "snail.png",
+        "location": "rocksShrubsRaining",
+        "price": 250,
+        "times": [{"startTime": "2000-01-01T00:00:00.000Z", "endTime": "2000-01-01T24:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 76,
+        "name": "Pill Bug",
+        "thumbnail": "pill_bug.png",
+        "location": "hitRocks",
+        "price": 250,
+        "times": [{"startTime": "2000-01-01T23:00:00.000Z", "endTime": "2000-01-01T16:00:00.000Z"}],
+        "northMonths": [9,10,11,12,1,2,3,4,5,6],
+        "southMonths": [3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 77,
+        "name": "Centipede",
+        "thumbnail": "centipede.png",
+        "location": "hitRocks",
+        "price": 300,
+        "times": [{"startTime": "2000-01-01T16:00:00.000Z", "endTime": "2000-01-01T23:00:00.000Z"}],
+        "northMonths": [9,10,11,12,1,2,3,4,5,6],
+        "southMonths": [3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 78,
+        "name": "Spider",
+        "thumbnail": "spider.png",
+        "location": "shakeTrees",
+        "price": 480,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T08:00:00.000Z"}],
+        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
+        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+    {
+        "id": 79,
+        "name": "Tarantula",
+        "thumbnail": "tarantula.png",
+        "location": "ground",
+        "price": 8000,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T04:00:00.000Z"}],
+        "northMonths": [11,12,1,2,3,4],
+        "southMonths": [5,6,7,8,9,10]
+    },
+    {
+        "id": 80,
+        "name": "Scorpion",
+        "thumbnail": "scorpion.png",
+        "location": "ground",
+        "price": 8000,
+        "times": [{"startTime": "2000-01-01T19:00:00.000Z", "endTime": "2000-01-01T04:00:00.000Z"}],
+        "northMonths": [5,6,7,8,9,10],
+        "southMonths": [11,12,1,2,3,4]
     }
 ]

@@ -1,19 +1,21 @@
 [
     {
+        "id": 1,
         "name": "bitterling",
         "thumbnail": "bitterling.png",
         "location": "River",
-        "size": 1,
+        "silhouetteSize": 1,
         "price": 900,
         "times": [{"startTime": "0001-01-01T04:00:00.000Z", "endTime": "0001-01-01T23:59:59.000Z"}],
         "northMonths": [10,11,0,1,2],
         "southMonths": [4,5,6,7,8]
     },
     {
+        "id": 2,
         "name": "Plae Chub",
         "thumbnail": "pale_chub.png",
         "location": "River",
-        "size": 1,
+        "silhouetteSize": 1,
         "price": 160,
         "times": [{"startTime": "0001-01-01T09:00:00.000Z", "endTime": "0001-01-01T15:59:59.000Z"}],
         "northMonths": [0,1,2,3,4,5,6,7,8,9,10,11],

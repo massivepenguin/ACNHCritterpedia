@@ -4,9 +4,7 @@ import { ICritter } from '../model/ICritter';
 import bugs from '../data/bugs.json';
 import fish from '../data/fish.json';
 import { ITimeSpan } from '../model/ITimeSpan';
-import { IFish } from '../model/IFish';
-import { CritterEntry} from './CritterEntry';
-
+import { CritterEntry } from './CritterEntry';
 
 interface IMainApp {
     hemisphere: string;
@@ -16,7 +14,8 @@ interface IMainApp {
 
 const initialState = {
     currentView: 'all',
-    filteredCritters: undefined as undefined | ICritterList,
+    availableCritters: undefined as undefined | ICritterList,
+    upcomingCritters: undefined as undefined | ICritterList,
     loading: true,
 }
 
@@ -38,35 +37,55 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
         }
     }
 
-    private async filterCritterAvailability(critterList: ICritterList) {
+    private filterCritterList = (critterList: ICritter[], upcomingOnly: boolean = false): ICritter[] => {
+        const currentMonth = new Date().getMonth() + 1; // the months in the json files are not zero-indexed
+        const currentHour = new Date().getHours();
+        const availableCritters = critterList.filter((critter: ICritter) => {
+            const monthsCritterAppears = this.props.hemisphere === 'north' ? critter.northMonths : critter.southMonths;
+            if(monthsCritterAppears.indexOf(currentMonth) > -1) {
+                // check if the critter is available at this moment in time
+                for(const timeRange of critter.times) {
+                    const startTime = new Date(timeRange.startTime).getHours();
+                    const endTime = new Date(timeRange.endTime).getHours();
+                    if(!upcomingOnly) {
+                        if(startTime <= currentHour && endTime >= currentHour) {
+                            return critter;
+                        }
+                    } else {
+                        if(startTime > currentHour) {
+                            console.log(critter.name, currentHour, startTime)
+                            return critter;
+                        }
+                    }
+                }
+            }
+        });
+        return availableCritters;
+    }
+
+    private filterCritterAvailability(critterList: ICritterList) {
         this.setState({
             loading: true,
         });
-        const currentMonth = new Date().getMonth();
-        const currentTime = new Date().getTime();
-        critterList.bugs.map((critter: ICritter) => {
-            const monthsCritterAppears = this.props.hemisphere === 'north' ? critter.northMonths : critter.southMonths;
-            if(monthsCritterAppears.indexOf(currentMonth) > -1) {
-                return critter;
-            }
-            return false;
-        });
-        critterList.fish.map((critter: IFish) => {
-            const monthsCritterAppears = this.props.hemisphere === 'north' ? critter.northMonths : critter.southMonths;
-            if(monthsCritterAppears.indexOf(currentMonth) > -1) {
-                return critter;
-            }
-            return false;
-        });
+
+        const currentCritters: ICritterList = {
+            bugs: this.filterCritterList(critterList.bugs),
+            fish: this.filterCritterList(critterList.fish)
+        }
+
+        const upcomingCritters: ICritterList = {
+            bugs: this.filterCritterList(critterList.bugs, true),
+            fish: this.filterCritterList(critterList.fish, true),
+        }
 
         this.setState({
-            filteredCritters: critterList,
+            availableCritters: currentCritters,
+            upcomingCritters: upcomingCritters,
             loading: false,
         });
     }
 
     private createCritterList = async() => {
-        console.log("init");
       const sourceBugList = bugs;
       const critterList: ICritterList = { bugs: [], fish: []};
       for(const bug of sourceBugList) {
@@ -142,9 +161,11 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
         const { loading } = this.state;
         return (
             loading ? <div>Loading</div> 
-            : <div><h1>What can I catch right now?</h1><ul>{
-                this.state.filteredCritters?.bugs.map((bug:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critter={bug} key={bug.name} /> )
-                }</ul></div>
+            : <div><h1>You can currently catch {this.state.availableCritters?.bugs.length} Bugs:</h1><ul>{
+                this.state.availableCritters?.bugs.map((bug:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={'bug'} critterId={bug.id} critter={bug} key={`bug_${bug.id}`} /> )
+                }</ul><h1>You can catch {this.state.upcomingCritters?.bugs.length} Bugs later today:</h1><ul>{
+                    this.state.upcomingCritters?.bugs.map((bug:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={'bug'} critterId={bug.id} critter={bug} key={`bug_${bug.id}`} /> )
+                    }</ul></div>
         );
     }
 }
