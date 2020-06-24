@@ -2,27 +2,14 @@ import React, {useState} from 'react';
 import './App.css';
 import { HemisphereChooser } from './UI/HemisphereChooser';
 import { MainApp } from './UI/MainApp';
-import { ICritter } from './model/ICritter';
-import bugs from './data/bugs.json';
-import { ITimeSpan } from './model/ITimeSpan';
-
 function App() {
   const [hemisphere, setHemisphere] = useLocalStorage('hemisphere', undefined);
-  const [bugList, updateBugList] = useLocalStorage('bugs', createBugList());
-
-  function createBugList() {
-    const sourceBugList = bugs;
-    const bugList: ICritter[] = [];
-    for(const bug of sourceBugList) {
-      bugList.push({...bug, times: bug.times as ITimeSpan[], caught: false, donated: false});
-    }
-    updateBugList(bugList);
-  }
+  const [critterList, updateCritterList] = useLocalStorage('critters', undefined);
 
   return (
     <div className="App">
       {
-        hemisphere ? <MainApp hemisphere={hemisphere} bugList={bugList} /> : <HemisphereChooser toggleHemisphere={setHemisphere} />
+        hemisphere ? <MainApp hemisphere={hemisphere} critterList={critterList} updateCritterList={updateCritterList} /> : <HemisphereChooser toggleHemisphere={setHemisphere} />
       }
     </div>
   );
