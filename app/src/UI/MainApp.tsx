@@ -38,27 +38,40 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
     }
 
     private filterCritterList = (critterList: ICritter[], upcomingOnly: boolean = false): ICritter[] => {
-        const currentMonth = new Date().getMonth() + 1; // the months in the json files are not zero-indexed
-        const currentHour = new Date().getHours();
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1; // the months in the json files are not zero-indexed
         const availableCritters = critterList.filter((critter: ICritter) => {
             const monthsCritterAppears = this.props.hemisphere === 'north' ? critter.northMonths : critter.southMonths;
             if(monthsCritterAppears.indexOf(currentMonth) > -1) {
                 // check if the critter is available at this moment in time
                 for(const timeRange of critter.times) {
-                    const startTime = new Date(timeRange.startTime).getHours();
-                    const endTime = new Date(timeRange.endTime).getHours();
+                    const startTime = new Date(timeRange.startTime);
+                    const endTime = new Date(timeRange.endTime);
+                    const startDate = new Date();
+                    startDate.setHours(startTime.getHours());
+                    startDate.setMinutes(startTime.getMinutes());
+                    startDate.setSeconds(startTime.getSeconds());
+                    startTime.setDate(currentDate.getDate());
+                    const endDate = new Date();
+                    endDate.setHours(endTime.getHours());
+                    endDate.setMinutes(endTime.getMinutes());
+                    endDate.setSeconds(endTime.getSeconds());
+                    if(startDate.getHours() > endDate.getHours()) {
+                        endDate.setDate(endDate.getDate() + 1);
+                    }
+                    console.log(critter.name, currentDate, startDate, endDate);
                     if(!upcomingOnly) {
-                        if(startTime <= currentHour && endTime >= currentHour) {
+                        if(startDate <= currentDate && endDate >= currentDate) {
                             return critter;
                         }
                     } else {
-                        if(startTime > currentHour) {
-                            console.log(critter.name, currentHour, startTime)
+                        if(startDate > currentDate) {
                             return critter;
                         }
                     }
                 }
             }
+            return null;
         });
         return availableCritters;
     }
