@@ -3,13 +3,19 @@ import { ICritterList } from '../model/ICritterList';
 import { ICritter } from '../model/ICritter';
 import bugs from '../data/bugs.json';
 import fish from '../data/fish.json';
-import { ITimeSpan } from '../model/ITimeSpan';
 import { CritterEntry } from './CritterEntry';
+import { correctDates } from '../helpers/dateHelpers';
 
 interface IMainApp {
     hemisphere: string;
-    critterList: ICritterList;
-    updateCritterList: (critterList: ICritterList) => void;
+    caughtBugs: string[];
+    donatedBugs: string[];
+    caughtFish: string[];
+    donatedFish: string[];
+    catchBug: (caughtCritters: string[]) => void;
+    catchFish: (caughtCritters: string[]) => void;
+    donateBug: (caughtCritters: string[]) => void;
+    donateFish: (caughtCritters: string[]) => void;
 }
 
 const initialState = {
@@ -21,51 +27,28 @@ const initialState = {
 
 export class MainApp extends React.Component<IMainApp, typeof initialState> {
     public state = initialState;
+    public critterList: ICritterList = {bugs: bugs, fish: fish};
 
     public componentDidMount() {
-        // initialise the critter list if it's blank
-        if(!this.props.critterList) {
-            this.createCritterList();
-        } else {
-            this.filterCritterAvailability(this.props.critterList);
-        }
-    }
-
-    public componentDidUpdate(prevProps: IMainApp) {
-        if(prevProps.critterList !== this.props.critterList) {
-            this.filterCritterAvailability(this.props.critterList);
-        }
+        this.filterCritterAvailability(this.critterList);
     }
 
     private filterCritterList = (critterList: ICritter[], upcomingOnly: boolean = false): ICritter[] => {
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth() + 1; // the months in the json files are not zero-indexed
+        const currentTime = new Date();
+        const currentMonth = currentTime.getMonth() + 1; // the months in the json files are not zero-indexed
         const availableCritters = critterList.filter((critter: ICritter) => {
             const monthsCritterAppears = this.props.hemisphere === 'north' ? critter.northMonths : critter.southMonths;
             if(monthsCritterAppears.indexOf(currentMonth) > -1) {
                 // check if the critter is available at this moment in time
                 for(const timeRange of critter.times) {
-                    const startTime = new Date(timeRange.startTime);
-                    const endTime = new Date(timeRange.endTime);
-                    const startDate = new Date();
-                    startDate.setHours(startTime.getHours());
-                    startDate.setMinutes(startTime.getMinutes());
-                    startDate.setSeconds(startTime.getSeconds());
-                    startTime.setDate(currentDate.getDate());
-                    const endDate = new Date();
-                    endDate.setHours(endTime.getHours());
-                    endDate.setMinutes(endTime.getMinutes());
-                    endDate.setSeconds(endTime.getSeconds());
-                    if(startDate.getHours() > endDate.getHours()) {
-                        endDate.setDate(endDate.getDate() + 1);
-                    }
-                    console.log(critter.name, currentDate, startDate, endDate);
+                    const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
+                    // console.log(critter.name, currentTime, startTime, endTime);
                     if(!upcomingOnly) {
-                        if(startDate <= currentDate && endDate >= currentDate) {
+                        if(startTime <= currentTime && endTime >= currentTime) {
                             return critter;
                         }
                     } else {
-                        if(startDate > currentDate) {
+                        if(startTime > currentTime) {
                             return critter;
                         }
                     }
@@ -98,76 +81,80 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
         });
     }
 
-    private createCritterList = async() => {
-      const sourceBugList = bugs;
-      const critterList: ICritterList = { bugs: [], fish: []};
-      for(const bug of sourceBugList) {
-        critterList.bugs.push({...bug, times: bug.times as ITimeSpan[], caught: false, donated: false});
-      }
-      const sourceFishList = fish;
-      for(const fish of sourceFishList) {
-        critterList.fish.push({...fish, times: fish.times as ITimeSpan[], caught: false, donated: false});
-      }
-      this.props.updateCritterList(critterList);
-    }
-
     public catchCritter = (e: React.SyntheticEvent<HTMLElement>) => {
-        const critterName = e.currentTarget.getAttribute('data-critter-name');
+        console.log("cattled catchCritter");
+        const critterId = e.currentTarget.getAttribute('data-critter-id');
         const critterType = e.currentTarget.getAttribute('data-critter-type');
-        const critterList: ICritterList = {bugs: [], fish: []};
-        switch(critterType) {
-            case 'bug': {
-                for(const bug of this.props.critterList.bugs) {
-                    if(bug.name === critterName) {
-                        critterList.bugs.push({...bug, caught: !bug.caught});
-                    } else {
-                        critterList.bugs.push(bug);
-                    }
+        const caughtArray: string[] = [];
+        if(critterId && critterType) {
+            switch(critterType) {
+                case 'bug': {
+                    caughtArray.push(...this.props.caughtBugs);
+                    break;
                 }
-                break;
+                case 'fish': {
+                    caughtArray.push(...this.props.caughtFish);
+                    break;
+                }
             }
-            case 'fish': {
-                for(const fish of this.props.critterList.fish) {
-                    if(fish.name === critterName) {
-                        critterList.fish.push({...fish, caught: !fish.caught});
-                    } else {
-                        critterList.fish.push(fish);
-                    }
+            const caughtIndex = caughtArray.indexOf(critterId);
+            if(caughtIndex > -1) {
+                caughtArray.splice(caughtIndex, 1);
+            } else {
+                caughtArray.push(critterId);
+            }
+            switch(critterType) {
+                case 'bug': {
+                    this.props.catchBug(caughtArray);
+                    break;
                 }
-                break;
+                case 'fish': {
+                    this.props.catchFish(caughtArray);
+                }
             }
         }
-        console.log(critterList);
-        this.props.updateCritterList(critterList);
     }
     
     public donateCritter = (e: React.SyntheticEvent<HTMLElement>) => {
-        const critterName = e.currentTarget.getAttribute('data-critter-name');
+        const critterId = e.currentTarget.getAttribute('data-critter-id');
         const critterType = e.currentTarget.getAttribute('data-critter-type');
-        const critterList: ICritterList = {bugs: [], fish: []};
-        switch(critterType) {
-            case 'bug': {
-                for(const bug of this.props.critterList.bugs) {
-                    if(bug.name === critterName) {
-                        critterList.bugs.push({...bug, caught: !bug.donated ? true : bug.caught, donated: !bug.donated});
-                    } else {
-                        critterList.bugs.push(bug);
-                    }
+        let donatedArray: string[] = [];
+        let caughtArray: string[] = [];
+        if(critterId && critterType) {
+            switch(critterType) {
+                case 'bug': {
+                    donatedArray.push(...this.props.donatedBugs);
+                    caughtArray.push(...this.props.caughtBugs);
+                    break;
                 }
-                break;
+                case 'fish': {
+                    donatedArray.push(...this.props.donatedFish);
+                    caughtArray.push(...this.props.caughtFish);
+                    break;
+                }
             }
-            case 'fish': {
-                for(const fish of this.props.critterList.fish) {
-                    if(fish.name === critterName) {
-                        critterList.fish.push({...fish, caught: !fish.donated ? true : fish.caught, donated: !fish.donated});
-                    } else {
-                        critterList.fish.push(fish);
-                    }
+            const donatedIndex = donatedArray.indexOf(critterId);
+            const caughtIndex = caughtArray.indexOf(critterId);
+            if(donatedIndex > -1) {
+                donatedArray.splice(donatedIndex, 1);
+            } else {
+                donatedArray.push(critterId);
+                if(caughtIndex <= -1) {
+                    caughtArray.push(critterId);
                 }
-                break;
+            }
+            switch(critterType) {
+                case 'bug': {
+                    this.props.catchBug(caughtArray);
+                    this.props.donateBug(donatedArray);
+                    break;
+                }
+                case 'fish': {
+                    this.props.catchFish(caughtArray);
+                    this.props.donateFish(donatedArray);
+                }
             }
         }
-        this.props.updateCritterList(critterList);
     }
 
     render() {
@@ -175,9 +162,9 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
         return (
             loading ? <div>Loading</div> 
             : <div><h1>You can currently catch {this.state.availableCritters?.bugs.length} Bugs:</h1><ul>{
-                this.state.availableCritters?.bugs.map((bug:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={'bug'} critterId={bug.id} critter={bug} key={`bug_${bug.id}`} /> )
+                this.state.availableCritters?.bugs.map((bug:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={'bug'} critterId={bug.id} critter={bug} key={`bug_${bug.id}`} caught={this.props.caughtBugs.indexOf(bug.id.toString()) > -1} donated={this.props.donatedBugs.indexOf(bug.id.toString()) > -1} /> )
                 }</ul><h1>You can catch {this.state.upcomingCritters?.bugs.length} Bugs later today:</h1><ul>{
-                    this.state.upcomingCritters?.bugs.map((bug:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={'bug'} critterId={bug.id} critter={bug} key={`bug_${bug.id}`} /> )
+                    this.state.upcomingCritters?.bugs.map((bug:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={'bug'} critterId={bug.id} critter={bug} key={`bug_${bug.id}`} caught={this.props.caughtBugs.indexOf(bug.id.toString()) > -1} donated={this.props.donatedBugs.indexOf(bug.id.toString()) > -1} /> )
                     }</ul></div>
         );
     }

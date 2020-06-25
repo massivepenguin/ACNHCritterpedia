@@ -85,7 +85,7 @@
         "thumbnail": "emperor_butterfly.png",
         "location": "flying",
         "price": 4000,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [6,7,8,9],
         "southMonths": [12,1,2,3]
     },
@@ -125,7 +125,7 @@
         "thumbnail": "moth.png",
         "location": "flyingLight",
         "price": 130,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -135,7 +135,7 @@
         "thumbnail": "atlas_moth.png",
         "location": "trees",
         "price": 3000,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
         "northMonths": [4,5,6,7,8,9],
         "southMonths": [10,11,12,1,2,3]
     },
@@ -195,7 +195,7 @@
         "thumbnail": "cricket.png",
         "location": "ground",
         "price": 130,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [9,10,11],
         "southMonths": [3,4,5]
     },
@@ -205,7 +205,7 @@
         "thumbnail": "bell_cricket.png",
         "location": "ground",
         "price": 430,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [9,10],
         "southMonths": [3,4]
     },
@@ -355,7 +355,7 @@
         "thumbnail": "firefly.png",
         "location": "flying",
         "price": 300,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
         "northMonths": [6],
         "southMonths": [12]
     },
@@ -395,7 +395,7 @@
         "thumbnail": "giant_water_bug.png",
         "location": "pondsRiversSurface",
         "price": 2000,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [4,5,6,7,8,9],
         "southMonths": [10,11,12,1,2,3]
     },
@@ -415,7 +415,7 @@
         "thumbnail": "man_faced_stink_bug.png",
         "location": "flowers",
         "price": 1000,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [3,4,5,6,7,8,9,10,11],
         "southMonths": [9,10,11,12,1,2,3,4]
     },
@@ -515,7 +515,7 @@
         "thumbnail": "scarab_beetle.png",
         "location": "trees",
         "price": 10000,
-        "times": [{"startTime": "2000-01-01T23:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T23:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -535,7 +535,7 @@
         "thumbnail": "goliath_beetle.png",
         "location": "coconutTrees",
         "price": 8000,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [6,7,8,9],
         "southMonths": [12,1,2,3]
     },
@@ -565,7 +565,7 @@
         "thumbnail": "giant_stag.png",
         "location": "trees",
         "price": 10000,
-        "times": [{"startTime": "2000-01-01T23:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T23:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -575,7 +575,7 @@
         "thumbnail": "rainbow_stag.png",
         "location": "trees",
         "price": 8000,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [6,7,8,9],
         "southMonths": [12,1,2,3]
     },
@@ -585,7 +585,7 @@
         "thumbnail": "cyclommatus_stag.png",
         "location": "coconutTrees",
         "price": 8000,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -595,7 +595,7 @@
         "thumbnail": "golden_stag.png",
         "location": "coconutTrees",
         "price": 12000,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -605,7 +605,7 @@
         "thumbnail": "giraffe_stag.png",
         "location": "coconutTrees",
         "price": 12000,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -615,7 +615,7 @@
         "thumbnail": "horned_dynastid.png",
         "location": "trees",
         "price": 1350,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -625,7 +625,7 @@
         "thumbnail": "horned_atlas.png",
         "location": "coconutTrees",
         "price": 8000,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -635,7 +635,7 @@
         "thumbnail": "horned_elephant.png",
         "location": "coconutTrees",
         "price": 8000,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -645,7 +645,7 @@
         "thumbnail": "horned_hercules.png",
         "location": "coconutTrees",
         "price": 12000,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [7,8],
         "southMonths": [1,2]
     },
@@ -695,7 +695,7 @@
         "thumbnail": "hermit_crab.png",
         "location": "shellDisguise",
         "price": 1000,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"},{"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -725,7 +725,7 @@
         "thumbnail": "mosquito.png",
         "location": "flying",
         "price": 130,
-        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T17:00:00.000", "endTime": "2000-01-01T24:00:00.000"},{"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
         "northMonths": [6,7,8,9],
         "southMonths": [12,1,2,3]
     },
@@ -755,7 +755,7 @@
         "thumbnail": "pill_bug.png",
         "location": "hitRocks",
         "price": 250,
-        "times": [{"startTime": "2000-01-01T23:00:00.000", "endTime": "2000-01-01T16:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T23:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T16:00:00.000"}],
         "northMonths": [9,10,11,12,1,2,3,4,5,6],
         "southMonths": [3,4,5,6,7,8,9,10,11,12]
     },
@@ -775,7 +775,7 @@
         "thumbnail": "spider.png",
         "location": "shakeTrees",
         "price": 480,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T08:00:00.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -785,7 +785,7 @@
         "thumbnail": "tarantula.png",
         "location": "ground",
         "price": 8000,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
         "northMonths": [11,12,1,2,3,4],
         "southMonths": [5,6,7,8,9,10]
     },
@@ -795,7 +795,7 @@
         "thumbnail": "scorpion.png",
         "location": "ground",
         "price": 8000,
-        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
+        "times": [{"startTime": "2000-01-01T19:00:00.000", "endTime": "2000-01-01T24:00:00.000"}, {"startTime": "2000-01-01T00:00:00.000", "endTime": "2000-01-01T04:00:00.000"}],
         "northMonths": [5,6,7,8,9,10],
         "southMonths": [11,12,1,2,3,4]
     }

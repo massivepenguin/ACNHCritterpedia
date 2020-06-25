@@ -10,6 +10,4 @@ export interface ICritter {
     northMonths: number[];
     southMonths: number[];
     silhouetteSize?: number;
-    caught?: boolean;
-    donated?: boolean;
 }
