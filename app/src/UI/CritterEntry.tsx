@@ -1,8 +1,9 @@
 import React from 'react';
 import {ICritter} from '../model/ICritter';
+import { critterType } from '../model/CritterType';
 
 interface ICritterEntry {
-    critterType: string,
+    critterType: critterType,
     critterId: number,
     critter: ICritter,
     caught: boolean | undefined,

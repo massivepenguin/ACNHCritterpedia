@@ -3,9 +3,14 @@ import './App.css';
 import { HemisphereChooser } from './UI/HemisphereChooser';
 import { MainApp } from './UI/MainApp';
 import { useLocalStorage } from './helpers/dataHelpers';
+import { filterType } from './model/FilterTypes';
 
 function App() {
   const [hemisphere, setHemisphere] = useLocalStorage('hemisphere', undefined);
+  const [activeFilter, changeFilter] = useLocalStorage('filterType', filterType.entryAsc);
+  const [timeOffset, changeTimeOffset] = useLocalStorage('offset', 0);
+  const [hideCaught, changeHideCaught] = useLocalStorage('hideCaught', false);
+  const [showAll, changeShowAll] = useLocalStorage('showAll', false);
   const [caughtBugs, catchBug] = useLocalStorage('caughtBugs', []);
   const [donatedBugs, donateBug] = useLocalStorage('donatedBugs', []);
   const [caughtFish, catchFish] = useLocalStorage('caughtFish', []);
@@ -20,7 +25,15 @@ function App() {
     catchBug,
     donateBug,
     catchFish,
-    donateFish
+    donateFish,
+    activeFilter,
+    changeFilter,
+    timeOffset,
+    changeTimeOffset,
+    hideCaught,
+    changeHideCaught,
+    showAll,
+    changeShowAll,
   }
 
   return (
