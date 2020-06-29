@@ -9,6 +9,7 @@ import { correctDates, setDateToCurrentDate } from '../helpers/dateHelpers';
 import { filterType } from '../model/FilterTypes';
 import { ListSorter } from './ListSorter';
 import Checkbox from './Checkbox';
+import { ICheckedCritterList } from '../model/ICheckedCritterList';
 
 interface IMainApp {
     hemisphere: string;
@@ -91,93 +92,58 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
         return 0;
     }
 
-    private async filterCritterAvailability() {
-        const availableBugs: number[] = [];
-        const availableFish: number[] = [];
-
-        const filterCritterList = (critterListIn: ICritter[], typeOfCritter: critterType, upcomingOnly: boolean = false): ICritter[] => {
-            let currentTime = new Date();
-            if(this.props.timeOffset !== 0) {
-                currentTime.setHours(currentTime.getHours() + this.props.timeOffset);
-                currentTime = setDateToCurrentDate(currentTime); // in case we crossed a time boundary, we reset the date to the current date (keeping the time)
-            }
-            const currentMonth = currentTime.getMonth() + 1; // the months in the json files are not zero-indexed
-            const availableCritters = critterListIn.filter((critter: ICritter) => {
-                // skip out of the rest of the function if we've caught this critter and are hiding ones we've caught
-                if(this.props.hideCaught) {
-                    switch(typeOfCritter) {
-                        case critterType.bug: {
-                            if(this.props.caughtBugs.indexOf(critter.id.toString()) > -1) {
-                                return null;
-                            }
-                            break;
-                        }
-                        case critterType.fish: {
-                            if(this.props.caughtFish.indexOf(critter.id.toString()) > -1) {
-                                return null;
-                            }
-                            break;
-                        }
-                    }
-                }
-
-                const monthsCritterAppears = this.props.hemisphere === 'north' ? critter.northMonths : critter.southMonths;
-                if(monthsCritterAppears.indexOf(currentMonth) > -1) {
-                    // check if the critter is available at this moment in time
-                    for(const timeRange of critter.times) {
-                        const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
-                        const isInTimeRange = endTime > startTime ? currentTime >= startTime && currentTime <= endTime : currentTime >= startTime || currentTime <= endTime;
-                        if(!upcomingOnly) {
-                            if(isInTimeRange) {
-                                switch(typeOfCritter) {
-                                    case critterType.bug: {
-                                        availableBugs.push(critter.id);
-                                        break;
-                                    }
-                                    case critterType.fish: {
-                                        availableFish.push(critter.id);
-                                        break;
-                                    }
-                                }
-                                return critter;
-                            }
-                        } else {
-                            if(!isInTimeRange && startTime > currentTime) {
-                                switch(typeOfCritter) {
-                                    case critterType.bug: {
-                                        if(availableBugs.indexOf(critter.id) < 0) {
-                                            return critter;
-                                        }
-                                        break;
-                                    }
-                                    case critterType.fish: {
-                                        if(availableFish.indexOf(critter.id) < 0) {
-                                            return critter;
-                                        }
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+    private filterCritterList = (critterListIn: ICritter[], caughtArray: string[]): ICheckedCritterList => {
+        const upcomingCritters: ICritter[] = [];
+        let currentTime = new Date();
+        if(this.props.timeOffset !== 0) {
+            currentTime.setHours(currentTime.getHours() + this.props.timeOffset);
+            currentTime = setDateToCurrentDate(currentTime); // in case we crossed a time boundary, we reset the date to the current date (keeping the time)
+        }
+        // for readability, the months in the json files are not zero-indexed (January = 1), but the date object's month is (January = 0). 
+        // We add 1 to the current date's month to address this
+        const currentMonth = currentTime.getMonth() + 1; 
+        const availableCritters = critterListIn.filter((critter: ICritter) => {
+            // skip out of the rest of the function if we've caught this critter and are hiding ones we've caught
+            if(this.props.hideCaught && caughtArray.indexOf(critter.id.toString()) > -1) {
                 return null;
-            });
-            return availableCritters;
-        };
+            }
+            const monthsCritterAppears = this.props.hemisphere === 'north' ? critter.northMonths : critter.southMonths;
+            if(monthsCritterAppears.indexOf(currentMonth) > -1) {
+                // check if the critter is available at this moment in time
+                for(const timeRange of critter.times) {
+                    const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
+                    const critterAppearingNow = startTime < endTime ? currentTime >= startTime && currentTime < endTime : endTime > currentTime && startTime > currentTime;
+                    if(critterAppearingNow) {
+                        return critter;
+                    } else {
+                        if (startTime > currentTime && !upcomingCritters.includes(critter)) {
+                            upcomingCritters.push(critter);
+                            continue;
+                        }
+                    }
+                }
+            }
+            return null;
+        });
+        return { available: availableCritters, upcoming: upcomingCritters };
+    };
 
+    private async filterCritterAvailability() {
         this.setState({
             loading: true,
         });
 
+        const checkedBugs: ICheckedCritterList = this.filterCritterList(this.critterList.bugs, this.props.caughtBugs);
+        const checkedFish: ICheckedCritterList = this.filterCritterList(this.critterList.fish, this.props.caughtFish);
+
         const availableCritters: ICritterList = {
-            bugs: filterCritterList(this.critterList.bugs, critterType.bug),
-            fish: filterCritterList(this.critterList.fish, critterType.fish)
+            bugs: checkedBugs.available,
+            fish: checkedFish.available
         }
 
         const upcomingCritters: ICritterList = {
-            bugs: filterCritterList(this.critterList.bugs, critterType.bug, true),
-            fish: filterCritterList(this.critterList.fish, critterType.fish, true),
+            bugs: checkedBugs.upcoming,
+            fish: checkedFish.upcoming
         }
 
         this.setState({
@@ -311,7 +277,26 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
                         }
                     </ul></>
                 }
-                
+                {
+                    this.props.showAll ? <><h1>All Fish</h1>
+                    <ul>
+                        {
+                            allFish?.map((fish:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={critterType.bug} critterId={fish.id} critter={fish} key={`fish_${fish.id}`} caught={this.props.caughtFish.indexOf(fish.id.toString()) > -1} donated={this.props.donatedFish.indexOf(fish.id.toString()) > -1} /> )
+                        }
+                    </ul></>
+                    : <><h1>You can currently catch {this.state.availableCritters?.fish.length} Fish:</h1>
+                    <ul>
+                        {
+                            availableFish?.map((fish:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={critterType.bug} critterId={fish.id} critter={fish} key={`fish_${fish.id}`} caught={this.props.caughtFish.indexOf(fish.id.toString()) > -1} donated={this.props.donatedFish.indexOf(fish.id.toString()) > -1} /> )
+                        }
+                    </ul>
+                    <h1>You can catch {this.state.upcomingCritters?.fish.length} Fish later today:</h1>
+                    <ul>
+                        {
+                            upcomingFish?.map((fish:ICritter) => <CritterEntry collectFunction={this.catchCritter} donateFunction={this.donateCritter} critterType={critterType.bug} critterId={fish.id} critter={fish} key={`fish_${fish.id}`} caught={this.props.caughtFish.indexOf(fish.id.toString()) > -1} donated={this.props.donatedFish.indexOf(fish.id.toString()) > -1} /> )
+                        }
+                    </ul></>
+                }
             </div>
         );
     }
