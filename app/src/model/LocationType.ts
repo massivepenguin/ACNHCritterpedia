@@ -1,7 +1,11 @@
 export enum LocationType {
     "river" = "River",
     "riverMouth" = "River Mouth",
-    "clifftop" = "Cliff Top",
+    "riverCliff" = "River (Clifftop)",
+    "pond" = "Pond",
+    "sea" = "Sea",
+    "pier" = "Sea (off pier)",
+    "seaRain" = "Sea (must be raining)",
     "flying" = "Flying around everywhere",
     "flyingHybridFlowers" = "Flying by hybrid flowers",
     "flyingPurple" = "Flying near purple flowers",
