@@ -84,9 +84,82 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
             case "valueDesc": {
                 return b.price > a.price ? -1 : b.price < a.price ? 1 : 0; 
             }
-            case "todayAsc": {
+            case "todayAsc": 
+            case "todayDesc": {
                 // get the difference between current time and when the critter disappears
+                const remainingTimesForA: number[] = [];
+                const remainingTimesForB: number[] = [];
+                for (const timeRange of a.times) {
+                    const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
+                    const critterAppearingNow = startTime <= endTime ? currentTime >= startTime && currentTime < endTime : endTime > currentTime && startTime > currentTime;
+                    const adjustedEndTime = new Date(endTime);
+                    adjustedEndTime.setDate(endTime.getDate() + 1);
+                    if(critterAppearingNow) {
+                        remainingTimesForA.push(startTime < currentTime ? endTime.getTime() - currentTime.getTime() : adjustedEndTime.getTime() - currentTime.getTime());
+                    }
+                }
+                for (const timeRange of b.times) {
+                    const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
+                    const critterAppearingNow = startTime <= endTime ? currentTime >= startTime && currentTime < endTime : endTime > currentTime && startTime > currentTime;
+                    const adjustedEndTime = new Date(endTime);
+                    adjustedEndTime.setDate(endTime.getDate() + 1);
+                    if(critterAppearingNow) {
+                        remainingTimesForB.push(startTime < currentTime ? endTime.getTime() - currentTime.getTime() : adjustedEndTime.getTime() - currentTime.getTime());
+                    }
+                }
+                if(remainingTimesForA.length && remainingTimesForB.length) {
+                    const sortFunction = (a: number, b: number) => a > b ? 1 : b < a ? -1 : 0;
+                    remainingTimesForA.sort(sortFunction);
+                    remainingTimesForB.sort(sortFunction);
+                    if(filterType[this.props.activeFilter] === "todayAsc") {
+                        return remainingTimesForA[0] > remainingTimesForB[0] ? 1 : remainingTimesForA[0] < remainingTimesForB[0] ? -1 : 0;    
+                    } else {
+                        return remainingTimesForA[0] < remainingTimesForB[0] ? 1 : remainingTimesForA[0] > remainingTimesForB[0] ? -1 : 0;
+                    }
+                }
+                return 0;
+            }
+            case "yearAsc":
+            case "yearDesc": {
+                // get the month and adjust it to account for the fact that the critter months are 1-indexed rather than 0-indexed
+                
+                const aMonths = this.props.hemisphere === "north" ? a.northMonths : a.southMonths;
+                const bMonths = this.props.hemisphere === "north" ? b.northMonths : b.southMonths;
+                const sortMonths = (a: number, b: number) => a > b ? 1 : b < a ? -1 : 0;
+                aMonths.sort(sortMonths);
+                bMonths.sort(sortMonths);
 
+                const calculateMonthsRemaining = (sourceMonths: number[]): number => {
+                    const thisMonth = currentTime.getMonth() + 1;
+                    const startIndex = sourceMonths.indexOf(thisMonth);
+                    if(startIndex > -1) {
+                        let remainingMonths: number = 0;
+                        let currentMonthIndex = startIndex;
+                        while(remainingMonths < 12) { // we'll be looping round to January if we hit December, so we put a limit on this to stop infinite loops
+                            let currentMonthNumber: number = sourceMonths[currentMonthIndex];
+                            // if the next month is contiguous, add 1 to the remaining months and proceed
+                            if(sourceMonths.length > currentMonthIndex && sourceMonths[currentMonthIndex + 1] === currentMonthNumber + 1) {
+                                ++remainingMonths;
+                                ++currentMonthIndex;
+                            } else if(currentMonthNumber === 12 && sourceMonths[0] === 1) {
+                                ++remainingMonths;
+                                currentMonthIndex = 0;
+                            } else {
+                                break;
+                            }
+                        }
+                        return remainingMonths;
+                    }
+                    return 0;
+                }
+
+                const remainingMonthsForA = calculateMonthsRemaining(aMonths);
+                const remainingMonthsForB = calculateMonthsRemaining(bMonths);
+                if(filterType[this.props.activeFilter] === "yearAsc") {
+                    return remainingMonthsForA > remainingMonthsForB ? 1 : remainingMonthsForA < remainingMonthsForB ? -1 : 0;    
+                } else {
+                    return remainingMonthsForA < remainingMonthsForB ? 1 : remainingMonthsForA > remainingMonthsForB ? -1 : 0;
+                }
             }
         }
         return 0;
@@ -112,7 +185,7 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
                 // check if the critter is available at this moment in time
                 for(const timeRange of critter.times) {
                     const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
-                    const critterAppearingNow = startTime < endTime ? currentTime >= startTime && currentTime < endTime : endTime > currentTime && startTime > currentTime;
+                    const critterAppearingNow = startTime <= endTime ? currentTime >= startTime && currentTime < endTime : endTime > currentTime && startTime > currentTime;
                     if(critterAppearingNow) {
                         return critter;
                     } else {
@@ -154,7 +227,6 @@ export class MainApp extends React.Component<IMainApp, typeof initialState> {
     }
 
     public catchCritter = (e: React.SyntheticEvent<HTMLElement>) => {
-        console.log("catching");
         const critterId = e.currentTarget.getAttribute('data-critter-id');
         const typeOfCritter = e.currentTarget.getAttribute('data-critter-type');
         const caughtArray: string[] = [];
