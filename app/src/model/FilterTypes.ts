@@ -1,5 +1,3 @@
-import { EnumDictionary } from "./EnumDictionary";
-
 export enum filterType {
     entryAsc,
     entryDesc,

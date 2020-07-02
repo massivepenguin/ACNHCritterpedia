@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { store } from '../reducers/appReducer';
+import { store, hideCaught, showAll } from '../reducers/appReducer';
 import { ICritterList } from '../model/ICritterList';
 import { ICritter } from '../model/ICritter';
 import { critterType } from '../model/CritterType';
@@ -59,6 +59,8 @@ function MainApp() {
         loading ? <div>Loading</div> 
         : <div>
             <ListSorter />
+            <Checkbox label={"Hide caught critters"} isSelected={state.hideCaught} onCheckboxChange={() => store.dispatch(hideCaught(!state.hideCaught))} />
+            <Checkbox label={"Show all critters"} isSelected={state.showAll} onCheckboxChange={() => store.dispatch(showAll(!state.showAll))} />
             {
                 state.showAll ? <><h1>All Bugs</h1>
                 <ul>

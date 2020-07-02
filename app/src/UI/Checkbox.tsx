@@ -6,19 +6,23 @@ interface ICheckbox {
     onCheckboxChange: (e: React.SyntheticEvent<HTMLInputElement>) => void
 }
 
-const Checkbox = (props: ICheckbox) => (
+function Checkbox(props: React.PropsWithChildren<ICheckbox>) {
+  const {label, isSelected, onCheckboxChange} = props;
+
+  return (
     <div className="form-check">
       <label>
         <input
           type="checkbox"
-          name={props.label}
-          checked={props.isSelected}
-          onChange={props.onCheckboxChange}
+          name={label}
+          checked={isSelected}
+          onChange={onCheckboxChange}
           className="form-check-input"
         />
         {props.label}
       </label>
     </div>
-  );
+  )
+}
   
-  export default Checkbox;
+export default Checkbox;
