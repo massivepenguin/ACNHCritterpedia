@@ -5,7 +5,7 @@ export function correctDates(startDate: string, endDate: string): Date[] {
     return [startTime, endTime];
 }
 
-export function setDateToCurrentDate(dateIn: Date):Date {
+export function setDateToCurrentDate(dateIn: Date): Date {
     const currentDate = new Date();
     currentDate.setHours(dateIn.getHours());
     currentDate.setMinutes(dateIn.getMinutes());

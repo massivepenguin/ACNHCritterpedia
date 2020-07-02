@@ -1,4 +1,4 @@
-import { ITimeSpan } from "./ITimeSpan";
+import { ITimeSpan } from './ITimeSpan';
 
 export interface ICritter {
     id: number;

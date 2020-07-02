@@ -1,27 +1,23 @@
-import {
-    configureStore,
-    getDefaultMiddleware,
-    createSlice,
-  } from "@reduxjs/toolkit";
-import { critterType } from "../model/CritterType";
-import { mainAppView } from "../model/MainAppView";
-import { filterType } from "../model/FilterTypes";
-  
-  const middleware = [
+import { configureStore, getDefaultMiddleware, createSlice } from '@reduxjs/toolkit';
+import { critterType } from '../model/CritterType';
+import { mainAppView } from '../model/MainAppView';
+import { filterType } from '../model/FilterTypes';
+
+const middleware = [
     ...getDefaultMiddleware(),
     /*YOUR CUSTOM MIDDLEWARES HERE*/
-  ];
+];
 
-  const catchSlice = createSlice({
+const catchSlice = createSlice({
     name: 'catch',
-    initialState: {bugs: [] as number[], fish: [] as number[]},
+    initialState: { bugs: [] as number[], fish: [] as number[] },
     reducers: {
         catchCritter: (state, action) => {
-            const {critterId, type} = action.payload;
+            const { critterId, type } = action.payload;
             switch (type) {
                 case critterType.bug: {
                     const critterIndex = state.bugs.indexOf(critterId);
-                    if(critterIndex > -1) {
+                    if (critterIndex > -1) {
                         state.bugs.splice(critterIndex, 1);
                     } else {
                         state.bugs.push(critterId);
@@ -30,7 +26,7 @@ import { filterType } from "../model/FilterTypes";
                 }
                 case critterType.fish: {
                     const critterIndex = state.bugs.indexOf(critterId);
-                    if(critterIndex> -1) {
+                    if (critterIndex > -1) {
                         state.fish.splice(critterIndex, 1);
                     } else {
                         state.fish.push(critterId);
@@ -41,20 +37,20 @@ import { filterType } from "../model/FilterTypes";
                     return state;
             }
             return state;
-        }
-    }
+        },
+    },
 });
 
 const donateSlice = createSlice({
     name: 'donate',
-    initialState: {bugs: [] as number[], fish: [] as number[]},
+    initialState: { bugs: [] as number[], fish: [] as number[] },
     reducers: {
         donateCritter: (state, action) => {
-            const {critterId, type} = action.payload;
+            const { critterId, type } = action.payload;
             switch (type) {
                 case critterType.bug: {
                     const critterIndex = state.bugs.indexOf(critterId);
-                    if(critterIndex> -1) {
+                    if (critterIndex > -1) {
                         state.bugs.splice(critterIndex, 1);
                     } else {
                         state.bugs.push(critterId);
@@ -63,7 +59,7 @@ const donateSlice = createSlice({
                 }
                 case critterType.fish: {
                     const critterIndex = state.bugs.indexOf(critterId);
-                    if(critterIndex> -1) {
+                    if (critterIndex > -1) {
                         state.fish.splice(critterIndex, 1);
                     } else {
                         state.fish.push(critterId);
@@ -74,8 +70,8 @@ const donateSlice = createSlice({
                     return state;
             }
             return state;
-        }
-    }
+        },
+    },
 });
 
 const hemispehereSlice = createSlice({
@@ -112,7 +108,7 @@ const filterSlice = createSlice({
     reducers: {
         changeFilter: (state, action) => {
             const newFilter = action.payload;
-            if(state !== newFilter) {
+            if (state !== newFilter) {
                 state = newFilter;
                 return state;
             }
@@ -128,7 +124,7 @@ const hideCaughtSlice = createSlice({
             const newValue = action.payload;
             state = newValue;
             return state;
-        }
+        },
     },
 });
 
@@ -150,7 +146,7 @@ const switchAppViewSlice = createSlice({
     reducers: {
         changeView: (state, action) => {
             const newView = action.payload;
-            if(state !== newView) {
+            if (state !== newView) {
                 state = newView;
                 return state;
             }

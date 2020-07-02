@@ -1,5 +1,5 @@
 export enum mainAppView {
     all,
     bugs,
-    fish
+    fish,
 }

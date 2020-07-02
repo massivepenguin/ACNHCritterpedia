@@ -7,30 +7,32 @@ function ListSorter() {
 
     const changeHandler = (e: React.SyntheticEvent<HTMLSelectElement>): void => {
         const changeValue = parseInt(e.currentTarget.value, 10);
-        if(!isNaN(changeValue) && changeValue !== state.activeFilter) {
+        if (!isNaN(changeValue) && changeValue !== state.activeFilter) {
             store.dispatch(changeFilter(changeValue));
         }
-    }
+    };
 
     const getSelectOptions = () => {
         const elements: JSX.Element[] = [];
         for (const opt in filterType) {
-            if(!isNaN(Number(opt))) {
-                elements.push(<option key={opt} value={opt}>{filterValues[opt]}</option>);
+            if (!isNaN(Number(opt))) {
+                elements.push(
+                    <option key={opt} value={opt}>
+                        {filterValues[opt]}
+                    </option>,
+                );
             }
         }
         return elements;
-    }
+    };
 
     return (
         <div>
             <select onChange={changeHandler} defaultValue={state.activeFilter}>
-                {
-                    getSelectOptions()
-                }
+                {getSelectOptions()}
             </select>
         </div>
-    )
+    );
 }
 
 export default ListSorter;

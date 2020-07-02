@@ -12,14 +12,14 @@ export enum filterType {
 }
 
 export const filterValues = [
-    "Critterpedia Index (Ascending)",
-     "Critterpedia Index (Descending)",
-    "Alphabetical (Ascending)",
-    "Alphabetical (Descending)",
-    "Value (Most valuable first)",
-    "Value (cheapest first)",
-    "Time Remaining (Today, shortest time first)",
-    "Time Remaining (Today, longest time first)",
-    "Leaving Soonest",
-    "Longest Time Remaining",
+    'Critterpedia Index (Ascending)',
+    'Critterpedia Index (Descending)',
+    'Alphabetical (Ascending)',
+    'Alphabetical (Descending)',
+    'Value (Most valuable first)',
+    'Value (cheapest first)',
+    'Time Remaining (Today, shortest time first)',
+    'Time Remaining (Today, longest time first)',
+    'Leaving Soonest',
+    'Longest Time Remaining',
 ];

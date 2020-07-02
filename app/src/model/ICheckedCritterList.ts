@@ -1,4 +1,4 @@
-import { ICritter } from "./ICritter";
+import { ICritter } from './ICritter';
 
 export interface ICheckedCritterList {
     available: ICritter[];
