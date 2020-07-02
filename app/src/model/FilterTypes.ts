@@ -1,25 +1,27 @@
+import { EnumDictionary } from "./EnumDictionary";
+
 export enum filterType {
-    "entryAsc",
-    "entryDesc",
-    "alphaAsc",
-    "alphaDesc",
-    "valueAsc",
-    "valueDesc",
-    "todayAsc",
-    "todayDesc",
-    "yearAsc",
-    "yearDesc",
+    entryAsc,
+    entryDesc,
+    alphaAsc,
+    alphaDesc,
+    valueAsc,
+    valueDesc,
+    todayAsc,
+    todayDesc,
+    yearAsc,
+    yearDesc,
 }
 
-export enum filterDescriptions {
+export const filterValues = [
     "Critterpedia Index (Ascending)",
-    "Critterpedia Index (Descending)",
+     "Critterpedia Index (Descending)",
     "Alphabetical (Ascending)",
-    "AlphaBetical (Descending)",
+    "Alphabetical (Descending)",
     "Value (Most valuable first)",
     "Value (cheapest first)",
     "Time Remaining (Today, shortest time first)",
     "Time Remaining (Today, longest time first)",
     "Leaving Soonest",
     "Longest Time Remaining",
-}
+];
