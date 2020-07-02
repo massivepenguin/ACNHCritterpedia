@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+
+body {
+  position: relative;
+}
+
+.controls {
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+}
