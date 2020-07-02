@@ -1,12 +1,12 @@
 [
     {
         "id": 1,
-        "name": "bitterling",
+        "name": "Bitterling",
         "thumbnail": "bitterling.png",
         "location": "river",
         "silhouetteSize": 1,
         "price": 900,
-        "times": [{"startTime": "0001-01-01T04:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T04:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [11,12,1,2,3],
         "southMonths": [5,6,7,8,9]
     },
@@ -28,7 +28,7 @@
         "location": "river",
         "silhouetteSize": 2,
         "price": 160,
-        "times": [{"startTime": "0001-01-01T09:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T09:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -50,7 +50,7 @@
         "location": "pond",
         "silhouetteSize": 4,
         "price": 300,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -72,7 +72,7 @@
         "location": "pond",
         "silhouetteSize": 1,
         "price": 1300,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -105,7 +105,7 @@
         "location": "pond",
         "silhouetteSize": 1,
         "price": 300,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [4,5,6,7,8],
         "southMonths": [1,2,10,11,12]
     },
@@ -116,7 +116,7 @@
         "location": "pond",
         "silhouetteSize": 2,
         "price": 200,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [4,5,6,7,8,9],
         "southMonths": [1,2,3,10,11,12]
     },
@@ -149,7 +149,7 @@
         "location": "pond",
         "silhouetteSize": 1,
         "price": 100,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [3,4,5,6,7],
         "southMonths": [1,9,10,11,12]
     },
@@ -160,7 +160,7 @@
         "location": "pond",
         "silhouetteSize": 2,
         "price": 120,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [5,6,7,8],
         "southMonths": [1,2,11,12]
     },
@@ -182,7 +182,7 @@
         "location": "river",
         "silhouetteSize": 2,
         "price": 400,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [3,4,5],
         "southMonths": [9,10,11]
     },
@@ -226,7 +226,7 @@
         "location": "river",
         "silhouetteSize": 3,
         "price": 300,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,10,11,12],
         "southMonths": [4,5,6,7,8,9]
     },
@@ -237,7 +237,7 @@
         "location": "river",
         "silhouetteSize": 4,
         "price": 400,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -248,7 +248,7 @@
         "location": "river",
         "silhouetteSize": 3,
         "price": 800,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [6,7,8,9,10],
         "southMonths": [1,2,3,4,12]
     },
@@ -259,7 +259,7 @@
         "location": "river",
         "silhouetteSize": 5,
         "price": 1800,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [9,10,11,12],
         "southMonths": [3,4,5,6]
     },
@@ -270,7 +270,7 @@
         "location": "river",
         "silhouetteSize": 2,
         "price": 500,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,12],
         "southMonths": [6,7,8]
     },
@@ -281,7 +281,7 @@
         "location": "river",
         "silhouetteSize": 3,
         "price": 900,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [7,8,9],
         "southMonths": [1,2,3]
     },
@@ -336,7 +336,7 @@
         "location": "riverMouth",
         "silhouetteSize": 4,
         "price": 700,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [9],
         "southMonths": [3]
     },
@@ -347,7 +347,7 @@
         "location": "riverMouth",
         "silhouetteSize": 6,
         "price": 1800,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [9],
         "southMonths": [3]
     },
@@ -501,7 +501,7 @@
         "location": "riverMouth",
         "silhouetteSize": 6,
         "price": 10000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,9,10,11,12],
         "southMonths": [3,4,5,6,7,8,9]
     },
@@ -512,7 +512,7 @@
         "location": "sea",
         "silhouetteSize": 1,
         "price": 1000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,12],
         "southMonths": [6,7,8,9]
     },
@@ -523,7 +523,7 @@
         "location": "sea",
         "silhouetteSize": 1,
         "price": 1100,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [4,5,6,7,8,9,10,11],
         "southMonths": [1,2,3,4,5,10,11,12]
     },
@@ -534,7 +534,7 @@
         "location": "sea",
         "silhouetteSize": 1,
         "price": 650,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [4,5,6,7,8,9],
         "southMonths": [1,2,3,10,11,12]
     },
@@ -545,7 +545,7 @@
         "location": "sea",
         "silhouetteSize": 2,
         "price": 1000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [4,5,6,7,8,9],
         "southMonths": [1,2,3,10,11,12]
     },
@@ -556,7 +556,7 @@
         "location": "sea",
         "silhouetteSize": 2,
         "price": 1000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [4,5,6,7,8,9],
         "southMonths": [1,2,3,10,11,12]
     },
@@ -578,7 +578,7 @@
         "location": "sea",
         "silhouetteSize": 3,
         "price": 500,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [4,5,6,7,8,9,10,11],
         "southMonths": [1,2,3,4,5,10,11,12]
     },
@@ -600,7 +600,7 @@
         "location": "sea",
         "silhouetteSize": 3,
         "price": 250,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [7,8,9],
         "southMonths": [1,2,3]
     },
@@ -622,7 +622,7 @@
         "location": "sea",
         "silhouetteSize": 2,
         "price": 150,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -633,7 +633,7 @@
         "location": "sea",
         "silhouetteSize": 3,
         "price": 5000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [3,4,5,6,7,8,9,10,11],
         "southMonths": [1,2,3,4,5,9,10,11,12]
     },
@@ -644,7 +644,7 @@
         "location": "sea",
         "silhouetteSize": 5,
         "price": 400,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -655,7 +655,7 @@
         "location": "sea",
         "silhouetteSize": 4,
         "price": 3000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -666,7 +666,7 @@
         "location": "sea",
         "silhouetteSize": 3,
         "price": 300,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,10,11,12],
         "southMonths": [4,5,6,7,8,9,10]
     },
@@ -677,7 +677,7 @@
         "location": "sea",
         "silhouetteSize": 4,
         "price": 800,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },
@@ -688,7 +688,7 @@
         "location": "sea",
         "silhouetteSize": 3,
         "price": 500,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,12],
         "southMonths": [1,2,6,7,8,9,10,11,12]
     },
@@ -699,7 +699,7 @@
         "location": "sea",
         "silhouetteSize": 7,
         "price": 2000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [8,9,10],
         "southMonths": [2,3,4]
     },
@@ -710,7 +710,7 @@
         "location": "sea",
         "silhouetteSize": 7,
         "price": 600,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [6,7,8,9,10],
         "southMonths": [1,2,3,4,12]
     },
@@ -721,7 +721,7 @@
         "location": "pier",
         "silhouetteSize": 6,
         "price": 7000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,11,12],
         "southMonths": [5,6,7,8,9,10]
     },
@@ -732,7 +732,7 @@
         "location": "pier",
         "silhouetteSize": 6,
         "price": 10000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,7,8,9,11,12],
         "southMonths": [1,2,3,5,6,7,8,9,10,11]
     },
@@ -743,7 +743,7 @@
         "location": "pier",
         "silhouetteSize": 5,
         "price": 4500,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [5,6,7,8,9,10],
         "southMonths": [1,2,3,4,11,12]
     },
@@ -754,7 +754,7 @@
         "location": "pier",
         "silhouetteSize": 5,
         "price": 6000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [5,6,7,8,9,10],
         "southMonths": [1,2,3,4,11,12]
     },
@@ -820,7 +820,7 @@
         "location": "sea",
         "silhouetteSize": 9,
         "price": 13000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [6,7,8,9],
         "southMonths": [1,2,3,12]
     },
@@ -831,7 +831,7 @@
         "location": "sea",
         "silhouetteSize": 8,
         "price": 1500,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [6,7,8,9],
         "southMonths": [1,2,3,12]
     },
@@ -853,7 +853,7 @@
         "location": "sea",
         "silhouetteSize": 5,
         "price": 9000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,12],
         "southMonths": [6,7,8,9,10,11]
     },
@@ -875,7 +875,7 @@
         "location": "seaRain",
         "silhouetteSize": 6,
         "price": 15000,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T24:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     }

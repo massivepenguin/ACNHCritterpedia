@@ -1,24 +1,22 @@
 import React from 'react';
-import { filterType, filterDescriptions } from '../model/FilterTypes';
+import { filterType, filterValues } from '../model/FilterTypes';
+import { store, changeFilter } from '../reducers/appReducer';
 
-interface IListFilter {
-    activeFilter: number;
-    filterChangeFunction: (newFilter: number) => void;
-}
+function ListSorter() {
+    const state = store.getState();
 
-export function ListSorter(props: IListFilter) {
     const changeHandler = (e: React.SyntheticEvent<HTMLSelectElement>): void => {
         const changeValue = parseInt(e.currentTarget.value, 10);
-        if(!isNaN(changeValue) && changeValue !== props.activeFilter) {
-            props.filterChangeFunction(changeValue);
+        if(!isNaN(changeValue) && changeValue !== state.activeFilter) {
+            store.dispatch(changeFilter(changeValue));
         }
     }
 
     const getSelectOptions = () => {
         const elements: JSX.Element[] = [];
         for (const opt in filterType) {
-            if (!isNaN(Number(opt))) {
-                elements.push(<option key={opt} value={opt}>{filterDescriptions[opt]}</option>);
+            if(!isNaN(Number(opt))) {
+                elements.push(<option key={opt} value={opt}>{filterValues[opt]}</option>);
             }
         }
         return elements;
@@ -26,7 +24,7 @@ export function ListSorter(props: IListFilter) {
 
     return (
         <div>
-            <select onChange={changeHandler} defaultValue={props.activeFilter}>
+            <select onChange={changeHandler} defaultValue={state.activeFilter}>
                 {
                     getSelectOptions()
                 }
@@ -34,3 +32,5 @@ export function ListSorter(props: IListFilter) {
         </div>
     )
 }
+
+export default ListSorter;
