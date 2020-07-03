@@ -1,42 +1,54 @@
 import React, { useState } from 'react';
-import { store, hideCaught, showAll } from '../reducers/appReducer';
+import bugs from '../data/bugs.json';
+import fish from '../data/fish.json';
+import seaCreatures from '../data/seaCreatures.json';
+import { store, hideCaught, showAll } from '../reducers/AppReducer';
 import { ICritterList } from '../model/ICritterList';
 import { ICritter } from '../model/ICritter';
 import { critterType } from '../model/CritterType';
-import bugs from '../data/bugs.json';
-import fish from '../data/fish.json';
-import CritterEntry from './CritterEntry';
+import { ICheckedCritterList } from '../model/ICheckedCritterList';
+import { filterCritterList, sortCritterList } from '../helpers/CritterFilters';
 import ListSorter from './ListSorter';
 import Checkbox from './Checkbox';
-import { ICheckedCritterList } from '../model/ICheckedCritterList';
-import { filterCritterList, sortCritterList } from '../helpers/critterFilters';
+import SettingsButton from './SettingsButton';
+import CritterSection from './CritterSection';
+import LoadingSpinner from './LoadingSpinner';
+import { filterValues } from '../model/FilterTypes';
 
-const critterList: ICritterList = { bugs: bugs, fish: fish } as ICritterList;
+const critterList: ICritterList = { bugs: bugs, fish: fish, seaCreatures: seaCreatures } as ICritterList;
 
 function MainApp() {
     const [loading, setLoading] = useState(true);
-    const [availableCritters, setAvailableCritters] = useState({ bugs: [], fish: [] } as ICritterList);
-    const [upcomingCritters, setUpcomingCritters] = useState({ bugs: [], fish: [] } as ICritterList);
+    const [availableCritters, setAvailableCritters] = useState({ bugs: [], fish: [], seaCreatures: [] } as ICritterList);
+    const [upcomingCritters, setUpcomingCritters] = useState({ bugs: [], fish: [], seaCreatures: [] } as ICritterList);
+
+    const state = store.getState();
 
     store.subscribe(() => {
         filterCritterAvailability();
     });
 
-    const state = store.getState();
-
     const filterCritterAvailability = () => {
         setLoading(true);
         const checkedBugs: ICheckedCritterList = filterCritterList(critterList.bugs, state.caughtCritters.bugs);
         const checkedFish: ICheckedCritterList = filterCritterList(critterList.fish, state.caughtCritters.fish);
+        const checkedSeaCreatures: ICheckedCritterList = filterCritterList(critterList.seaCreatures, state.caughtCritters.seaCreatures);
+
+        console.log(filterValues[state.activeFilter]);
+        console.log(checkedBugs.available);
 
         const availableCritters: ICritterList = {
-            bugs: checkedBugs.available,
-            fish: checkedFish.available,
+            bugs: checkedBugs.available.sort(sortCritterList),
+            fish: checkedFish.available.sort(sortCritterList),
+            seaCreatures: checkedSeaCreatures.available.sort(sortCritterList)
         };
 
+        console.log(availableCritters.bugs);
+
         const upcomingCritters: ICritterList = {
-            bugs: checkedBugs.upcoming,
-            fish: checkedFish.upcoming,
+            bugs: checkedBugs.upcoming.sort(sortCritterList),
+            fish: checkedFish.upcoming.sort(sortCritterList),
+            seaCreatures: checkedSeaCreatures.upcoming.sort(sortCritterList)
         };
 
         setAvailableCritters(availableCritters);
@@ -44,27 +56,27 @@ function MainApp() {
         setLoading(false);
     };
 
-    const availableBugs = availableCritters.bugs.sort(sortCritterList);
-    const upcomingBugs = upcomingCritters.bugs.sort(sortCritterList);
-    const allBugs = critterList.bugs
-        .sort(sortCritterList)
+    const allCritters: ICritterList = {
+        bugs: critterList.bugs.sort(sortCritterList)
         .filter((critter: ICritter) =>
-            state.hideCaught ? state.caughtCritters.bugs.indexOf(critter.id) < 0 : critter,
-        );
-    const availableFish = availableCritters.fish.sort(sortCritterList);
-    const upcomingFish = upcomingCritters.fish.sort(sortCritterList);
-    const allFish = critterList.fish
-        .sort(sortCritterList)
+        state.hideCaught ? state.caughtCritters.bugs.indexOf(critter.id) < 0 : critter,
+        ),
+        fish: critterList.fish.sort(sortCritterList)
         .filter((critter: ICritter) =>
-            state.hideCaught ? state.caughtCritters.fish.indexOf(critter.id) < 0 : critter,
-        );
+        state.hideCaught ? state.caughtCritters.fish.indexOf(critter.id) < 0 : critter,
+        ),
+        seaCreatures: critterList.seaCreatures.sort(sortCritterList)
+        .filter((critter: ICritter) =>
+        state.hideCaught ? state.caughtCritters.seaCreatures.indexOf(critter.id) < 0 : critter,
+        )
+    };
 
-    if (!availableCritters.bugs.length && !availableCritters.fish.length) {
+    if (!availableCritters.bugs.length && !availableCritters.fish.length && !availableCritters.seaCreatures.length) {
         filterCritterAvailability();
     }
 
     return loading ? (
-        <div>Loading</div>
+        <LoadingSpinner />
     ) : (
         <div>
             <div className={'controls'}>
@@ -79,81 +91,11 @@ function MainApp() {
                     isSelected={state.showAll}
                     onCheckboxChange={() => store.dispatch(showAll(!state.showAll))}
                 />
+                <SettingsButton />
             </div>
-            {state.showAll ? (
-                <>
-                    <h1>All Bugs</h1>
-                    <ul>
-                        {allBugs.map((critter: ICritter) => (
-                            <CritterEntry
-                                typeOfCritter={critterType.bug}
-                                critter={critter}
-                                key={`all_bug_${critter.id}`}
-                            />
-                        ))}
-                    </ul>
-                </>
-            ) : (
-                <>
-                    <h1>You can currently catch {availableCritters?.bugs.length} Bugs:</h1>
-                    <ul>
-                        {availableBugs.map((critter: ICritter) => (
-                            <CritterEntry
-                                typeOfCritter={critterType.bug}
-                                critter={critter}
-                                key={`available_bug_${critter.id}`}
-                            />
-                        ))}
-                    </ul>
-                    <h1>You can catch {upcomingCritters.bugs.length} Bugs later today:</h1>
-                    <ul>
-                        {upcomingBugs.map((critter: ICritter) => (
-                            <CritterEntry
-                                typeOfCritter={critterType.bug}
-                                critter={critter}
-                                key={`donated_bug_${critter.id}`}
-                            />
-                        ))}
-                    </ul>
-                </>
-            )}
-            {state.showAll ? (
-                <>
-                    <h1>All Fish</h1>
-                    <ul>
-                        {allFish.map((critter: ICritter) => (
-                            <CritterEntry
-                                typeOfCritter={critterType.fish}
-                                critter={critter}
-                                key={`all_fish_${critter.id}`}
-                            />
-                        ))}
-                    </ul>
-                </>
-            ) : (
-                <>
-                    <h1>You can currently catch {availableCritters.fish.length} Fish:</h1>
-                    <ul>
-                        {availableFish.map((critter: ICritter) => (
-                            <CritterEntry
-                                typeOfCritter={critterType.fish}
-                                critter={critter}
-                                key={`available_fish_${critter.id}`}
-                            />
-                        ))}
-                    </ul>
-                    <h1>You can catch {upcomingCritters.fish.length} Fish later today:</h1>
-                    <ul>
-                        {upcomingFish.map((critter: ICritter) => (
-                            <CritterEntry
-                                typeOfCritter={critterType.fish}
-                                critter={critter}
-                                key={`donated_fish_${critter.id}`}
-                            />
-                        ))}
-                    </ul>
-                </>
-            )}
+            <CritterSection showAll={state.showAll} allCritters={allCritters.bugs} availableCritters={availableCritters.bugs} upcomingCritters={upcomingCritters.bugs} typeOfCritter={critterType.bug} />
+            <CritterSection showAll={state.showAll} allCritters={allCritters.fish} availableCritters={availableCritters.fish} upcomingCritters={upcomingCritters.fish} typeOfCritter={critterType.fish} />
+            <CritterSection showAll={state.showAll} allCritters={allCritters.seaCreatures} availableCritters={availableCritters.seaCreatures} upcomingCritters={upcomingCritters.seaCreatures} typeOfCritter={critterType.seaCreature} />
         </div>
     );
 }

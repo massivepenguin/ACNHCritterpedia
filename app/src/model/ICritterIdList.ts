@@ -1,4 +1,5 @@
 export interface ICritterIdList {
-    bugs: string[];
-    fish: string[];
+    bugs: number[];
+    fish: number[];
+    seaCreatures: number[];
 }

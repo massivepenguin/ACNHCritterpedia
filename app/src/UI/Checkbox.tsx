@@ -19,7 +19,7 @@ function Checkbox(props: React.PropsWithChildren<ICheckbox>) {
                     onChange={onCheckboxChange}
                     className="form-check-input"
                 />
-                {props.label}
+                {label}
             </label>
         </div>
     );

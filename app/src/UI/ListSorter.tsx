@@ -1,6 +1,6 @@
 import React from 'react';
 import { filterType, filterValues } from '../model/FilterTypes';
-import { store, changeFilter } from '../reducers/appReducer';
+import { store, changeFilter } from '../reducers/AppReducer';
 
 function ListSorter() {
     const state = store.getState();

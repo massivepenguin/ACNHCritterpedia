@@ -1,15 +1,13 @@
 import { ICritter } from '../model/ICritter';
 import { ICheckedCritterList } from '../model/ICheckedCritterList';
-import { setDateToCurrentDate, correctDates } from './dateHelpers';
+import { setDateToCurrentDate, correctDates } from './DateHelpers';
 import { hemisphere } from '../model/Hemisphere';
 import { filterType } from '../model/FilterTypes';
-import { store } from '../reducers/appReducer';
-
-let state = store.getState();
-
-store.subscribe(() => (state = store.getState()));
+import { IAppState } from '../model/AppState';
+import { store } from '../reducers/AppReducer';
 
 export const filterCritterList = (critterListIn: ICritter[], caughtArray: number[]): ICheckedCritterList => {
+    const state = store.getState();
     const upcomingCritters: ICritter[] = [];
     let currentTime = new Date();
     if (state.timeOffset !== 0) {
@@ -49,24 +47,22 @@ export const filterCritterList = (critterListIn: ICritter[], caughtArray: number
 };
 
 export const sortCritterList = (a: ICritter, b: ICritter): number => {
+    const state = store.getState();
     let currentTime = new Date();
     if (state.timeOffset !== 0) {
         currentTime.setHours(currentTime.getHours() + state.timeOffset);
         currentTime = setDateToCurrentDate(currentTime); // in case we crossed a time boundary, we reset the date to the current date (keeping the time)
     }
     switch (state.activeFilter) {
-        case filterType.alphaAsc: {
-            return b.name.toUpperCase() > a.name.toUpperCase()
-                ? -1
-                : b.name.toUpperCase() < a.name.toUpperCase()
-                ? 1
-                : 0;
-        }
-        case filterType.alphaDesc: {
-            return a.name.toUpperCase() > b.name.toUpperCase()
-                ? -1
-                : a.name.toUpperCase() < b.name.toUpperCase()
-                ? 1
+        case filterType.alphaAsc:
+        case filterType.alphaDesc:{
+            // uppercase names and remove spaces to allow for accurate alphabetical sorting
+            const aName = a.name.toUpperCase().replace(' ', '');
+            const bName = b.name.toUpperCase().replace(' ', '');
+            return bName > aName
+                ? (state.activeFilter === filterType.alphaAsc ? -1 : 1)
+                : bName < aName
+                ? (state.activeFilter === filterType.alphaAsc ? 1 : -1)
                 : 0;
         }
         case filterType.entryDesc: {
@@ -140,8 +136,6 @@ export const sortCritterList = (a: ICritter, b: ICritter): number => {
         }
         case filterType.yearAsc:
         case filterType.yearDesc: {
-            // get the month and adjust it to account for the fact that the critter months are 1-indexed rather than 0-indexed
-
             const aMonths = state.hemisphere === hemisphere.north ? a.northMonths : a.southMonths;
             const bMonths = state.hemisphere === hemisphere.south ? b.northMonths : b.southMonths;
             const sortMonths = (a: number, b: number) => (a > b ? 1 : b < a ? -1 : 0);
@@ -149,6 +143,7 @@ export const sortCritterList = (a: ICritter, b: ICritter): number => {
             bMonths.sort(sortMonths);
 
             const calculateMonthsRemaining = (sourceMonths: number[]): number => {
+                // get the month and adjust it to account for the fact that the critter months are 1-indexed rather than 0-indexed
                 const thisMonth = currentTime.getMonth() + 1;
                 const startIndex = sourceMonths.indexOf(thisMonth);
                 if (startIndex > -1) {

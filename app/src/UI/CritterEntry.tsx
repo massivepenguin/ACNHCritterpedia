@@ -1,7 +1,7 @@
 import React from 'react';
 import { ICritter } from '../model/ICritter';
 import { critterType } from '../model/CritterType';
-import { store, catchCritter, donateCritter } from '../reducers/appReducer';
+import { store, catchCritter, donateCritter } from '../reducers/AppReducer';
 
 interface ICritterEntryProps {
     typeOfCritter: critterType;
@@ -10,8 +10,6 @@ interface ICritterEntryProps {
 
 function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
     const { typeOfCritter, critter } = props;
-
-    const critterId = critter.id;
 
     const state = store.getState();
 
@@ -27,33 +25,17 @@ function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
         case critterType.fish: {
             caughtSource = state.caughtCritters.fish;
             donatedSource = state.donatedCritters.fish;
+            break;
+        }
+        case critterType.seaCreature: {
+            caughtSource = state.caughtCritters.seaCreatures;
+            donatedSource = state.donatedCritters.seaCreatures;
+            break;
         }
     }
 
-    const caught = caughtSource.indexOf(critterId) > -1;
-    const donated = donatedSource.indexOf(critterId) > -1;
-
-    const donateCritterCatchCheck = () => {
-        // special case - we need to 'catch' the critter if we haven't done so already when donating it
-        let caughtArray: number[] = [];
-        let donatedArray: number[] = [];
-        switch (typeOfCritter) {
-            case critterType.bug: {
-                caughtArray = state.caughtCritters.bugs;
-                donatedArray = state.donatedCritters.bugs;
-                break;
-            }
-            case critterType.fish: {
-                caughtArray = state.caughtCritters.fish;
-                donatedArray = state.donatedCritters.fish;
-                break;
-            }
-        }
-        if (caughtArray.indexOf(critterId) < 0 && donatedArray.indexOf(critterId) < 0) {
-            store.dispatch(catchCritter({ critterId: critterId, type: typeOfCritter }));
-        }
-        store.dispatch(donateCritter({ critterId: critterId, type: typeOfCritter }));
-    };
+    const caught = caughtSource.indexOf(critter.id) > -1;
+    const donated = donatedSource.indexOf(critter.id) > -1;
 
     return (
         <li className={'critterEntry'}>
@@ -62,10 +44,12 @@ function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
                 <li>{critter.price} bells</li>
             </ul>
             <ul>
-                <li onClick={() => store.dispatch(catchCritter({ critterId: critterId, type: typeOfCritter }))}>
+                <li onClick={() => store.dispatch(catchCritter({ critterId: critter.id, type: typeOfCritter }))}>
                     {caught ? 'Caught' : 'Not caught'}
                 </li>
-                <li onClick={donateCritterCatchCheck}>{donated ? 'Donated' : 'Not donated'}</li>
+                <li onClick={() => store.dispatch(donateCritter({critterId: critter.id, type: typeOfCritter}))}>
+                    {donated ? 'Donated' : 'Not donated'}
+                </li>
             </ul>
         </li>
     );

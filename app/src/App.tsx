@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
-import { store } from './reducers/appReducer';
+import { store } from './reducers/AppReducer';
 import HemisphereChooser from './UI/HemisphereChooser';
 import MainApp from './UI/MainApp';
 
@@ -11,10 +11,10 @@ function App() {
         initialState.hemisphere !== null ? <MainApp /> : <HemisphereChooser />,
     );
 
+    // surely there's a better way of doing this?
     store.subscribe(() =>
         setAppContent(() => {
             const state = store.getState();
-            localStorage.setItem('appState', JSON.stringify(state));
             return state.hemisphere !== null ? <MainApp /> : <HemisphereChooser />;
         }),
     );

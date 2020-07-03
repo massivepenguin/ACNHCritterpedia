@@ -787,7 +787,7 @@
         "location": "sea",
         "silhouetteSize": 9,
         "price": 160,
-        "times": [{"startTime": "0001-01-01T09:00:00.000", "endTime": "0001-01-01T16:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T16:00:00.000", "endTime": "0001-01-01T09:00:00.000"}],
         "northMonths": [6,7,8,9],
         "southMonths": [1,2,3,12]
     },
@@ -809,7 +809,7 @@
         "location": "sea",
         "silhouetteSize": 9,
         "price": 15000,
-        "times": [{"startTime": "0001-01-01T09:00:00.000", "endTime": "0001-01-01T16:00:00.000"}],
+        "times": [{"startTime": "0001-01-01T16:00:00.000", "endTime": "0001-01-01T09:00:00.000"}],
         "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },

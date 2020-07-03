@@ -1,40 +1,40 @@
 import { configureStore, getDefaultMiddleware, createSlice } from '@reduxjs/toolkit';
 import { critterType } from '../model/CritterType';
-import { mainAppView } from '../model/MainAppView';
-import { filterType } from '../model/FilterTypes';
+import { AppState, IAppState, instanceOfAppState } from '../model/AppState';
 
 const middleware = [
     ...getDefaultMiddleware(),
     /*YOUR CUSTOM MIDDLEWARES HERE*/
 ];
 
+const exampleState = {...AppState} as IAppState;
+
 const catchSlice = createSlice({
     name: 'catch',
-    initialState: { bugs: [] as number[], fish: [] as number[] },
+    initialState: exampleState.caughtCritters,
     reducers: {
         catchCritter: (state, action) => {
             const { critterId, type } = action.payload;
+            let sourceArray: number [] = [];
             switch (type) {
                 case critterType.bug: {
-                    const critterIndex = state.bugs.indexOf(critterId);
-                    if (critterIndex > -1) {
-                        state.bugs.splice(critterIndex, 1);
-                    } else {
-                        state.bugs.push(critterId);
-                    }
+                    sourceArray = state.bugs;
                     break;
                 }
                 case critterType.fish: {
-                    const critterIndex = state.bugs.indexOf(critterId);
-                    if (critterIndex > -1) {
-                        state.fish.splice(critterIndex, 1);
-                    } else {
-                        state.fish.push(critterId);
-                    }
+                    sourceArray = state.fish;
                     break;
                 }
-                default:
-                    return state;
+                case critterType.seaCreature: {
+                    sourceArray = state.seaCreatures;
+                    break;
+                }
+            }
+            const critterIndex = sourceArray.indexOf(critterId);
+            if (critterIndex > -1) {
+                sourceArray.splice(critterIndex, 1);
+            } else {
+                sourceArray.push(critterId);
             }
             return state;
         },
@@ -43,7 +43,7 @@ const catchSlice = createSlice({
 
 const donateSlice = createSlice({
     name: 'donate',
-    initialState: { bugs: [] as number[], fish: [] as number[] },
+    initialState: exampleState.donatedCritters,
     reducers: {
         donateCritter: (state, action) => {
             const { critterId, type } = action.payload;
@@ -66,8 +66,15 @@ const donateSlice = createSlice({
                     }
                     break;
                 }
-                default:
-                    return state;
+                case critterType.seaCreature: {
+                    const critterIndex = state.seaCreatures.indexOf(critterId);
+                    if (critterIndex > -1) {
+                        state.seaCreatures.splice(critterIndex, 1);
+                    } else {
+                        state.seaCreatures.push(critterId);
+                    }
+                    break;
+                }
             }
             return state;
         },
@@ -76,7 +83,7 @@ const donateSlice = createSlice({
 
 const hemispehereSlice = createSlice({
     name: 'hemisphere',
-    initialState: null,
+    initialState: exampleState.hemisphere,
     reducers: {
         changeHemisphere: (state, action) => {
             const hemi = action.payload;
@@ -88,7 +95,7 @@ const hemispehereSlice = createSlice({
 
 const timeOffsetSlice = createSlice({
     name: 'timeOffset',
-    initialState: 0,
+    initialState: exampleState.timeOffset,
     reducers: {
         changeOffset: (state, action) => {
             const offset = action.payload;
@@ -104,21 +111,21 @@ const timeOffsetSlice = createSlice({
 
 const filterSlice = createSlice({
     name: 'filter',
-    initialState: filterType.entryAsc,
+    initialState: exampleState.activeFilter,
     reducers: {
         changeFilter: (state, action) => {
             const newFilter = action.payload;
             if (state !== newFilter) {
                 state = newFilter;
-                return state;
             }
+            return state;
         },
     },
 });
 
 const hideCaughtSlice = createSlice({
     name: 'hideCaught',
-    initialState: false,
+    initialState: exampleState.hideCaught,
     reducers: {
         hideCaught: (state, action) => {
             const newValue = action.payload;
@@ -130,7 +137,7 @@ const hideCaughtSlice = createSlice({
 
 const showAllCritterSlice = createSlice({
     name: 'showAllCritters',
-    initialState: false,
+    initialState: exampleState.showAll,
     reducers: {
         showAll: (state, action) => {
             const newValue = action.payload;
@@ -142,19 +149,31 @@ const showAllCritterSlice = createSlice({
 
 const switchAppViewSlice = createSlice({
     name: 'switchView',
-    initialState: mainAppView.all,
+    initialState: exampleState.currentView,
     reducers: {
         changeView: (state, action) => {
             const newView = action.payload;
             if (state !== newView) {
                 state = newView;
-                return state;
             }
+            return state;
         },
     },
 });
 
-const persistedState = localStorage.getItem('appState') ? JSON.parse(localStorage.getItem('appState') as string) : {};
+let persistedState = (localStorage.getItem('appState') ? JSON.parse(localStorage.getItem('appState') as string) : AppState);
+
+if(!instanceOfAppState(persistedState)) {
+    // if the state doesn't match the interface the app is expecting, we'll upgrade the
+    // persistedState to match it - this allows us to extend the creatures while preserving
+    // the user's saved state
+    let newState = {...AppState, ...persistedState} as IAppState;
+    newState.caughtCritters = {...AppState.caughtCritters, ...persistedState.caughtCritters};
+    newState.donatedCritters = {...AppState.donatedCritters, ...persistedState.donatedCritters};
+    persistedState = newState;
+    // overwrite the original state so we know it's good for next time
+    localStorage.setItem('appState', JSON.stringify(persistedState));
+} 
 
 export const { changeHemisphere } = hemispehereSlice.actions;
 export const { catchCritter } = catchSlice.actions;
@@ -183,8 +202,14 @@ export const store = configureStore({
         activeFilter: filterReducer,
         hideCaught: hideCaughtReducer,
         showAll: showAllReducer,
-        appView: appViewReducer,
+        currentView: appViewReducer,
     },
     middleware,
     preloadedState: persistedState,
+});
+
+// save the store state to localStorage when it's updated
+store.subscribe(() => {
+    const state = store.getState();
+    localStorage.setItem('appState', JSON.stringify(state));
 });

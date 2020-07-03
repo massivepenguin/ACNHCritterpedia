@@ -1,5 +1,5 @@
 import React from 'react';
-import { store, changeHemisphere } from '../reducers/appReducer';
+import { store, changeHemisphere } from '../reducers/AppReducer';
 import { hemisphere } from '../model/Hemisphere';
 
 function HemisphereChooser() {
