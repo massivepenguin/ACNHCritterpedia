@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
-import bugs from '../data/bugs.json';
-import fish from '../data/fish.json';
-import seaCreatures from '../data/seaCreatures.json';
 import { store, hideCaught, showAll } from '../reducers/AppReducer';
 import { ICritterList } from '../model/ICritterList';
-import { ICritter } from '../model/ICritter';
 import { critterType } from '../model/CritterType';
-import { ICheckedCritterList } from '../model/ICheckedCritterList';
-import { filterCritterList, sortCritterList } from '../helpers/CritterFilters';
+import { filterCritters } from '../helpers/CritterFilters';
 import ListSorter from './ListSorter';
 import Checkbox from './Checkbox';
 import SettingsButton from './SettingsButton';
 import CritterSection from './CritterSection';
 import LoadingSpinner from './LoadingSpinner';
-import { filterValues } from '../model/FilterTypes';
-
-const critterList: ICritterList = { bugs: bugs, fish: fish, seaCreatures: seaCreatures } as ICritterList;
 
 function MainApp() {
     const [loading, setLoading] = useState(true);
+    const [allCritters, setAllCritters] = useState({ bugs: [], fish: [], seaCreatures: [] } as ICritterList);
     const [availableCritters, setAvailableCritters] = useState({ bugs: [], fish: [], seaCreatures: [] } as ICritterList);
     const [upcomingCritters, setUpcomingCritters] = useState({ bugs: [], fish: [], seaCreatures: [] } as ICritterList);
 
@@ -27,50 +20,21 @@ function MainApp() {
     store.subscribe(() => {
         filterCritterAvailability();
     });
+  
 
     const filterCritterAvailability = () => {
         setLoading(true);
-        const checkedBugs: ICheckedCritterList = filterCritterList(critterList.bugs, state.caughtCritters.bugs);
-        const checkedFish: ICheckedCritterList = filterCritterList(critterList.fish, state.caughtCritters.fish);
-        const checkedSeaCreatures: ICheckedCritterList = filterCritterList(critterList.seaCreatures, state.caughtCritters.seaCreatures);
 
-        console.log(filterValues[state.activeFilter]);
-        console.log(checkedBugs.available);
+        const { all, available, upcoming } = filterCritters();
 
-        const availableCritters: ICritterList = {
-            bugs: checkedBugs.available.sort(sortCritterList),
-            fish: checkedFish.available.sort(sortCritterList),
-            seaCreatures: checkedSeaCreatures.available.sort(sortCritterList)
-        };
+        setAllCritters(all);
+        setAvailableCritters(available);
+        setUpcomingCritters(upcoming);
 
-        console.log(availableCritters.bugs);
-
-        const upcomingCritters: ICritterList = {
-            bugs: checkedBugs.upcoming.sort(sortCritterList),
-            fish: checkedFish.upcoming.sort(sortCritterList),
-            seaCreatures: checkedSeaCreatures.upcoming.sort(sortCritterList)
-        };
-
-        setAvailableCritters(availableCritters);
-        setUpcomingCritters(upcomingCritters);
         setLoading(false);
     };
 
-    const allCritters: ICritterList = {
-        bugs: critterList.bugs.sort(sortCritterList)
-        .filter((critter: ICritter) =>
-        state.hideCaught ? state.caughtCritters.bugs.indexOf(critter.id) < 0 : critter,
-        ),
-        fish: critterList.fish.sort(sortCritterList)
-        .filter((critter: ICritter) =>
-        state.hideCaught ? state.caughtCritters.fish.indexOf(critter.id) < 0 : critter,
-        ),
-        seaCreatures: critterList.seaCreatures.sort(sortCritterList)
-        .filter((critter: ICritter) =>
-        state.hideCaught ? state.caughtCritters.seaCreatures.indexOf(critter.id) < 0 : critter,
-        )
-    };
-
+    // call filterCritters on first run when availableCritters' properties are empty
     if (!availableCritters.bugs.length && !availableCritters.fish.length && !availableCritters.seaCreatures.length) {
         filterCritterAvailability();
     }

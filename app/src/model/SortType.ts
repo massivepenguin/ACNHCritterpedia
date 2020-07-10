@@ -1,4 +1,4 @@
-export enum filterType {
+export enum sortType {
     entryAsc,
     entryDesc,
     alphaAsc,
@@ -11,7 +11,7 @@ export enum filterType {
     yearDesc,
 }
 
-export const filterValues = [
+export const sortValues = [
     'Critterpedia Index (Ascending)',
     'Critterpedia Index (Descending)',
     'Alphabetical (Ascending)',

@@ -1,32 +1,28 @@
 import React, { useState } from 'react';
 import { store, changeOffset } from '../reducers/AppReducer';
-import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
 function TimeOffsetSlider() {
     const state = store.getState();
 
+    const [textVal, setTextVal] = useState(state.timeOffset.toString());
+
     let sliderVal = state.timeOffset;
 
-    const onChange = (value: number) => {
-        sliderVal = value;
+    const setValue = (e: React.SyntheticEvent<HTMLInputElement>) => {
+        store.dispatch(changeOffset(parseInt(e.currentTarget.value, 10)));
     }
 
-    const changeComplete = (value: number) => {
-        console.log(sliderVal);
+    const updateValue = (e: React.SyntheticEvent<HTMLInputElement>) => {
+        setTextVal(e.currentTarget.value);
     }
-
-    console.log('rendering');
 
     return (
-        <Slider
-            min={-12}
-            max={12}
-            step={0.5}
-            value={Number(sliderVal)}
-            onChange={onChange}
-            onChangeComplete={changeComplete}
-      />
+        <div className={'offset-slider'}>
+            <label>Timezone Offset</label>
+            <div>{textVal}</div>
+            <input type={'range'} min={-12} max={12} step={0.5} defaultValue={sliderVal} id={'offset'} onInput={updateValue} onMouseUp={setValue} onTouchEnd={setValue} onDrop={setValue} />
+        </div>
     );
 }
 

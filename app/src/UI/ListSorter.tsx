@@ -1,24 +1,24 @@
 import React from 'react';
-import { filterType, filterValues } from '../model/FilterTypes';
-import { store, changeFilter } from '../reducers/AppReducer';
+import { sortType, sortValues } from '../model/SortType';
+import { store, changeSort } from '../reducers/AppReducer';
 
 function ListSorter() {
     const state = store.getState();
 
     const changeHandler = (e: React.SyntheticEvent<HTMLSelectElement>): void => {
         const changeValue = parseInt(e.currentTarget.value, 10);
-        if (!isNaN(changeValue) && changeValue !== state.activeFilter) {
-            store.dispatch(changeFilter(changeValue));
+        if (!isNaN(changeValue) && changeValue !== state.activeSort) {
+            store.dispatch(changeSort(changeValue));
         }
     };
 
     const getSelectOptions = () => {
         const elements: JSX.Element[] = [];
-        for (const opt in filterType) {
+        for (const opt in sortType) {
             if (!isNaN(Number(opt))) {
                 elements.push(
                     <option key={opt} value={opt}>
-                        {filterValues[opt]}
+                        {sortValues[opt]}
                     </option>,
                 );
             }
@@ -28,7 +28,7 @@ function ListSorter() {
 
     return (
         <div>
-            <select onChange={changeHandler} defaultValue={state.activeFilter}>
+            <select onChange={changeHandler} defaultValue={state.activeSort}>
                 {getSelectOptions()}
             </select>
         </div>

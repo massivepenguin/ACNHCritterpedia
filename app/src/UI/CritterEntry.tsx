@@ -18,18 +18,18 @@ function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
 
     switch (typeOfCritter) {
         case critterType.bug: {
-            caughtSource = state.caughtCritters.bugs;
-            donatedSource = state.donatedCritters.bugs;
+            caughtSource = state.critters.caught.bugs;
+            donatedSource = state.critters.donated.bugs;
             break;
         }
         case critterType.fish: {
-            caughtSource = state.caughtCritters.fish;
-            donatedSource = state.donatedCritters.fish;
+            caughtSource = state.critters.caught.fish;
+            donatedSource = state.critters.donated.fish;
             break;
         }
         case critterType.seaCreature: {
-            caughtSource = state.caughtCritters.seaCreatures;
-            donatedSource = state.donatedCritters.seaCreatures;
+            caughtSource = state.critters.caught.seaCreatures;
+            donatedSource = state.critters.donated.seaCreatures;
             break;
         }
     }

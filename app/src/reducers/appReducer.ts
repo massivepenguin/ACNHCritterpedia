@@ -9,71 +9,76 @@ const middleware = [
 
 const exampleState = {...AppState} as IAppState;
 
-const catchSlice = createSlice({
-    name: 'catch',
-    initialState: exampleState.caughtCritters,
+const critterSlice = createSlice({
+    name: 'critters',
+    initialState: exampleState.critters,
     reducers: {
         catchCritter: (state, action) => {
             const { critterId, type } = action.payload;
-            let sourceArray: number [] = [];
+            let caughtArray: number [] = [];
+            let donatedArray: number [] = [];
             switch (type) {
                 case critterType.bug: {
-                    sourceArray = state.bugs;
+                    caughtArray = state.caught.bugs;
+                    donatedArray = state.donated.bugs;
                     break;
                 }
                 case critterType.fish: {
-                    sourceArray = state.fish;
+                    caughtArray = state.caught.fish;
+                    donatedArray = state.donated.fish;
                     break;
                 }
                 case critterType.seaCreature: {
-                    sourceArray = state.seaCreatures;
+                    caughtArray = state.caught.seaCreatures;
+                    donatedArray = state.donated.seaCreatures;
                     break;
                 }
             }
-            const critterIndex = sourceArray.indexOf(critterId);
-            if (critterIndex > -1) {
-                sourceArray.splice(critterIndex, 1);
+            const caughtIndex = caughtArray.indexOf(critterId);
+            if (caughtIndex > -1) {
+                caughtArray.splice(caughtIndex, 1);
+                // we're marking the critter as uncaught, which means we can't have donated it either.
+                // let's remove the critter from the donated array too
+                const donatedIndex = donatedArray.indexOf(critterId);
+                if(donatedIndex > -1) {
+                    donatedArray.splice(donatedIndex, 1);
+                }
             } else {
-                sourceArray.push(critterId);
+                caughtArray.push(critterId);
             }
             return state;
         },
-    },
-});
-
-const donateSlice = createSlice({
-    name: 'donate',
-    initialState: exampleState.donatedCritters,
-    reducers: {
         donateCritter: (state, action) => {
             const { critterId, type } = action.payload;
+            let caughtArray: number [] = [];
+            let donatedArray: number [] = [];
             switch (type) {
                 case critterType.bug: {
-                    const critterIndex = state.bugs.indexOf(critterId);
-                    if (critterIndex > -1) {
-                        state.bugs.splice(critterIndex, 1);
-                    } else {
-                        state.bugs.push(critterId);
-                    }
+                    caughtArray = state.caught.bugs;
+                    donatedArray = state.donated.bugs;
                     break;
                 }
                 case critterType.fish: {
-                    const critterIndex = state.bugs.indexOf(critterId);
-                    if (critterIndex > -1) {
-                        state.fish.splice(critterIndex, 1);
-                    } else {
-                        state.fish.push(critterId);
-                    }
+                    caughtArray = state.caught.fish;
+                    donatedArray = state.donated.fish;
                     break;
                 }
                 case critterType.seaCreature: {
-                    const critterIndex = state.seaCreatures.indexOf(critterId);
-                    if (critterIndex > -1) {
-                        state.seaCreatures.splice(critterIndex, 1);
-                    } else {
-                        state.seaCreatures.push(critterId);
-                    }
+                    caughtArray = state.caught.seaCreatures;
+                    donatedArray = state.donated.seaCreatures;
                     break;
+                }
+            }
+            const donatedIndex = donatedArray.indexOf(critterId);
+            if(donatedIndex > -1) {
+                // we're marking this critter as not donated
+                donatedArray.splice(donatedIndex, 1);
+            } else {
+                // we've not donated this critter. Let's also mark it as caught!
+                donatedArray.push(critterId);
+                const caughtIndex = caughtArray.indexOf(critterId);
+                if(caughtIndex < 0) {
+                    caughtArray.push(critterId);
                 }
             }
             return state;
@@ -109,11 +114,11 @@ const timeOffsetSlice = createSlice({
     },
 });
 
-const filterSlice = createSlice({
-    name: 'filter',
-    initialState: exampleState.activeFilter,
+const sortSlice = createSlice({
+    name: 'changeSort',
+    initialState: exampleState.activeSort,
     reducers: {
-        changeFilter: (state, action) => {
+        changeSort: (state, action) => {
             const newFilter = action.payload;
             if (state !== newFilter) {
                 state = newFilter;
@@ -168,27 +173,24 @@ if(!instanceOfAppState(persistedState)) {
     // persistedState to match it - this allows us to extend the creatures while preserving
     // the user's saved state
     let newState = {...AppState, ...persistedState} as IAppState;
-    newState.caughtCritters = {...AppState.caughtCritters, ...persistedState.caughtCritters};
-    newState.donatedCritters = {...AppState.donatedCritters, ...persistedState.donatedCritters};
+    newState.critters = {caught: {...AppState.critters.caught, ...persistedState.critters.caught}, donated: {...AppState.critters.donated, ...persistedState.critters.donated}};
     persistedState = newState;
     // overwrite the original state so we know it's good for next time
     localStorage.setItem('appState', JSON.stringify(persistedState));
 } 
 
 export const { changeHemisphere } = hemispehereSlice.actions;
-export const { catchCritter } = catchSlice.actions;
-export const { donateCritter } = donateSlice.actions;
+export const { catchCritter, donateCritter } = critterSlice.actions;
 export const { changeOffset, removeOffset } = timeOffsetSlice.actions;
-export const { changeFilter } = filterSlice.actions;
+export const { changeSort } = sortSlice.actions;
 export const { changeView } = switchAppViewSlice.actions;
 export const { showAll } = showAllCritterSlice.actions;
 export const { hideCaught } = hideCaughtSlice.actions;
 
 const hemisphereReducer = hemispehereSlice.reducer;
-const catchReducer = catchSlice.reducer;
-const donateReducer = donateSlice.reducer;
+const critterReducer = critterSlice.reducer;
 const timeOffsetReducer = timeOffsetSlice.reducer;
-const filterReducer = filterSlice.reducer;
+const sortReducer = sortSlice.reducer;
 const hideCaughtReducer = hideCaughtSlice.reducer;
 const showAllReducer = showAllCritterSlice.reducer;
 const appViewReducer = switchAppViewSlice.reducer;
@@ -196,10 +198,9 @@ const appViewReducer = switchAppViewSlice.reducer;
 export const store = configureStore({
     reducer: {
         hemisphere: hemisphereReducer,
-        caughtCritters: catchReducer,
-        donatedCritters: donateReducer,
+        critters: critterReducer,
         timeOffset: timeOffsetReducer,
-        activeFilter: filterReducer,
+        activeSort: sortReducer,
         hideCaught: hideCaughtReducer,
         showAll: showAllReducer,
         currentView: appViewReducer,
