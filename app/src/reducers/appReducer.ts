@@ -209,6 +209,21 @@ export const store = configureStore({
     preloadedState: persistedState,
 });
 
+// store that's specifically for testing, so we don't pollute the app's store during testing
+export const testStore = configureStore({
+    reducer: {
+        hemisphere: hemisphereReducer,
+        critters: critterReducer,
+        timeOffset: timeOffsetReducer,
+        activeSort: sortReducer,
+        hideCaught: hideCaughtReducer,
+        showAll: showAllReducer,
+        currentView: appViewReducer,
+    },
+    middleware,
+    preloadedState: exampleState,
+});
+
 // save the store state to localStorage when it's updated
 store.subscribe(() => {
     const state = store.getState();

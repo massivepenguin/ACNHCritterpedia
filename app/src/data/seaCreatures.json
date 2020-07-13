@@ -31,13 +31,13 @@
     },
     {
         "id": 4,
-        "name": "?",
-        "thumbnail": "?.png",
+        "name": "Sea Pig",
+        "thumbnail": "sea_pig.png",
         "location": "underwater",
-        "price": 0,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
-        "northMonths": [],
-        "southMonths": []
+        "price": 10000,
+        "times": [{"startTime": "0001-01-01T16:00:00.000", "endTime": "0001-01-01T09:00:00.000"}],
+        "northMonths": [11,12,1,2],
+        "southMonths": [5,6,7,8]
     },
     {
         "id": 5,
@@ -153,7 +153,7 @@
         "name": "Turban Shell",
         "thumbnail": "turban_shell.png",
         "location": "underwater",
-        "price": 0,
+        "price": 1000,
         "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
         "northMonths": [3,4,5,9,10,11,12],
         "southMonths": [3,4,5,6,9,10,11]
@@ -180,18 +180,18 @@
     },
     {
         "id": 19,
-        "name": "?",
-        "thumbnail": "?.png",
+        "name": "Chambered Nautilus",
+        "thumbnail": "chambered_nautilus.png",
         "location": "underwater",
-        "price": 0,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
-        "northMonths": [],
-        "southMonths": []
+        "price": 1800,
+        "times": [{"startTime": "0001-01-01T16:00:00.000", "endTime": "0001-01-01T09:00:00.000"}],
+        "northMonths": [3,4,5,6,9,10,11],
+        "southMonths": [9,10,11,12,3,4,5]
     },
     {
         "id": 20,
         "name": "Octopus",
-        "thumbnail": "octopus.png",
+        "thumbnail": "octopus0.png",
         "location": "underwater",
         "price": 1200,
         "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
@@ -199,33 +199,33 @@
         "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
     },{
         "id": 21,
-        "name": "?",
-        "thumbnail": "?.png",
+        "name": "Umbrella Octopus",
+        "thumbnail": "umbrella_octopus.png",
         "location": "underwater",
-        "price": 0,
+        "price": 6000,
         "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
-        "northMonths": [],
-        "southMonths": []
+        "northMonths": [3,4,5,9,10,11],
+        "southMonths": [3,4,5,9,10,11]
     },
     {
         "id": 22,
         "name": "Vampire Squid",
         "thumbnail": "vampire_squid.png",
         "location": "underwater",
-        "price": 0,
+        "price": 10000,
         "times": [{"startTime": "0001-01-01T16:00:00.000", "endTime": "0001-01-01T09:00:00.000"}],
         "northMonths": [5,6,7,8],
         "southMonths": [1,2,11,12]
     },
     {
         "id": 23,
-        "name": "?",
-        "thumbnail": "?.png",
+        "name": "Firefly Squid",
+        "thumbnail": "firefly_squid.png",
         "location": "underwater",
-        "price": 0,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
-        "northMonths": [],
-        "southMonths": []
+        "price": 1400,
+        "times": [{"startTime": "0001-01-01T21:00:00.000", "endTime": "0001-01-01T04:00:00.000"}],
+        "northMonths": [3,4,5,6],
+        "southMonths": [9,10,11,12]
     },
     {
         "id": 24,
@@ -259,13 +259,13 @@
     },
     {
         "id": 27,
-        "name": "?",
-        "thumbnail": "?.png",
+        "name": "Red King Crab",
+        "thumbnail": "red_king_crab.png",
         "location": "underwater",
-        "price": 0,
+        "price": 8000,
         "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
-        "northMonths": [],
-        "southMonths": []
+        "northMonths": [11,12,1,2,3],
+        "southMonths": [5,6,7,8,9]
     },
     {
         "id": 28,
@@ -279,13 +279,13 @@
     },
     {
         "id": 29,
-        "name": "?",
-        "thumbnail": "?.png",
+        "name": "Spider Crab",
+        "thumbnail": "spider_crab.png",
         "location": "underwater",
-        "price": 0,
+        "price": 12000,
         "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
-        "northMonths": [],
-        "southMonths": []
+        "northMonths": [3,4],
+        "southMonths": [9,10]
     },
     {
         "id": 30,
@@ -301,7 +301,7 @@
         "name": "Sweet Shrimp",
         "thumbnail": "sweet_shrimp.png",
         "location": "underwater",
-        "price": 0,
+        "price": 1400,
         "times": [{"startTime": "0001-01-01T16:00:00.000", "endTime": "0001-01-01T09:00:00.000"}],
         "northMonths": [1,2,9,10,11,12],
         "southMonths": [3,4,5,6,7,8]
@@ -321,7 +321,7 @@
         "name": "Spiny Lobster",
         "thumbnail": "spiny_lobster.png",
         "location": "underwater",
-        "price": 0,
+        "price": 5000,
         "times": [{"startTime": "0001-01-01T21:00:00.000", "endTime": "0001-01-01T04:00:00.000"}],
         "northMonths": [10,11,12],
         "southMonths": [4,5,6]
@@ -378,13 +378,13 @@
     },
     {
         "id": 39,
-        "name": "?",
-        "thumbnail": "?.png",
+        "name": "Flatworm",
+        "thumbnail": "flatworm.png",
         "location": "underwater",
-        "price": 0,
-        "times": [{"startTime": "0001-01-01T00:00:00.000", "endTime": "0001-01-01T23:59:59.000"}],
-        "northMonths": [],
-        "southMonths": []
+        "price": 700,
+        "times": [{"startTime": "0001-01-01T16:00:00.000", "endTime": "0001-01-01T09:00:00.000"}],
+        "northMonths": [8,9],
+        "southMonths": [2,3]
     },
     {
         "id": 40,

@@ -8,6 +8,9 @@ import Checkbox from './Checkbox';
 import SettingsButton from './SettingsButton';
 import CritterSection from './CritterSection';
 import LoadingSpinner from './LoadingSpinner';
+import { hemisphere } from '../model/Hemisphere';
+import { ICritterState } from '../model/ICritterState';
+import { sortType } from '../model/SortType';
 
 function MainApp() {
     const [loading, setLoading] = useState(true);
@@ -18,14 +21,15 @@ function MainApp() {
     const state = store.getState();
 
     store.subscribe(() => {
-        filterCritterAvailability();
+        const newState = store.getState();
+        filterCritterAvailability(newState.timeOffset, newState.hemisphere || hemisphere.north, newState.critters, newState.hideCaught, newState.activeSort);
     });
   
 
-    const filterCritterAvailability = () => {
+    const filterCritterAvailability = (timeOffset: number, hemi: hemisphere, critters: ICritterState, hideCaught: boolean, sortBy: sortType) => {
         setLoading(true);
 
-        const { all, available, upcoming } = filterCritters();
+        const { all, available, upcoming } = filterCritters(timeOffset, hemi, critters, hideCaught, sortBy);
 
         setAllCritters(all);
         setAvailableCritters(available);
@@ -36,7 +40,7 @@ function MainApp() {
 
     // call filterCritters on first run when availableCritters' properties are empty
     if (!availableCritters.bugs.length && !availableCritters.fish.length && !availableCritters.seaCreatures.length) {
-        filterCritterAvailability();
+        filterCritterAvailability(state.timeOffset, state.hemisphere || hemisphere.north, state.critters, state.hideCaught, state.activeSort);
     }
 
     return loading ? (
