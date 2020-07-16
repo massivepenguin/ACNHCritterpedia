@@ -1,3 +1,5 @@
+import { ITimeSpan } from "../model/ITimeSpan";
+
 export function correctDates(startDate: string, endDate: string): Date[] {
     const startTime = setDateToCurrentDate(new Date(startDate));
     const endTime = setDateToCurrentDate(new Date(endDate));
@@ -11,4 +13,9 @@ export function setDateToCurrentDate(dateIn: Date): Date {
     currentDate.setMinutes(dateIn.getMinutes());
     currentDate.setSeconds(dateIn.getSeconds());
     return currentDate;
+}
+
+export function isInTimeRange(timeToCheck: Date, timeRange: ITimeSpan, adjustedDate: Date): boolean {
+    const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
+    return timeToCheck >= startTime && timeToCheck < endTime;
 }

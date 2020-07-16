@@ -20,6 +20,6 @@
     "jsx": "react"
   },
   "include": [
-    "src"
+    "src", "__tests__/AppReducer.test.ts", "__tests__/CritterFilters.test.ts"
   ]
 }
