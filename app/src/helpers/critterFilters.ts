@@ -1,6 +1,6 @@
 import { ICritter } from '../model/ICritter';
 import { ICheckedCritterList } from '../model/ICheckedCritterList';
-import { setDateToCurrentDate, correctDates } from './DateHelpers';
+import { convertDates, isInTimeRange, createAdjustedEndTime } from './DateHelpers';
 import { hemisphere } from '../model/Hemisphere';
 import { sortType } from '../model/SortType';
 import { ICritterList } from '../model/ICritterList';
@@ -28,7 +28,6 @@ const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaught: boo
     const upcomingCritters: ICritter[] = [];
     if (timeOffset !== 0) {
         currentTime.setHours(currentTime.getHours() + timeOffset);
-        currentTime = setDateToCurrentDate(currentTime); // in case we crossed a time boundary, we reset the date to the current date (keeping the time)
     }
     // for readability, the months in the json files are not zero-indexed (January = 1), but the date object's month is (January = 0).
     // We add 1 to the current date's month to address this
@@ -38,15 +37,12 @@ const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaught: boo
         if (hideCaught && caughtArray.indexOf(critter.id) > -1) {
             return null;
         }
-        const monthsCritterAppears = hemi === hemisphere.north ? critter.northMonths : critter.southMonths;
+        const monthsCritterAppears = hemi === hemisphere.south ? critter.southMonths : critter.northMonths;
         if (monthsCritterAppears.indexOf(currentMonth) > -1) {
             // check if the critter is available at this moment in time
             for (const timeRange of critter.times) {
-                const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
-                const critterAppearingNow =
-                    startTime <= endTime
-                        ? currentTime >= startTime && currentTime < endTime
-                        : endTime > currentTime && startTime > currentTime;
+                const [startTime, endTime] = convertDates(timeRange.startTime, timeRange.endTime, currentTime);
+                const critterAppearingNow = isInTimeRange(currentTime, startTime, endTime);
                 if (critterAppearingNow) {
                     return critter;
                 } else {
@@ -66,21 +62,22 @@ const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaught: boo
 /**
  * sorts a list of critters based on the current sortBy value
  *
- * @param {ICritter[]} critterList - the list of critters to sort
+ * @param {ICritter[]} critterListIn - the list of critters to sort
  * @param {number} timeOffset - the difference (positive or negative) between the app and the user's Switch console
  * @param {sortType} activeSort - how we're sorting the list of critters
  * @param {hemisphere} hemi - the hemisphere in which the user's island is located
  * @param {Date} currentTime - the date we're using as a comparitor
  * @returns {ICritter[]}
  */
-const sortCritterList = (critterList: ICritter[], timeOffset: number, activeSort: sortType, hemi: hemisphere, currentTime: Date): ICritter[] => {
+const sortCritterList = (critterListIn: ICritter[], timeOffset: number, activeSort: sortType, hemi: hemisphere, currentTime: Date): ICritter[] => {
 
     const sortFunction = (a: ICritter, b: ICritter): number => {
+        const aMonths = hemi === hemisphere.south ? a.southMonths : a.northMonths;
+        const bMonths = hemi === hemisphere.south ? b.southMonths : b.northMonths;
 
         // create a new date to use as a comparator
         if (timeOffset !== 0) {
             currentTime.setHours(currentTime.getHours() + timeOffset);
-            currentTime = setDateToCurrentDate(currentTime); // in case we crossed a time boundary, we reset the date to the current date (keeping the time)
         }
         switch (activeSort) {
             case sortType.alphaAsc:
@@ -118,13 +115,10 @@ const sortCritterList = (critterList: ICritter[], timeOffset: number, activeSort
                 const remainingTimesForA: number[] = [];
                 const remainingTimesForB: number[] = [];
                 for (const timeRange of a.times) {
-                    const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
-                    const critterAppearingNow =
-                        startTime <= endTime
-                            ? currentTime >= startTime && currentTime < endTime
-                            : endTime > currentTime && startTime > currentTime;
-                    const adjustedEndTime = new Date(endTime);
-                    adjustedEndTime.setDate(endTime.getDate() + 1);
+                    const [startTime, endTime] = convertDates(timeRange.startTime, timeRange.endTime, currentTime);
+                    // we create an adjusted end time to use if the end time is earlier than the start time - e.g. if we need to trip over into the next day
+                    let adjustedEndTime = createAdjustedEndTime(endTime, aMonths);
+                    const critterAppearingNow = isInTimeRange(currentTime, startTime, endTime);
                     if (critterAppearingNow) {
                         remainingTimesForA.push(
                             startTime < currentTime
@@ -134,13 +128,9 @@ const sortCritterList = (critterList: ICritter[], timeOffset: number, activeSort
                     }
                 }
                 for (const timeRange of b.times) {
-                    const [startTime, endTime] = correctDates(timeRange.startTime, timeRange.endTime);
-                    const critterAppearingNow =
-                        startTime <= endTime
-                            ? currentTime >= startTime && currentTime < endTime
-                            : endTime > currentTime && startTime > currentTime;
-                    const adjustedEndTime = new Date(endTime);
-                    adjustedEndTime.setDate(endTime.getDate() + 1);
+                    const [startTime, endTime] = convertDates(timeRange.startTime, timeRange.endTime, currentTime);
+                    const critterAppearingNow = isInTimeRange(currentTime, startTime, endTime);
+                    let adjustedEndTime = createAdjustedEndTime(endTime, bMonths);
                     if (critterAppearingNow) {
                         remainingTimesForB.push(
                             startTime < currentTime
@@ -172,8 +162,6 @@ const sortCritterList = (critterList: ICritter[], timeOffset: number, activeSort
             }
             case sortType.yearAsc:
             case sortType.yearDesc: {
-                const aMonths = hemi === hemisphere.north ? a.northMonths : a.southMonths;
-                const bMonths = hemi === hemisphere.south ? b.northMonths : b.southMonths;
                 const sortMonths = (a: number, b: number) => (a > b ? 1 : b < a ? -1 : 0);
                 aMonths.sort(sortMonths);
                 bMonths.sort(sortMonths);
@@ -226,7 +214,7 @@ const sortCritterList = (critterList: ICritter[], timeOffset: number, activeSort
         }
     }
 
-    return critterList.sort(sortFunction);
+    return critterListIn.sort(sortFunction);
 };
 
 
