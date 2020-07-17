@@ -1,4 +1,4 @@
 export interface ITimeSpan {
-    startTime: string;
-    endTime: string;
+    startTime: number[];
+    endTime: number[];
 }

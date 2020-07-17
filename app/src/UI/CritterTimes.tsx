@@ -1,6 +1,6 @@
 import React from 'react';
 import { ITimeSpan } from '../model/ITimeSpan';
-import { setDateToCurrentDate, isInTimeRange } from '../helpers/DateHelpers';
+import { isInTimeRange, convertDates } from '../helpers/DateHelpers';
 
 interface ICritterTimes {
     availableTimes: ITimeSpan[];
@@ -15,7 +15,6 @@ function CritterTimes(props: React.PropsWithChildren<ICritterTimes>) {
         let currentDate = new Date();
         let adjustedDate = new Date();
         adjustedDate.setHours(adjustedDate.getHours() + timeOffset); // adjust the time in accordance with the user's specified offset
-        currentDate = setDateToCurrentDate(adjustedDate); // in case we crossed a time boundary, we reset the date to the current date (keeping the time)
 
         const timeToCheck = new Date();
         timeToCheck.setMinutes(1); // set as 1 so we don't hit issues where the end time is an hour boundary (e.g. we don't want the 4-5pm slot filled in when the critter's end time is 4pm)
@@ -36,7 +35,8 @@ function CritterTimes(props: React.PropsWithChildren<ICritterTimes>) {
             let isCurrentlyActive: boolean = false;
 
             for(const timeRange of availableTimes) {
-                isCurrentlyActive = isInTimeRange(timeToCheck, timeRange, adjustedDate);
+                const [startTime, endTime] = convertDates(timeRange.startTime, timeRange.endTime);
+                isCurrentlyActive = isInTimeRange(timeToCheck, startTime, endTime);
                 if(isCurrentlyActive) {
                     break;
                 }
