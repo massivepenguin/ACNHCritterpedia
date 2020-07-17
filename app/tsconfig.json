@@ -19,7 +19,4 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": [
-    "src", "__tests__/AppReducer.test.ts", "__tests__/CritterFilters.test.ts"
-  ]
 }
