@@ -3,46 +3,59 @@ import { critterType } from "../model/CritterType";
 import { instanceOfAppState } from "../model/AppState";
 import { mainAppView } from "../model/MainAppView";
 import { sortType } from "../model/SortType";
-import { ICritterIdList } from "../model/ICritterIdList";
 
-it('catch bug with ID of 10', () => {
+describe('catch bug with ID of 10', () => {
     const store = testStore;
     const critterId:number = 10;
     store.dispatch(catchCritter({ critterId: critterId, type: critterType.bug }));
     const state = store.getState();
-    expect(state.critters.caught.bugs).toContain(critterId);
+    it('should contain the ID of the critter we\'ve caught', () => {
+        expect(state.critters.caught.bugs).toContain(critterId);
+    })
 });
 
-it('donate a fish with ID of 15', () => {
+describe('donate a fish with ID of 15', () => {
     const store = testStore;
     const critterId:number = 15;
     store.dispatch(donateCritter({ critterId: critterId, type: critterType.fish }));
     const state = store.getState();
-    expect(state.critters.caught.fish).toContain(critterId);
-    expect(state.critters.donated.fish).toContain(critterId);
+    it('should have the caught critter\'s ID in the \'donated\' array', () => {
+        expect(state.critters.donated.fish).toContain(critterId);
+    });
+    it('should also have the caught critter\'s ID in the \'caught\' array', () => {
+        expect(state.critters.caught.fish).toContain(critterId);
+    });
 });
 
-it('donate a seaCreature with ID of 30, then mark as uncaught', () => {
+describe('donate a seaCreature with ID of 30, then mark as uncaught', () => {
     const store = testStore;
     const critterId:number = 30;
     store.dispatch(donateCritter({ critterId: critterId, type: critterType.seaCreature }));
     store.dispatch(catchCritter({ critterId: critterId, type: critterType.seaCreature }));
     const state = store.getState();
-    expect(state.critters.caught.seaCreatures).not.toContain(critterId);
-    expect(state.critters.donated.seaCreatures).not.toContain(critterId);
+    it('should have removed the critter from the \'caught\' array', () => {
+        expect(state.critters.caught.seaCreatures).not.toContain(critterId);
+    });
+    it('should also have removed the critter from the \'donated\' array, as you can\'t donate something you haven\'t caught', () => {
+        expect(state.critters.donated.seaCreatures).not.toContain(critterId);
+    });
 });
 
-it('donate a bug with ID of 10, then undonate', () => {
+describe('donate a bug with ID of 10, then undonate', () => {
     const store = testStore;
     const critterId:number = 10;
     store.dispatch(donateCritter({ critterId: critterId, type: critterType.bug }));
     store.dispatch(donateCritter({ critterId: critterId, type: critterType.bug }));
     const state = store.getState();
-    expect(state.critters.caught.bugs).toContain(critterId);
-    expect(state.critters.donated.bugs).not.toContain(critterId);
+    it('should not have the critter ID in the \'donated\' array', () => {
+        expect(state.critters.donated.bugs).not.toContain(critterId);
+    });
+    it('should still have the critter ID in the \'caught\' array', () => {
+        expect(state.critters.caught.bugs).toContain(critterId);
+    });
 });
 
-it('update out-of-date state to current app state', () => {
+describe('update out-of-date state to current app state', () => {
     const outOfDateState = {
         currentView: mainAppView.all,
         critters: {
@@ -55,17 +68,32 @@ it('update out-of-date state to current app state', () => {
         hideCaught: false,
         showAll: false,
     };
-    expect(instanceOfAppState(outOfDateState)).toEqual(false);
     const updatedState = updateState(outOfDateState);
-    expect(instanceOfAppState(updatedState)).toEqual(true);
-    expect(updatedState.critters.caught.bugs.length).toEqual(3);
-    expect(updatedState.critters.caught.bugs).toContain(5);
-    expect(updatedState.critters.caught.fish.length).toEqual(4);
-    expect(updatedState.critters.caught.fish).toContain(67);
-    expect(updatedState.critters.donated.bugs.length).toEqual(1);
-    expect(updatedState.critters.donated.bugs).toContain(5);
-    expect(updatedState.critters.donated.fish.length).toEqual(2);
-    expect(updatedState.critters.donated.fish).toContain(25);
-    expect(updatedState.critters.caught.seaCreatures.length).toEqual(0);
-    expect(updatedState.critters.donated.seaCreatures.length).toEqual(0);
+
+    it('should return false as the \'critters\' proerty is missing \'seaCreatures\'', () => {
+        expect(instanceOfAppState(outOfDateState)).toEqual(false);
+    });
+    it('should have reshaped the state into a compatible one', () => {
+        expect(instanceOfAppState(updatedState)).toEqual(true);
+    });
+    it('should have preserved the caught bugs array', () => {
+        expect(updatedState.critters.caught.bugs.length).toEqual(3);
+        expect(updatedState.critters.caught.bugs).toContain(5);
+    });
+    it('should have preserved the caught fish array', () => {
+        expect(updatedState.critters.caught.fish.length).toEqual(4);
+        expect(updatedState.critters.caught.fish).toContain(67);
+    });
+    it('should have preserved the donated bugs array', () => {
+        expect(updatedState.critters.donated.bugs.length).toEqual(1);
+        expect(updatedState.critters.donated.bugs).toContain(5);
+    });
+    it('should have preserved the donated fish array', () => {
+        expect(updatedState.critters.donated.fish.length).toEqual(2);
+        expect(updatedState.critters.donated.fish).toContain(25);
+    });
+    it('should have added the donated/caught seaCreatures arrays', () => {
+        expect(updatedState.critters.caught.seaCreatures.length).toEqual(0);
+        expect(updatedState.critters.donated.seaCreatures.length).toEqual(0);
+    });
 });

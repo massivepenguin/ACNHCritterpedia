@@ -71,6 +71,8 @@ const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaught: boo
  */
 const sortCritterList = (critterListIn: ICritter[], timeOffset: number, activeSort: sortType, hemi: hemisphere, currentTime: Date): ICritter[] => {
 
+    const mutatableCritterList: ICritter[] = [...critterListIn];
+
     const sortFunction = (a: ICritter, b: ICritter): number => {
         const aMonths = hemi === hemisphere.south ? a.southMonths : a.northMonths;
         const bMonths = hemi === hemisphere.south ? b.southMonths : b.northMonths;
@@ -99,12 +101,12 @@ const sortCritterList = (critterListIn: ICritter[], timeOffset: number, activeSo
                 // simple ascending order based on numerical ID
                 return b.id > a.id ? -1 : b.id < a.id ? 1 : 0;
             }
-            case sortType.valueAsc: {
-                // simple ascending order based on sale price
-                return a.price > b.price ? -1 : a.price < b.price ? 1 : 0;
-            }
             case sortType.valueDesc: {
                 // simple descending order based on sale price
+                return a.price > b.price ? -1 : a.price < b.price ? 1 : 0;
+            }
+            case sortType.valueAsc: {
+                // simple ascending order based on sale price
                 return b.price > a.price ? -1 : b.price < a.price ? 1 : 0;
             }
             case sortType.todayAsc:
@@ -214,7 +216,9 @@ const sortCritterList = (critterListIn: ICritter[], timeOffset: number, activeSo
         }
     }
 
-    return critterListIn.sort(sortFunction);
+    mutatableCritterList.sort(sortFunction);
+
+    return mutatableCritterList;
 };
 
 
