@@ -16,8 +16,8 @@
         "location": "underwater",
         "price": 900,
         "times": [{"startTime": [0], "endTime": [23,59,59]}],
-        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
-        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+        "northMonths": [6,7,8,9],
+        "southMonths": [1,2,3,12]
     },
     {
         "id": 3,
@@ -56,8 +56,8 @@
         "location": "underwater",
         "price": 1700,
         "times": [{"startTime": [0], "endTime": [23,59,59]}],
-        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
-        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+        "northMonths": [1,2,3,11,12],
+        "southMonths": [5,6,7,8,9]
     },
     {
         "id": 7,
@@ -363,8 +363,8 @@
         "location": "underwater",
         "price": 1500,
         "times": [{"startTime": [0], "endTime": [23,59,59]}],
-        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
-        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+        "northMonths": [4,5,6,7,8],
+        "southMonths": [1,2,10,11,12]
     },
     {
         "id": 38,
@@ -373,8 +373,8 @@
         "location": "underwater",
         "price": 1100,
         "times": [{"startTime": [4], "endTime": [21]}],
-        "northMonths": [1,2,3,4,5,6,7,8,9,10,11,12],
-        "southMonths": [1,2,3,4,5,6,7,8,9,10,11,12]
+        "northMonths": [5,6,7,8,9,10],
+        "southMonths": [1,2,3,4,11,12]
     },
     {
         "id": 39,
