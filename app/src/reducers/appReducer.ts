@@ -168,13 +168,19 @@ const switchAppViewSlice = createSlice({
 
 let persistedState = (localStorage.getItem('appState') ? JSON.parse(localStorage.getItem('appState') as string) : AppState);
 
+export const updateState = (sourceState: any): IAppState => {
+    // first, make sure all the top level properties are the same as the IAppState interface
+    let newState = {...AppState, ...sourceState} as IAppState;
+    newState.critters = {caught: {...AppState.critters.caught, ...sourceState.critters.caught}, donated: {...AppState.critters.donated, ...sourceState.critters.donated}};
+    return newState;
+};
+
+
 if(!instanceOfAppState(persistedState)) {
     // if the state doesn't match the interface the app is expecting, we'll upgrade the
     // persistedState to match it - this allows us to extend the creatures while preserving
     // the user's saved state
-    let newState = {...AppState, ...persistedState} as IAppState;
-    newState.critters = {caught: {...AppState.critters.caught, ...persistedState.critters.caught}, donated: {...AppState.critters.donated, ...persistedState.critters.donated}};
-    persistedState = newState;
+    persistedState = updateState(persistedState);
     // overwrite the original state so we know it's good for next time
     localStorage.setItem('appState', JSON.stringify(persistedState));
 } 
