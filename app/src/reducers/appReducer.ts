@@ -166,6 +166,7 @@ const switchAppViewSlice = createSlice({
     },
 });
 
+// TODO: handle errors accessing localStorage
 let persistedState = (localStorage.getItem('appState') ? JSON.parse(localStorage.getItem('appState') as string) : AppState);
 
 export const updateState = (sourceState: any): IAppState => {
@@ -182,6 +183,7 @@ if(!instanceOfAppState(persistedState)) {
     // the user's saved state
     persistedState = updateState(persistedState);
     // overwrite the original state so we know it's good for next time
+    // TODO: handle saving errors
     localStorage.setItem('appState', JSON.stringify(persistedState));
 } 
 
@@ -233,5 +235,6 @@ export const testStore = configureStore({
 // save the store state to localStorage when it's updated
 store.subscribe(() => {
     const state = store.getState();
+    // TODO: handle errors when saving
     localStorage.setItem('appState', JSON.stringify(state));
 });
