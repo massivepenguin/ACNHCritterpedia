@@ -2,7 +2,7 @@ ACNHCritterpedia
 ---
 A small app for tracking your Critterpedia progress in Animal Crossing: New Horizons for Nintendo Switch.
 
-Saves data to localStorage. Uses [React Redux](https://react-redux.js.org/) (and [redux-toolkit](https://redux-toolkit.js.org/)) for satae management, and [Jest](https://jestjs.io/) for tests.
+Saves data to localStorage. Uses [React Redux](https://react-redux.js.org/) (and [redux-toolkit](https://redux-toolkit.js.org/)) for state management, and [Jest](https://jestjs.io/) for tests.
 
 Critter images are taken from the [Animal Crossing Wiki] (https://animalcrossing.fandom.com/wiki/) at [Fandom](https://www.fandom.com/).
 
