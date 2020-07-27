@@ -1,10 +1,10 @@
 import { configureStore, getDefaultMiddleware, createSlice } from '@reduxjs/toolkit';
 import { critterType } from '../model/CritterType';
 import { AppState, IAppState, instanceOfAppState } from '../model/AppState';
+import { saveData, loadData } from '../helpers/dataHelpers';
 
 const middleware = [
     ...getDefaultMiddleware(),
-    /*YOUR CUSTOM MIDDLEWARES HERE*/
 ];
 
 const exampleState = {...AppState} as IAppState;
@@ -167,7 +167,7 @@ const switchAppViewSlice = createSlice({
 });
 
 // TODO: handle errors accessing localStorage
-let persistedState = (localStorage.getItem('appState') ? JSON.parse(localStorage.getItem('appState') as string) : AppState);
+let persistedState = loadData();
 
 export const updateState = (sourceState: any): IAppState => {
     // first, make sure all the top level properties are the same as the IAppState interface
@@ -183,8 +183,7 @@ if(!instanceOfAppState(persistedState)) {
     // the user's saved state
     persistedState = updateState(persistedState);
     // overwrite the original state so we know it's good for next time
-    // TODO: handle saving errors
-    localStorage.setItem('appState', JSON.stringify(persistedState));
+    saveData(persistedState);
 } 
 
 export const { changeHemisphere } = hemispehereSlice.actions;
@@ -235,6 +234,5 @@ export const testStore = configureStore({
 // save the store state to localStorage when it's updated
 store.subscribe(() => {
     const state = store.getState();
-    // TODO: handle errors when saving
-    localStorage.setItem('appState', JSON.stringify(state));
+    saveData(state);
 });
