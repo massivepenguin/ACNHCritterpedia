@@ -1,6 +1,6 @@
 import React from 'react';
 import { sortType, sortValues } from '../model/SortType';
-import { store, changeSort } from '../reducers/AppReducer';
+import { store, changeSort } from '../reducers/appReducer';
 
 function ListSorter() {
     const state = store.getState();

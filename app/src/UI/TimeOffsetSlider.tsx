@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { store, changeOffset } from '../reducers/AppReducer';
+import { store, changeOffset } from '../reducers/appReducer';
 import 'react-rangeslider/lib/index.css';
 
 function TimeOffsetSlider() {

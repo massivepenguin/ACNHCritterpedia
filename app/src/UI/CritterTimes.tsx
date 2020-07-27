@@ -1,6 +1,6 @@
 import React from 'react';
 import { ITimeSpan } from '../model/ITimeSpan';
-import { isInTimeRange, convertDates } from '../helpers/DateHelpers';
+import { isInTimeRange, convertDates } from '../helpers/dateHelpers';
 
 interface ICritterTimes {
     availableTimes: ITimeSpan[];

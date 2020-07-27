@@ -1,7 +1,7 @@
 import React from 'react';
 import { ICritter } from '../model/ICritter';
 import { critterType } from '../model/CritterType';
-import { store, catchCritter, donateCritter } from '../reducers/AppReducer';
+import { store, catchCritter, donateCritter } from '../reducers/appReducer';
 import CritterThumbnail from './CritterThumbnail';
 import CritterCalendar from './CritterCalendar';
 import CritterTimes from './CritterTimes';

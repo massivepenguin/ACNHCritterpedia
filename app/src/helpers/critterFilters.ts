@@ -1,6 +1,6 @@
 import { ICritter } from '../model/ICritter';
 import { ICheckedCritterList } from '../model/ICheckedCritterList';
-import { convertDates, isInTimeRange, createAdjustedEndTime } from './DateHelpers';
+import { convertDates, isInTimeRange, createAdjustedEndTime } from './dateHelpers';
 import { hemisphere } from '../model/Hemisphere';
 import { sortType } from '../model/SortType';
 import { ICritterList } from '../model/ICritterList';

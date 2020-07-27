@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { store, hideCaught, showAll } from '../reducers/AppReducer';
+import { store, hideCaught, showAll } from '../reducers/appReducer';
 import { ICritterList } from '../model/ICritterList';
 import { critterType } from '../model/CritterType';
-import { filterCritters } from '../helpers/CritterFilters';
+import { filterCritters } from '../helpers/critterFilters';
 import ListSorter from './ListSorter';
 import Checkbox from './Checkbox';
 import SettingsButton from './SettingsButton';
