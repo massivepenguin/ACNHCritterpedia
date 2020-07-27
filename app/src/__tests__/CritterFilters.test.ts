@@ -1,10 +1,20 @@
 import { hemisphere } from '../model/Hemisphere';
-import { filterCritters } from '../helpers/CritterFilters';
+import { filterCritters } from '../helpers/critterFilters';
 import { ICritterState } from '../model/ICritterState';
 import { sortType } from '../model/SortType';
 
 const blankCritterSet: ICritterState = {caught: {bugs: [], fish: [], seaCreatures: []}, donated: {bugs: [], fish: [], seaCreatures: []}};
 const caughtCritterSet: ICritterState = {caught: {bugs: [10, 75], fish: [], seaCreatures: []}, donated: {bugs: [], fish: [], seaCreatures: []}}
+
+
+
+describe('check filtering step', () => {
+    // TODO: create tests that check the filterCritterList function
+});
+
+describe('check sorting step', () => {
+    // TODO: create tests that check the sortCritterList function
+});
 
 describe('availability filtering', () => {
     const northResultAll = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.alphaAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00

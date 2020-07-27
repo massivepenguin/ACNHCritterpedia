@@ -1,4 +1,4 @@
-import { testStore, catchCritter, donateCritter, updateState } from "../reducers/AppReducer";
+import { testStore, catchCritter, donateCritter, updateState } from "../reducers/appReducer";
 import { critterType } from "../model/CritterType";
 import { instanceOfAppState } from "../model/AppState";
 import { mainAppView } from "../model/MainAppView";

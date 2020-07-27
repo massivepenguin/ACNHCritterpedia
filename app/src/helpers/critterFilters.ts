@@ -23,7 +23,7 @@ const critterList: ICritterList = { bugs: bugs, fish: fish, seaCreatures: seaCre
  * @param {Date} currentTime - the date we're using as a comparitor (set to the current date if none provided)
  * @returns {ICheckedCritterList} - an object containing the critters that we can catch now, and the ones that are available later
  */
-const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaught: boolean, critterListIn: ICritter[], caughtArray: number[], currentTime: Date): ICheckedCritterList => {
+export const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaught: boolean, critterListIn: ICritter[], caughtArray: number[], currentTime: Date): ICheckedCritterList => {
     // get the current state so we know which hemisphere we're in, what the time offset is, and whether we're hiding caught critters
     const upcomingCritters: ICritter[] = [];
     if (timeOffset !== 0) {
@@ -69,7 +69,7 @@ const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaught: boo
  * @param {Date} currentTime - the date we're using as a comparitor
  * @returns {ICritter[]}
  */
-const sortCritterList = (critterListIn: ICritter[], timeOffset: number, activeSort: sortType, hemi: hemisphere, currentTime: Date): ICritter[] => {
+export const sortCritterList = (critterListIn: ICritter[], timeOffset: number, activeSort: sortType, hemi: hemisphere, currentTime: Date): ICritter[] => {
 
     const mutatableCritterList: ICritter[] = [...critterListIn];
 
