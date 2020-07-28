@@ -1,4 +1,4 @@
-import { convertDates, createAdjustedEndTime, isInTimeRange } from "../helpers/DateHelpers";
+import { convertDates, createAdjustedEndTime, isInTimeRange } from "../helpers/dateHelpers";
 
 describe('date conversion test (current date)', () => {
     const currentDate: Date = new Date();
