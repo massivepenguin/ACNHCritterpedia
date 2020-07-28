@@ -1,11 +1,13 @@
 import React from 'react';
-import { ICritter } from '../model/ICritter';
+import { createUseStyles } from 'react-jss';
 import { critterType } from '../model/CritterType';
+import { hemisphere } from '../model/Hemisphere';
+import { ICritter } from '../model/ICritter';
 import { store, catchCritter, donateCritter } from '../reducers/appReducer';
+import { sharedStyles } from '../styles/SharedStyles';
 import CritterThumbnail from './CritterThumbnail';
 import CritterCalendar from './CritterCalendar';
 import CritterTimes from './CritterTimes';
-import { hemisphere } from '../model/Hemisphere';
 
 interface ICritterEntryProps {
     typeOfCritter: critterType;
@@ -16,6 +18,42 @@ function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
     const { typeOfCritter, critter } = props;
 
     const state = store.getState();
+
+    const classes = createUseStyles({
+        actionButtons: {
+            ...sharedStyles.inlineList,
+        },
+        critterDetails: {
+            display: 'flex',
+            flexDirection: 'row',
+        },
+        critterEntry: {
+            margin: '2rem 0 2rem 4rem',
+            position: 'relative',
+        },
+        critterInfo: {
+            flex: '1 1 auto',
+        },
+        critterThumb: {
+            backgroundColor: '#fff',
+            borderRadius: '40px',
+            boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.5)',
+            flex: '0 0 auto',
+            height: '80px',
+            marginLeft: '-3.5rem',
+            position: 'relative',
+            width: '80px',
+            '& > img': {
+                display: 'block',
+                height: '90%',
+                left: '50%',
+                position: 'relative',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '90%',
+            }
+        },
+    })();
 
     let caughtSource: number[] = [];
     let donatedSource: number[] = [];
@@ -46,15 +84,19 @@ function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
     const donated = donatedSource.indexOf(critter.id) > -1;
 
     return (
-        <li className={'critterEntry'}>
-            <ul>
-                <li><CritterThumbnail path={`img/critters/${path}/${critter.thumbnail}`} name={critter.name} /></li>
-                <li>{critter.name}</li>
-                <li>{critter.price} bells</li>
-                <li><CritterTimes availableTimes={critter.times} timeOffset={state.timeOffset} /></li>
-                <li><CritterCalendar availableMonths={state.hemisphere === hemisphere.south ? critter.southMonths : critter.northMonths} timeOffset={state.timeOffset} /></li>
-            </ul>
-            <ul>
+        <li className={classes.critterEntry}>
+            <h2>{critter.name}</h2>
+            <div className={classes.critterDetails}>
+                <div className={classes.critterThumb}>
+                    <CritterThumbnail path={`img/critters/${path}/${critter.thumbnail}`} name={critter.name} />
+                </div>
+                <ul className={classes.critterInfo}>
+                    <li>{critter.price} bells</li>
+                    <li><CritterTimes availableTimes={critter.times} timeOffset={state.timeOffset} /></li>
+                    <li><CritterCalendar availableMonths={state.hemisphere === hemisphere.south ? critter.southMonths : critter.northMonths} timeOffset={state.timeOffset} /></li>
+                </ul>
+            </div>
+            <ul className={classes.actionButtons}>
                 <li onClick={() => store.dispatch(catchCritter({ critterId: critter.id, type: typeOfCritter }))}>
                     {caught ? 'Caught' : 'Not caught'}
                 </li>

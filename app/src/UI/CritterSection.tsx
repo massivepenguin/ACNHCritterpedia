@@ -11,7 +11,7 @@ interface ICritterSection {
     typeOfCritter: critterType,
 }
 
-function CritterSection(props: React.PropsWithChildren<ICritterSection>) {
+function CritterSection(props: React.PropsWithChildren<ICritterSection>): JSX.Element {
     const { showAll, allCritters, availableCritters, upcomingCritters, typeOfCritter } = props;
 
     const critterName: string = critterTypeValues[typeOfCritter];
