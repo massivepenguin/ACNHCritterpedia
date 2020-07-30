@@ -1,0 +1,298 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+            animation-iteration-count: 1 !important;
+    -webkit-transition-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.critterList, .critterList .critterEntry .actionButtons, .viewSwitch .viewSwitchList {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.critterList li, .critterList .critterEntry .actionButtons li, .viewSwitch .viewSwitchList li {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: 'pusabregular';
+  src: url("/fonts/PUSAB___-webfont.eot");
+  src: url("/fonts/PUSAB___-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/PUSAB___-webfont.woff2") format("woff2"), url("/fonts/PUSAB___-webfont.woff") format("woff"), url("/fonts/PUSAB___-webfont.ttf") format("truetype"), url("/fonts/PUSAB___-webfont.svg#pusabregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+
+body {
+  background-color: #00905A;
+  background-image: url("/img/bg/tile_bg.png");
+  background-size: 128px;
+  font-size: 1.6rem;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'pusabregular';
+  font-weight: normal;
+}
+
+#root, .App {
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.mainApp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.controls {
+  background-color: #fff;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+
+.critterPaneHolder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.critterPane {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  padding: 1rem;
+}
+
+.hiddenList {
+  display: none;
+}
+
+.viewableList {
+  display: block;
+}
+
+.critterSection {
+  text-align: center;
+}
+
+.critterList {
+  margin: 0 auto;
+}
+
+.critterList .critterEntry {
+  background-color: #cc0000;
+  border-radius: 10px;
+  margin: 4rem auto 2rem;
+  position: relative;
+  width: 280px;
+}
+
+.critterList .critterEntry .critterDetails {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.critterList .critterEntry .critterInfo {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.critterList .critterEntry .critterThumb {
+  background-color: #fff;
+  border-radius: 40px;
+  -webkit-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  height: 80px;
+  position: relative;
+  width: 80px;
+}
+
+.critterList .critterEntry .critterThumb img {
+  display: block;
+  height: 90%;
+  left: 50%;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+.viewSwitch {
+  background-color: #fff;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  padding: 1rem;
+}
+
+.viewSwitch .viewSwitchList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.viewSwitch .viewSwitchList li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.viewSwitch .viewSwitchList li.activeButton {
+  cursor: default;
+}
+
+.viewSwitch .viewSwitchList li.switchButton {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 840px) {
+  .hiddenList {
+    display: block;
+  }
+  .viewSwitch {
+    display: none;
+  }
+  .critterPane {
+    -ms-flex-preferred-size: 280px;
+        flex-basis: 280px;
+  }
+  .critterPaneHolder {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+/*# sourceMappingURL=App.css.map */

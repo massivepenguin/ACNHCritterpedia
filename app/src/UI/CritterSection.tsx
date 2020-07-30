@@ -19,9 +19,9 @@ function CritterSection(props: React.PropsWithChildren<ICritterSection>): JSX.El
 
     if(showAll) {
         return (
-            <div className={'critter-section'}>
+            <div className={'critterSection'}>
                 <h1>All {critterNamePlural}</h1>
-                    <ul>
+                    <ul className={'critterList'}>
                         {allCritters.map((critter: ICritter) => (
                             <CritterEntry
                                 typeOfCritter={typeOfCritter}
@@ -35,9 +35,9 @@ function CritterSection(props: React.PropsWithChildren<ICritterSection>): JSX.El
     }
 
     return (
-        <div className={'critter-section'}>
+        <div className={'critterSection'}>
             <h1>You can currently catch {availableCritters.length} {availableCritters.length !== 1 ? critterNamePlural : critterName}:</h1>
-            <ul>
+            <ul className={'critterList'}>
                 {availableCritters.map((critter: ICritter) => (
                     <CritterEntry
                         typeOfCritter={typeOfCritter}
@@ -46,8 +46,8 @@ function CritterSection(props: React.PropsWithChildren<ICritterSection>): JSX.El
                     />
                 ))}
             </ul>
-                <h1>You can catch {upcomingCritters.length} {upcomingCritters.length !== 1 ? critterNamePlural : critterName} later today:</h1>
-            <ul>
+            <h1>You can catch {upcomingCritters.length} {upcomingCritters.length !== 1 ? critterNamePlural : critterName} later today:</h1>
+            <ul className={'critterList'}>
                 {upcomingCritters.map((critter: ICritter) => (
                     <CritterEntry
                         typeOfCritter={typeOfCritter}
