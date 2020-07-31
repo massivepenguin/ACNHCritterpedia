@@ -10,24 +10,21 @@ function CritterThumbnail(props: React.PropsWithChildren<ICritterThumbnailProps>
 
     const [thumbnail, setThumbnail] = useState(undefined as undefined | string);
 
-    const fetchData = () => {
-        // fetch the blob data for the critter's thumbnail and set it to the compnent's state
-        fetch(path).then(response => response.blob()).then(data =>{
-            const imgReader = new FileReader();
-            imgReader.onloadend = () => {
-                if(typeof imgReader.result === 'string') {
-                    setThumbnail(imgReader.result);
-                }
-            }
-            imgReader.readAsDataURL(data);
-        }).catch(error => {
-            console.error(`error loading thumbnail for ${name}:`, error);
-        });
+    const loadImage = () => {
+        // create an image object to load our thumbnail into
+        const thumb = new Image();
+        // when the thumbnail has loaded, set the component's src
+        thumb.onload = () => {
+            setThumbnail(path);
+        }
+        // start the thumbnail loading
+        thumb.src = path;
+        
     }
 
     // fetch the thumbnail if we don't already have it
     if(!thumbnail) {
-        fetchData();
+        loadImage();
     }
 
     // show a loading spinner instead of the thumbnail if the thumbnail hasn't loaded yet

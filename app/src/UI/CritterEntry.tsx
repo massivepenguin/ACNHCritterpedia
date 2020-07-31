@@ -47,7 +47,7 @@ function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
 
     return (
         <li className={'critterEntry'}>
-            <h2>{critter.name}</h2>
+            <h2><span>{critter.name}</span></h2>
             <div className={'critterDetails'}>
                 <div className={'critterThumb'}>
                     <CritterThumbnail path={`img/critters/${path}/${critter.thumbnail}`} name={critter.name} />

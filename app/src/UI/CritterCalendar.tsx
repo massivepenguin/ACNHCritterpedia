@@ -9,18 +9,18 @@ function CritterCalendar(props: React.PropsWithChildren<ICritterCalendar>) {
     const { availableMonths, timeOffset } = props;
 
     const monthArray: JSX.Element[] = [
-        <>J<span className={'month-name-mid'}>an</span><span className={'month-name-rest'}>uary</span></>,
-        <>F<span className={'month-name-mid'}>eb</span><span className={'month-name-rest'}>ruary</span></>,
-        <>M<span className={'month-name-mid'}>ar</span><span className={'month-name-rest'}>ch</span></>,
-        <>A<span className={'month-name-mid'}>pr</span><span className={'month-name-rest'}>il</span></>,
-        <>M<span className={'month-name-mid'}>ay</span></>,
-        <>J<span className={'month-name-mid'}>un</span><span className={'month-name-rest'}>e</span></>,
-        <>J<span className={'month-name-mid'}>ul</span><span className={'month-name-rest'}>y</span></>,
-        <>A<span className={'month-name-mid'}>ug</span><span className={'month-name-rest'}>ust</span></>,
-        <>S<span className={'month-name-mid'}>ept</span><span className={'month-name-rest'}>ember</span></>,
-        <>O<span className={'month-name-mid'}>ct</span><span className={'month-name-rest'}>ober</span></>,
-        <>N<span className={'month-name-mid'}>ov</span><span className={'month-name-rest'}>ember</span></>,
-        <>D<span className={'month-name-mid'}>ec</span><span className={'month-name-rest'}>ember</span></>,
+        <>J<span className={'monthName--mid'}>an</span><span className={'monthName--rest'}>uary</span></>,
+        <>F<span className={'monthName--mid'}>eb</span><span className={'monthName--rest'}>ruary</span></>,
+        <>M<span className={'monthName--mid'}>ar</span><span className={'monthName--rest'}>ch</span></>,
+        <>A<span className={'monthName--mid'}>pr</span><span className={'monthName--rest'}>il</span></>,
+        <>M<span className={'monthName--mid'}>ay</span></>,
+        <>J<span className={'monthName--mid'}>un</span><span className={'monthName--rest'}>e</span></>,
+        <>J<span className={'monthName--mid'}>ul</span><span className={'monthName--rest'}>y</span></>,
+        <>A<span className={'monthName--mid'}>ug</span><span className={'monthName--rest'}>ust</span></>,
+        <>S<span className={'monthName--mid'}>ept</span><span className={'monthName--rest'}>ember</span></>,
+        <>O<span className={'monthName--mid'}>ct</span><span className={'monthName--rest'}>ober</span></>,
+        <>N<span className={'monthName--mid'}>ov</span><span className={'monthName--rest'}>ember</span></>,
+        <>D<span className={'monthName--mid'}>ec</span><span className={'monthName--rest'}>ember</span></>,
     ];
 
     const renderMonths = (): JSX.Element[] => {
@@ -37,11 +37,14 @@ function CritterCalendar(props: React.PropsWithChildren<ICritterCalendar>) {
     }
 
     return (
-        <ul className={'critter-calendar'}>
-            {
-                renderMonths()
-            }
-        </ul>
+        <>
+            <h3>Active Months</h3>
+            <ul className={'critterCalendar'}>
+                {
+                    renderMonths()
+                }
+            </ul>
+        </>
     );
 }
 

@@ -25,7 +25,7 @@ function CritterTimes(props: React.PropsWithChildren<ICritterTimes>) {
             marginLeft: 100 / 60 * currentDate.getMinutes() + '%'
         };
 
-        const timeMarker: JSX.Element = <span className={'time-marker'} style={styleObject}>*</span>;
+        const timeMarker: JSX.Element = <span className={'timeMarker'} style={styleObject}></span>;
 
         // loop through the 24-hour clock
         for(let i: number = 0; i < 24; ++i) {
@@ -44,18 +44,21 @@ function CritterTimes(props: React.PropsWithChildren<ICritterTimes>) {
 
             const hourValue12 = i > 12 ? i - 12 : i;
             const hourString = hourValue12 <= 9 ? String("0" + hourValue12).slice(-2) : hourValue12;
-            elements.push(<li key={`hour_${i}`} className={isCurrentlyActive ? 'active' : 'inactive'}>{i === currentDate.getHours() ? timeMarker : null}<span className={'hour_label'}>{hourString}</span></li>)
+            elements.push(<li key={`hour_${i}`} className={isCurrentlyActive ? 'active' : 'inactive'}>{i === currentDate.getHours() ? timeMarker : null}<span className={'hourLabel'}>{hourString}</span></li>)
         }
 
         return elements;
     }
 
     return (
-        <ul className={'times-list'}>
-            {
-                renderTimes()
-            }
-        </ul>
+        <>
+            <h3>Active Hours</h3>
+            <ul className={'timesList'}>
+                {
+                    renderTimes()
+                }
+            </ul>
+        </>
     )
 }
 

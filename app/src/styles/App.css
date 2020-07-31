@@ -81,18 +81,6 @@ select {
   }
 }
 
-.critterList, .critterList .critterEntry .actionButtons, .viewSwitch .viewSwitchList {
-  display: block;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.critterList li, .critterList .critterEntry .actionButtons li, .viewSwitch .viewSwitchList li {
-  margin: 0;
-  padding: 0;
-}
-
 @font-face {
   font-family: 'pusabregular';
   src: url("/fonts/PUSAB___-webfont.eot");
@@ -118,6 +106,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  color: #685A53;
   font-family: 'pusabregular';
   font-weight: normal;
 }
@@ -184,55 +173,239 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .critterList {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   margin: 0 auto;
 }
 
+.critterList li {
+  margin: 0;
+  padding: 0;
+}
+
 .critterList .critterEntry {
-  background-color: #cc0000;
+  background-color: #F1E7CC;
   border-radius: 10px;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.5);
   margin: 4rem auto 2rem;
+  padding: 1rem 2rem 2rem;
   position: relative;
   width: 280px;
 }
 
-.critterList .critterEntry .critterDetails {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+.critterList .critterEntry h2 {
+  display: inline-block;
+  font-size: 1.4rem;
+  position: relative;
+  text-align: center;
 }
 
-.critterList .critterEntry .critterInfo {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+.critterList .critterEntry h2 span {
+  border-radius: 2px;
+  background-color: #F1E05E;
+  color: #685A53;
+  padding: 0.5rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.critterList .critterEntry h2 span::before, .critterList .critterEntry h2 span::after {
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1.5rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  position: absolute;
+  bottom: -1rem;
+  width: 0;
+  z-index: -1;
+}
+
+.critterList .critterEntry h2 span::before {
+  border-right-color: #CDB687;
+  left: -1.5rem;
+}
+
+.critterList .critterEntry h2 span::after {
+  border-left-color: #CDB687;
+  right: -1.5rem;
+}
+
+.critterList .critterEntry h2::before, .critterList .critterEntry h2::after {
+  border-color: #D5C27E;
+  border-style: solid;
+  border-width: 1.5rem 2rem;
+  content: ' ';
+  display: block;
+  height: 0;
+  position: absolute;
+  bottom: -1.5rem;
+  width: 0;
+  z-index: 0;
+}
+
+.critterList .critterEntry h2::before {
+  border-left-color: transparent;
+  left: -2.3rem;
+}
+
+.critterList .critterEntry h2::after {
+  border-right-color: transparent;
+  right: -2.3rem;
 }
 
 .critterList .critterEntry .critterThumb {
-  background-color: #fff;
-  border-radius: 40px;
-  -webkit-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
-          box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+  background-color: #F2EED5;
+  border-radius: 150px;
   -webkit-box-flex: 0;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
-  height: 80px;
+  height: 128px;
+  margin: 2rem auto 1rem;
   position: relative;
-  width: 80px;
+  width: 128px;
 }
 
 .critterList .critterEntry .critterThumb img {
   display: block;
-  height: 90%;
+  height: auto;
   left: 50%;
   position: relative;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 90%;
+  width: 60%;
+}
+
+.critterList .critterEntry .critterInfo {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.critterList .critterEntry .critterInfo li {
+  margin: 0;
+  padding: 0;
+}
+
+.critterList .critterEntry .timesList {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid #685A53;
+  border-right: 1px solid #685A53;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  font-size: 0.5rem;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+}
+
+.critterList .critterEntry .timesList li {
+  margin: 0;
+  padding: 0;
+}
+
+.critterList .critterEntry .timesList li {
+  border-right: 1px solid #685A53;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  line-height: 1rem;
+  position: relative;
+  text-align: left;
+}
+
+.critterList .critterEntry .timesList li:last-child {
+  border-right: none;
+}
+
+.critterList .critterEntry .timesList li.active {
+  background-color: #F1E05E;
+}
+
+.critterList .critterEntry .timesList .hourLabel {
+  padding-left: 0.1rem;
+  position: relative;
+  top: 1rem;
+}
+
+.critterList .critterEntry .timesList .timeMarker {
+  border-right: 1px solid #cc0000;
+  content: ' ';
+  height: 2rem;
+  position: absolute;
+}
+
+.critterList .critterEntry .critterCalendar {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.critterList .critterEntry .critterCalendar li {
+  margin: 0;
+  padding: 0;
+}
+
+.critterList .critterEntry .critterCalendar li {
+  background-color: #D5C27E;
+  border-radius: 4px;
+  -ms-flex-preferred-size: 32%;
+      flex-basis: 32%;
+  font-size: 1rem;
+  line-height: 2rem;
+  margin-bottom: 2%;
+  opacity: 0.25;
+}
+
+.critterList .critterEntry .critterCalendar li.active {
+  opacity: 1;
+}
+
+.critterList .critterEntry .critterCalendar li.current {
+  background-color: #F1E05E;
+}
+
+.critterList .critterEntry .critterCalendar .monthName--rest {
+  display: none;
+}
+
+.critterList .critterEntry .actionButtons {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.critterList .critterEntry .actionButtons li {
+  margin: 0;
+  padding: 0;
 }
 
 .viewSwitch {
@@ -244,6 +417,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .viewSwitch .viewSwitchList {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -254,6 +431,11 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.viewSwitch .viewSwitchList li {
+  margin: 0;
+  padding: 0;
 }
 
 .viewSwitch .viewSwitchList li {
