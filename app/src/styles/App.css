@@ -19,8 +19,6 @@ h2,
 h3,
 h4,
 p,
-ul[class],
-ol[class],
 li,
 figure,
 figcaption,
@@ -151,6 +149,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
   overflow-x: hidden;
   overflow-y: auto;
+  width: 100%;
 }
 
 .critterPane {
@@ -158,6 +157,19 @@ h1, h2, h3, h4, h5, h6 {
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   padding: 1rem;
+}
+
+.critterPane h1 {
+  background-color: #685A53;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 0 #2f2926;
+          box-shadow: 0 5px 0 #2f2926;
+  color: #fff;
+  font-size: 1.8rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-shadow: 0 -2px 0 #2f2926;
+  width: 320px;
 }
 
 .hiddenList {
@@ -177,15 +189,15 @@ h1, h2, h3, h4, h5, h6 {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  margin: 0 auto;
+  margin: 0 auto 6rem;
 }
 
-.critterList li {
+.critterList > li {
   margin: 0;
   padding: 0;
 }
 
-.critterList .critterEntry {
+li.critterEntry {
   background-color: #F1E7CC;
   border-radius: 10px;
   -webkit-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.5);
@@ -196,14 +208,14 @@ h1, h2, h3, h4, h5, h6 {
   width: 280px;
 }
 
-.critterList .critterEntry h2 {
+li.critterEntry h2 {
   display: inline-block;
   font-size: 1.4rem;
   position: relative;
   text-align: center;
 }
 
-.critterList .critterEntry h2 span {
+li.critterEntry h2 span {
   border-radius: 2px;
   background-color: #F1E05E;
   color: #685A53;
@@ -212,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
-.critterList .critterEntry h2 span::before, .critterList .critterEntry h2 span::after {
+li.critterEntry h2 span::before, li.critterEntry h2 span::after {
   border-color: transparent;
   border-style: solid;
   border-width: 1.5rem;
@@ -225,17 +237,17 @@ h1, h2, h3, h4, h5, h6 {
   z-index: -1;
 }
 
-.critterList .critterEntry h2 span::before {
+li.critterEntry h2 span::before {
   border-right-color: #CDB687;
   left: -1.5rem;
 }
 
-.critterList .critterEntry h2 span::after {
+li.critterEntry h2 span::after {
   border-left-color: #CDB687;
   right: -1.5rem;
 }
 
-.critterList .critterEntry h2::before, .critterList .critterEntry h2::after {
+li.critterEntry h2::before, li.critterEntry h2::after {
   border-color: #D5C27E;
   border-style: solid;
   border-width: 1.5rem 2rem;
@@ -248,17 +260,17 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 0;
 }
 
-.critterList .critterEntry h2::before {
+li.critterEntry h2::before {
   border-left-color: transparent;
   left: -2.3rem;
 }
 
-.critterList .critterEntry h2::after {
+li.critterEntry h2::after {
   border-right-color: transparent;
   right: -2.3rem;
 }
 
-.critterList .critterEntry .critterThumb {
+li.critterEntry .critterThumb {
   background-color: #F2EED5;
   border-radius: 150px;
   -webkit-box-flex: 0;
@@ -270,7 +282,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 128px;
 }
 
-.critterList .critterEntry .critterThumb img {
+li.critterEntry .critterThumb img {
   display: block;
   height: auto;
   left: 50%;
@@ -281,7 +293,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 60%;
 }
 
-.critterList .critterEntry .critterInfo {
+li.critterEntry .critterInfo {
   display: block;
   list-style-type: none;
   margin: 0;
@@ -291,12 +303,12 @@ h1, h2, h3, h4, h5, h6 {
           flex: 1 1 auto;
 }
 
-.critterList .critterEntry .critterInfo li {
+li.critterEntry .critterInfo > li {
   margin: 0;
   padding: 0;
 }
 
-.critterList .critterEntry .timesList {
+li.critterEntry .timesList {
   display: block;
   list-style-type: none;
   margin: 0;
@@ -315,12 +327,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 0 2rem;
 }
 
-.critterList .critterEntry .timesList li {
+li.critterEntry .timesList > li {
   margin: 0;
   padding: 0;
 }
 
-.critterList .critterEntry .timesList li {
+li.critterEntry .timesList li {
   border-right: 1px solid #685A53;
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
@@ -332,28 +344,28 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
 }
 
-.critterList .critterEntry .timesList li:last-child {
+li.critterEntry .timesList li:last-child {
   border-right: none;
 }
 
-.critterList .critterEntry .timesList li.active {
+li.critterEntry .timesList li.active {
   background-color: #F1E05E;
 }
 
-.critterList .critterEntry .timesList .hourLabel {
+li.critterEntry .timesList .hourLabel {
   padding-left: 0.1rem;
   position: relative;
   top: 1rem;
 }
 
-.critterList .critterEntry .timesList .timeMarker {
+li.critterEntry .timesList .timeMarker {
   border-right: 1px solid #cc0000;
   content: ' ';
   height: 2rem;
   position: absolute;
 }
 
-.critterList .critterEntry .critterCalendar {
+li.critterEntry .critterCalendar {
   display: block;
   list-style-type: none;
   margin: 0;
@@ -368,12 +380,12 @@ h1, h2, h3, h4, h5, h6 {
           justify-content: space-between;
 }
 
-.critterList .critterEntry .critterCalendar li {
+li.critterEntry .critterCalendar > li {
   margin: 0;
   padding: 0;
 }
 
-.critterList .critterEntry .critterCalendar li {
+li.critterEntry .critterCalendar li {
   background-color: #D5C27E;
   border-radius: 4px;
   -ms-flex-preferred-size: 32%;
@@ -384,26 +396,26 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.25;
 }
 
-.critterList .critterEntry .critterCalendar li.active {
+li.critterEntry .critterCalendar li.active {
   opacity: 1;
 }
 
-.critterList .critterEntry .critterCalendar li.current {
+li.critterEntry .critterCalendar li.current {
   background-color: #F1E05E;
 }
 
-.critterList .critterEntry .critterCalendar .monthName--rest {
+li.critterEntry .critterCalendar .monthName--rest {
   display: none;
 }
 
-.critterList .critterEntry .actionButtons {
+li.critterEntry .actionButtons {
   display: block;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-.critterList .critterEntry .actionButtons li {
+li.critterEntry .actionButtons > li {
   margin: 0;
   padding: 0;
 }
@@ -433,7 +445,7 @@ h1, h2, h3, h4, h5, h6 {
           justify-content: space-between;
 }
 
-.viewSwitch .viewSwitchList li {
+.viewSwitch .viewSwitchList > li {
   margin: 0;
   padding: 0;
 }
@@ -466,6 +478,7 @@ h1, h2, h3, h4, h5, h6 {
   .critterPane {
     -ms-flex-preferred-size: 280px;
         flex-basis: 280px;
+    width: 33.333333%;
   }
   .critterPaneHolder {
     -webkit-box-orient: horizontal;
