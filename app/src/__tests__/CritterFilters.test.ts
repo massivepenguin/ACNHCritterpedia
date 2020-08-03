@@ -1,7 +1,10 @@
 import { hemisphere } from '../model/Hemisphere';
-import { filterCritters } from '../helpers/critterFilters';
+import { filterCritters, filterCritterList, sortCritterList } from '../helpers/critterFilters';
 import { ICritterState } from '../model/ICritterState';
 import { sortType } from '../model/SortType';
+import bugs from '../data/bugs.json';
+import fish from '../data/fish.json';
+import seaCreatures from '../data/seaCreatures.json';
 
 const blankCritterSet: ICritterState = {caught: {bugs: [], fish: [], seaCreatures: []}, donated: {bugs: [], fish: [], seaCreatures: []}};
 const caughtCritterSet: ICritterState = {caught: {bugs: [10, 75], fish: [], seaCreatures: []}, donated: {bugs: [], fish: [], seaCreatures: []}}
@@ -9,11 +12,65 @@ const caughtCritterSet: ICritterState = {caught: {bugs: [10, 75], fish: [], seaC
 
 
 describe('check filtering step', () => {
-    // TODO: create tests that check the filterCritterList function
+    const bugResult = filterCritterList(0, hemisphere.north, false, bugs, [], new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const fishResult = filterCritterList(0, hemisphere.north, false, fish, [], new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const seaCreatureResult = filterCritterList(0, hemisphere.north, false, seaCreatures, [], new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    
+    it('matches expected availability length for bugs', () => {
+        expect(bugResult.available.length).toEqual(41);
+    });
+    it('matches expected upcoming availability length for bugs', () => {
+        expect(bugResult.upcoming.length).toEqual(22);
+    });
+    it('matches expected availability length for fish', () => {
+        expect(fishResult.available.length).toEqual(45);
+    });
+    it('matches expected upcoming availability length for fish', () => {
+        expect(fishResult.upcoming.length).toEqual(15);
+    });
+    it('matches expected availability length for sea cretaures', () => {
+        expect(seaCreatureResult.available.length).toEqual(17);
+    });
+    it('matches expected upcoming availability length for sea cretaures', () => {
+        expect(seaCreatureResult.upcoming.length).toEqual(7);
+    });
 });
 
 describe('check sorting step', () => {
-    // TODO: create tests that check the sortCritterList function
+    // these tests are expanded further down, so we ony test a limited amount here
+    const bugAlphaAsc = sortCritterList(bugs, 0, sortType.alphaAsc, hemisphere.north, new Date());
+    const bugAlphaDesc = sortCritterList(bugs, 0, sortType.alphaDesc, hemisphere.north, new Date());
+    const fishValueAsc = sortCritterList(fish, 0, sortType.valueAsc, hemisphere.north, new Date());
+    const fishValueDesc = sortCritterList(fish, 0, sortType.valueDesc, hemisphere.north, new Date());
+    const seaCreaturesIndexAsc = sortCritterList(seaCreatures, 0, sortType.entryAsc, hemisphere.north, new Date());
+    const seaCreaturesIndexDesc = sortCritterList(seaCreatures, 0, sortType.entryDesc, hemisphere.north, new Date());
+
+    it('matches known values for bugs when sorted alphabetically (asc)', () => {
+        expect(bugAlphaAsc[0].name).toBe('Agrias Butterfly');
+        expect(bugAlphaAsc[bugAlphaAsc.length - 1].name).toBe('Yellow Butterfly');
+    });
+    it('matches known values for bugs when sorted alphabetically (desc)', () => {
+        expect(bugAlphaDesc[0].name).toBe('Yellow Butterfly');
+        expect(bugAlphaDesc[bugAlphaDesc.length - 1].name).toBe('Agrias Butterfly');
+    });
+
+    it('matches known values for fish when sorted by value (asc)', () => {
+        expect(fishValueAsc[0].name).toBe('Tadpole');
+        expect(fishValueAsc[fishValueAsc.length - 1].name).toBe('Coelacanth');
+    });
+    it('matches known values for fish when sorted by value (desc)', () => {
+        expect(fishValueDesc[0].name).toBe('Coelacanth');
+        expect(fishValueDesc[fishValueDesc.length - 1].name).toBe('Tadpole');
+    });
+
+    it('matches known values for sea creatures when sorted by Critterpedia index (asc)', () => {
+        expect(seaCreaturesIndexAsc[0].name).toBe('Seaweed');
+        expect(seaCreaturesIndexAsc[seaCreaturesIndexAsc.length - 1].name).toBe('Venus\' Flower Basket');
+    });
+    it('matches known values for sea creatures when sorted by Critterpedia index (desc)', () => {
+        expect(seaCreaturesIndexDesc[0].name).toBe('Venus\' Flower Basket');
+        expect(seaCreaturesIndexDesc[seaCreaturesIndexDesc.length - 1].name).toBe('Seaweed');
+    });
 });
 
 describe('availability filtering', () => {
@@ -22,15 +79,15 @@ describe('availability filtering', () => {
     const southResultAll = filterCritters(0, hemisphere.south, blankCritterSet, false, sortType.alphaAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
     
     it('matches expected availability length for bugs', () => {
-        expect(northResultAll.available.bugs.length).toEqual(39);
+        expect(northResultAll.available.bugs.length).toEqual(38);
     });
     it('matches availability length when caught critters are hidden', () =>{
-        expect(northResultCaughtHidden.available.bugs.length).toEqual(37);
+        expect(northResultCaughtHidden.available.bugs.length).toEqual(36);
     });
     it('matches expected availability length for the southern hemisphere', () => {
         expect(southResultAll.available.bugs.length).toEqual(15);
         expect(southResultAll.available.fish.length).toEqual(24);
-        expect(southResultAll.available.seaCreatures.length).toEqual(17);
+        expect(southResultAll.available.seaCreatures.length).toEqual(16);
     });
 });
 
@@ -60,7 +117,7 @@ describe('index sorting test', () => {
     });
     it('matches known values when critters are sorted by critterpedia index (decending)', () => {
         expect(indexDesc.all.seaCreatures[indexDesc.all.seaCreatures.length - 1].name).toEqual('Seaweed');
-        expect(indexDesc.all.seaCreatures[0].name).toEqual('Venus\' flower basket');
+        expect(indexDesc.all.seaCreatures[0].name).toEqual('Venus\' Flower Basket');
     });
 });
 
