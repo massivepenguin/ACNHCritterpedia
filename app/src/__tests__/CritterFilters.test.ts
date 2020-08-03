@@ -141,12 +141,25 @@ describe('value sorting test', () => {
 
 describe('remaining (today) sorting test', () => {
     // TODO: add tests
-    const todayAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.todayAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
-    const todayDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.todayDesc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
+    const todayAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.todayAsc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const todayDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.todayDesc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+
+    it('matches known values when sorting by time remaining today (shortest first)', () => {
+        expect(todayAsc.available.bugs[0].name).toBe('Queen Alexandra\'s Birdwing');
+    });
+    it('matches known values when sorting by time remaining today (longest first)', () => {
+        expect(todayDesc.available.bugs[0].name).toBe('Saw Stag');
+    });
 });
 
 describe('remaining (year) sorting test', () => {
-    // TODO: add tests
-    const yearAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.yearAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
-    const yearDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.yearDesc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
+    const yearAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.yearAsc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const yearDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.yearDesc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+
+    it('matches known values when sorting by time remaining today (shortest first)', () => {
+        expect(yearAsc.available.bugs[0].name).toBe('Blue Weevil Beetle');
+    });
+    it('matches known values when sorting by time remaining today (longest first)', () => {
+        expect(yearDesc.available.bugs[0].name).toBe('Fly');
+    });
 });
