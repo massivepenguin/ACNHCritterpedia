@@ -140,7 +140,6 @@ describe('value sorting test', () => {
 });
 
 describe('remaining (today) sorting test', () => {
-    // TODO: add tests
     const todayAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.todayAsc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
     const todayDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.todayDesc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
 
