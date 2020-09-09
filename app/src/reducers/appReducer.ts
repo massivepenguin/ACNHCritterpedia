@@ -132,7 +132,7 @@ const hideCaughtSlice = createSlice({
     name: 'hideCaught',
     initialState: exampleState.hideCaught,
     reducers: {
-        hideCaught: (state, action) => {
+        changeHideCaught: (state, action) => {
             const newValue = action.payload;
             state = newValue;
             return state;
@@ -144,7 +144,7 @@ const showAllCritterSlice = createSlice({
     name: 'showAllCritters',
     initialState: exampleState.showAll,
     reducers: {
-        showAll: (state, action) => {
+        changeShowAll: (state, action) => {
             const newValue = action.payload;
             state = newValue;
             return state;
@@ -191,8 +191,8 @@ export const { catchCritter, donateCritter } = critterSlice.actions;
 export const { changeOffset, removeOffset } = timeOffsetSlice.actions;
 export const { changeSort } = sortSlice.actions;
 export const { changeView } = switchAppViewSlice.actions;
-export const { showAll } = showAllCritterSlice.actions;
-export const { hideCaught } = hideCaughtSlice.actions;
+export const { changeShowAll } = showAllCritterSlice.actions;
+export const { changeHideCaught } = hideCaughtSlice.actions;
 
 const hemisphereReducer = hemispehereSlice.reducer;
 const critterReducer = critterSlice.reducer;
@@ -229,10 +229,4 @@ export const testStore = configureStore({
     },
     middleware,
     preloadedState: exampleState,
-});
-
-// save the store state to localStorage when it's updated
-store.subscribe(() => {
-    const state = store.getState();
-    saveData(state);
 });

@@ -23,7 +23,7 @@ const critterList: ICritterList = { bugs: bugs, fish: fish, seaCreatures: seaCre
  * @param {Date} currentTime - the date we're using as a comparitor (set to the current date if none provided)
  * @returns {ICheckedCritterList} - an object containing the critters that we can catch now, and the ones that are available later
  */
-export const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaught: boolean, critterListIn: ICritter[], caughtArray: number[], currentTime: Date): ICheckedCritterList => {
+export const filterCritterList = (timeOffset: number, hemi: hemisphere, critterListIn: ICritter[], currentTime: Date): ICheckedCritterList => {
     // get the current state so we know which hemisphere we're in, what the time offset is, and whether we're hiding caught critters
     const upcomingCritters: ICritter[] = [];
     if (timeOffset !== 0) {
@@ -33,10 +33,6 @@ export const filterCritterList = (timeOffset: number, hemi: hemisphere, hideCaug
     // We add 1 to the current date's month to address this
     const currentMonth = currentTime.getMonth() + 1;
     const availableCritters = critterListIn.filter((critter: ICritter) => {
-        // skip out of the rest of the function if we've caught this critter and are hiding ones we've caught
-        if (hideCaught && caughtArray.indexOf(critter.id) > -1) {
-            return null;
-        }
         const monthsCritterAppears = hemi === hemisphere.south ? critter.southMonths : critter.northMonths;
         if (monthsCritterAppears.indexOf(currentMonth) > -1) {
             // check if the critter is available at this moment in time
@@ -232,12 +228,13 @@ export const sortCritterList = (critterListIn: ICritter[], timeOffset: number, a
  * @param {boolean} hideCaught - whether the user wants to hide critters they've already caught
  * @param {sortType} sortBy - how we're sorting the critter list
  * @param {Date} currentTime - the date we're using as a comparitor (set to the current date if none provided)
- * @returns {{all: ICritterList, available: ICritterList, upcoming: ICritterList}}
+ * @returns {{allCritters: ICritterList, availableCritters: ICritterList, upcomingCritters: ICritterList}}
  */
-export const filterCritters = (timeOffset: number, hemi: hemisphere, critters: ICritterState, hideCaught: boolean, sortBy: sortType, currentDate: Date = new Date()): {all: ICritterList, available: ICritterList, upcoming: ICritterList} => {
-    const checkedBugs: ICheckedCritterList = filterCritterList(timeOffset, hemi, hideCaught, critterList.bugs, critters.caught.bugs, currentDate);
-    const checkedFish: ICheckedCritterList = filterCritterList(timeOffset, hemi, hideCaught, critterList.fish, critters.caught.fish, currentDate);
-    const checkedSeaCreatures: ICheckedCritterList = filterCritterList(timeOffset, hemi, hideCaught, critterList.seaCreatures, critters.caught.seaCreatures, currentDate);
+export const filterCritters = (timeOffset: number, hemi: hemisphere, sortBy: sortType, currentDate: Date = new Date()): {allCritters: ICritterList, availableCritters: ICritterList, upcomingCritters: ICritterList} => {
+    console.log("filtering");
+    const checkedBugs: ICheckedCritterList = filterCritterList(timeOffset, hemi, critterList.bugs, currentDate);
+    const checkedFish: ICheckedCritterList = filterCritterList(timeOffset, hemi, critterList.fish, currentDate);
+    const checkedSeaCreatures: ICheckedCritterList = filterCritterList(timeOffset, hemi, critterList.seaCreatures, currentDate);
 
     const availableCritters: ICritterList = {
         bugs: sortCritterList(checkedBugs.available, timeOffset, sortBy, hemi, currentDate),
@@ -253,20 +250,11 @@ export const filterCritters = (timeOffset: number, hemi: hemisphere, critters: I
 
     // for the list of all critters, we sort by the current sortBy option, then filter out the caught ones (if that option is set)
     const allCritters: ICritterList = {
-        bugs: sortCritterList(critterList.bugs, timeOffset, sortBy, hemi, currentDate)
-        .filter((critter: ICritter) =>
-            hideCaught ? critters.caught.bugs.indexOf(critter.id) < 0 : critter,
-        ),
-        fish: sortCritterList(critterList.fish, timeOffset, sortBy, hemi, currentDate)
-        .filter((critter: ICritter) =>
-            hideCaught ? critters.caught.fish.indexOf(critter.id) < 0 : critter,
-        ),
+        bugs: sortCritterList(critterList.bugs, timeOffset, sortBy, hemi, currentDate),
+        fish: sortCritterList(critterList.fish, timeOffset, sortBy, hemi, currentDate),
         seaCreatures: sortCritterList(critterList.seaCreatures, timeOffset, sortBy, hemi, currentDate)
-        .filter((critter: ICritter) =>
-            hideCaught ? critters.caught.seaCreatures.indexOf(critter.id) < 0 : critter,
-        )
     };
 
 
-    return {all: allCritters, available: availableCritters, upcoming: upcomingCritters};
+    return {allCritters, availableCritters, upcomingCritters};
 }

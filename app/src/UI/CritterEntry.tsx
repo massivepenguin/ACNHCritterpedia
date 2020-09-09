@@ -6,44 +6,38 @@ import { store, catchCritter, donateCritter } from '../reducers/appReducer';
 import CritterThumbnail from './CritterThumbnail';
 import CritterCalendar from './CritterCalendar';
 import CritterTimes from './CritterTimes';
+import { useSelector } from 'react-redux';
+import { IAppState } from '../model/AppState';
 
 interface ICritterEntryProps {
     typeOfCritter: critterType;
     critter: ICritter;
+    isCaught: boolean;
+    isDonated: boolean;
 }
 
 function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
-    const { typeOfCritter, critter } = props;
+    const { typeOfCritter, critter, isCaught, isDonated } = props;
 
-    const state = store.getState();
+    const timeOffset: number = useSelector((state: IAppState) => state.timeOffset);
+    const hemi: hemisphere | null = useSelector((state: IAppState) => state.hemisphere);
 
-    let caughtSource: number[] = [];
-    let donatedSource: number[] = [];
     let path = '';
 
     switch (typeOfCritter) {
         case critterType.bug: {
-            caughtSource = state.critters.caught.bugs;
-            donatedSource = state.critters.donated.bugs;
             path = 'bugs';
             break;
         }
         case critterType.fish: {
-            caughtSource = state.critters.caught.fish;
-            donatedSource = state.critters.donated.fish;
             path = 'fish';
             break;
         }
         case critterType.seaCreature: {
-            caughtSource = state.critters.caught.seaCreatures;
-            donatedSource = state.critters.donated.seaCreatures;
             path = 'seaCreatures';
             break;
         }
     }
-
-    const caught = caughtSource.indexOf(critter.id) > -1;
-    const donated = donatedSource.indexOf(critter.id) > -1;
 
     return (
         <li className={'critterEntry'}>
@@ -54,16 +48,16 @@ function CritterEntry(props: React.PropsWithChildren<ICritterEntryProps>) {
                 </div>
                 <ul className={'critterInfo'}>
                     <li>{critter.price} bells</li>
-                    <li><CritterTimes availableTimes={critter.times} timeOffset={state.timeOffset} /></li>
-                    <li><CritterCalendar availableMonths={state.hemisphere === hemisphere.south ? critter.southMonths : critter.northMonths} timeOffset={state.timeOffset} /></li>
+                    <li><CritterTimes availableTimes={critter.times} timeOffset={timeOffset} /></li>
+                    <li><CritterCalendar availableMonths={hemi === hemisphere.south ? critter.southMonths : critter.northMonths} timeOffset={timeOffset} /></li>
                 </ul>
             </div>
             <ul className={'actionButtons'}>
                 <li onClick={() => store.dispatch(catchCritter({ critterId: critter.id, type: typeOfCritter }))}>
-                    {caught ? 'Caught' : 'Not caught'}
+                    {isCaught ? 'Caught' : 'Not caught'}
                 </li>
                 <li onClick={() => store.dispatch(donateCritter({critterId: critter.id, type: typeOfCritter}))}>
-                    {donated ? 'Donated' : 'Not donated'}
+                    {isDonated ? 'Donated' : 'Not donated'}
                 </li>
             </ul>
         </li>

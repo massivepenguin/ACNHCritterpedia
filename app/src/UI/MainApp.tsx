@@ -1,102 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { filterCritters } from '../helpers/critterFilters';
 import { critterType } from '../model/CritterType';
-import { hemisphere } from '../model/Hemisphere';
-import { ICritterList } from '../model/ICritterList';
-import { ICritterState } from '../model/ICritterState';
 import { mainAppView } from '../model/MainAppView';
-import { sortType } from '../model/SortType';
-import { store, hideCaught, showAll } from '../reducers/appReducer';
+import { store, changeHideCaught, changeShowAll } from '../reducers/appReducer';
 import Checkbox from './Checkbox';
 import CritterSection from './CritterSection';
 import ListSorter from './ListSorter';
-import LoadingSpinner from './LoadingSpinner';
 import SettingsButton from './SettingsButton';
 import ViewSwitch from './ViewSwitch';
+import { IAppState } from '../model/AppState';
+import { useSelector } from 'react-redux';
+import { ICritterList } from '../model/ICritterList';
 
-function MainApp() {
-    const [loading, setLoading] = useState(true);
-    const [allCritters, setAllCritters] = useState({ bugs: [], fish: [], seaCreatures: [] } as ICritterList);
-    const [availableCritters, setAvailableCritters] = useState({ bugs: [], fish: [], seaCreatures: [] } as ICritterList);
-    const [upcomingCritters, setUpcomingCritters] = useState({ bugs: [], fish: [], seaCreatures: [] } as ICritterList);
+const MainApp = () => {
 
-    const state = store.getState();
+    const timeOffset = useSelector((state: IAppState) => state.timeOffset);
+    const hemisphere = useSelector((state: IAppState) => state.hemisphere);
+    const hideCaught = useSelector((state: IAppState) => state.hideCaught);
+    const activeSort = useSelector((state: IAppState) => state.activeSort);
+    const showAll = useSelector((state: IAppState) => state.showAll);
+    const currentView = useSelector((state: IAppState) => state.currentView);
+    
+    const emptyCritterList: ICritterList = {bugs: [], fish: [], seaCreatures: []};
 
-    store.subscribe(() => {
-        const newState = store.getState();
-        filterCritterAvailability(newState.timeOffset, newState.hemisphere || hemisphere.north, newState.critters, newState.hideCaught, newState.activeSort);
-    });
-  
+    const [all, setAllCritters] = useState(emptyCritterList);
+    const [available, setAvailableCritters] = useState(emptyCritterList);
+    const [upcoming, setUpcomingCritters] = useState(emptyCritterList);
 
-    const filterCritterAvailability = (timeOffset: number, hemi: hemisphere, critters: ICritterState, hideCaught: boolean, sortBy: sortType) => {
-        setLoading(true);
+    // only run the filtering step if something changes that will have a material effect on the list of critters
+    useEffect(() => {
+        const {allCritters, availableCritters, upcomingCritters} = filterCritters(timeOffset, hemisphere!, activeSort);
+        setAllCritters(allCritters);
+        setAvailableCritters(availableCritters);
+        setUpcomingCritters(upcomingCritters);
+    }, [timeOffset, hemisphere, hideCaught, activeSort, showAll, currentView]);
 
-        const { all, available, upcoming } = filterCritters(timeOffset, hemi, critters, hideCaught, sortBy);
-
-        setAllCritters(all);
-        setAvailableCritters(available);
-        setUpcomingCritters(upcoming);
-
-        setLoading(false);
-    };
-
-    // call filterCritters on first run when availableCritters' properties are empty
-    if (!availableCritters.bugs.length && !availableCritters.fish.length && !availableCritters.seaCreatures.length) {
-        filterCritterAvailability(state.timeOffset, state.hemisphere || hemisphere.north, state.critters, state.hideCaught, state.activeSort);
-    }
-
-    return loading ? (
-        <LoadingSpinner />
-    ) : (
-        <div className={'mainApp'}>
-            <div className={'controls'}>
-                <ListSorter />
-                <Checkbox
-                    label={'Hide caught critters'}
-                    isSelected={state.hideCaught}
-                    onCheckboxChange={() => store.dispatch(hideCaught(!state.hideCaught))}
+    return (<div className={'mainApp'}>
+        <div className={'controls'}>
+            <ListSorter />
+            <Checkbox
+                label={'Hide caught critters'}
+                isSelected={hideCaught}
+                onCheckboxChange={() => store.dispatch(changeHideCaught(!hideCaught))}
+            />
+            <Checkbox
+                label={'Show all critters'}
+                isSelected={showAll}
+                onCheckboxChange={() => store.dispatch(changeShowAll(!showAll))}
+            />
+            <SettingsButton />
+        </div>
+        <div className={'critterPaneHolder'}>
+            <div className={`critterPane ${currentView === mainAppView.all || currentView === mainAppView.bugs ? 'viewableList' : 'hiddenList'}`}>
+                <CritterSection 
+                    showAll={showAll} 
+                    allCritters={all.bugs} 
+                    availableCritters={available.bugs} 
+                    upcomingCritters={upcoming.bugs} 
+                    typeOfCritter={critterType.bug}
                 />
-                <Checkbox
-                    label={'Show all critters'}
-                    isSelected={state.showAll}
-                    onCheckboxChange={() => store.dispatch(showAll(!state.showAll))}
+            </div>
+            <div className={`critterPane ${currentView === mainAppView.all || currentView === mainAppView.fish ? 'viewableList' : 'hiddenList'}`}>
+                <CritterSection 
+                    showAll={showAll} 
+                    allCritters={all.fish} 
+                    availableCritters={available.fish} 
+                    upcomingCritters={upcoming.fish} 
+                    typeOfCritter={critterType.fish}
                 />
-                <SettingsButton />
             </div>
-            <div className={'critterPaneHolder'}>
-                <div className={`critterPane ${state.currentView === mainAppView.all || state.currentView === mainAppView.bugs ? 'viewableList' : 'hiddenList'}`}>
-                    <CritterSection 
-                        showAll={state.showAll} 
-                        allCritters={allCritters.bugs} 
-                        availableCritters={availableCritters.bugs} 
-                        upcomingCritters={upcomingCritters.bugs} 
-                        typeOfCritter={critterType.bug}
-                    />
-                </div>
-                <div className={`critterPane ${state.currentView === mainAppView.all || state.currentView === mainAppView.fish ? 'viewableList' : 'hiddenList'}`}>
-                    <CritterSection 
-                        showAll={state.showAll} 
-                        allCritters={allCritters.fish} 
-                        availableCritters={availableCritters.fish} 
-                        upcomingCritters={upcomingCritters.fish} 
-                        typeOfCritter={critterType.fish}
-                    />
-                </div>
-                <div className={`critterPane ${state.currentView === mainAppView.all || state.currentView === mainAppView.seaCreatures ? 'viewableList' : 'hiddenList'}`}>
-                    <CritterSection 
-                        showAll={state.showAll} 
-                        allCritters={allCritters.seaCreatures} 
-                        availableCritters={availableCritters.seaCreatures} 
-                        upcomingCritters={upcomingCritters.seaCreatures} 
-                        typeOfCritter={critterType.seaCreature}
-                    />
-                </div>
-            </div>
-            <div className={'viewSwitch'}>
-                <ViewSwitch viewType={state.currentView} />
+            <div className={`critterPane ${currentView === mainAppView.all || currentView === mainAppView.seaCreatures ? 'viewableList' : 'hiddenList'}`}>
+                <CritterSection 
+                    showAll={showAll} 
+                    allCritters={all.seaCreatures} 
+                    availableCritters={available.seaCreatures} 
+                    upcomingCritters={upcoming.seaCreatures} 
+                    typeOfCritter={critterType.seaCreature}
+                />
             </div>
         </div>
-    );
+        <div className={'viewSwitch'}>
+            <ViewSwitch viewType={currentView} />
+        </div>
+    </div>);
 }
 
 export default MainApp;

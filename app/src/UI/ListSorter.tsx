@@ -1,13 +1,15 @@
 import React from 'react';
 import { sortType, sortValues } from '../model/SortType';
 import { store, changeSort } from '../reducers/appReducer';
+import { useSelector } from 'react-redux';
+import { IAppState } from '../model/AppState';
 
 function ListSorter() {
-    const state = store.getState();
+    const activeSort = useSelector((state: IAppState) => state.activeSort);
 
     const changeHandler = (e: React.SyntheticEvent<HTMLSelectElement>): void => {
         const changeValue = parseInt(e.currentTarget.value, 10);
-        if (!isNaN(changeValue) && changeValue !== state.activeSort) {
+        if (!isNaN(changeValue) && changeValue !== activeSort) {
             store.dispatch(changeSort(changeValue));
         }
     };
@@ -28,7 +30,7 @@ function ListSorter() {
 
     return (
         <div>
-            <select onChange={changeHandler} defaultValue={state.activeSort}>
+            <select onChange={changeHandler} defaultValue={activeSort}>
                 {getSelectOptions()}
             </select>
         </div>

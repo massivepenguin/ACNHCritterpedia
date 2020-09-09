@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { store, changeOffset } from '../reducers/appReducer';
 import 'react-rangeslider/lib/index.css';
+import { useSelector } from 'react-redux';
+import { IAppState } from '../model/AppState';
 
 function TimeOffsetSlider() {
-    const state = store.getState();
+    const timeOffset: number = useSelector((state: IAppState) => state.timeOffset);
 
-    const [textVal, setTextVal] = useState(state.timeOffset.toString());
-
-    let sliderVal = state.timeOffset;
+    const [textVal, setTextVal] = useState(timeOffset.toString());
 
     const setValue = (e: React.SyntheticEvent<HTMLInputElement>) => {
         // set the app's timeOffset property only when interaction is complete to prevent re-renders on inout movement
@@ -28,7 +28,7 @@ function TimeOffsetSlider() {
                 min={-12} 
                 max={12} 
                 step={0.5} 
-                defaultValue={sliderVal} 
+                defaultValue={timeOffset} 
                 id={'offset'} 
                 onInput={updateTextValue} 
                 onMouseUp={setValue} 

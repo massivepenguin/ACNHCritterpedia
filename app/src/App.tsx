@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './reducers/appReducer';
 import HemisphereChooser from './UI/HemisphereChooser';
 import MainApp from './UI/MainApp';
+import { saveData } from './helpers/dataHelpers';
 
 function App() {
     const initialState = store.getState();
@@ -15,6 +16,7 @@ function App() {
     store.subscribe(() =>
         setAppContent(() => {
             const state = store.getState();
+            saveData(state);
             return state.hemisphere !== null ? <MainApp /> : <HemisphereChooser />;
         }),
     );
