@@ -6,11 +6,6 @@ import bugs from '../data/bugs.json';
 import fish from '../data/fish.json';
 import seaCreatures from '../data/seaCreatures.json';
 
-const blankCritterSet: ICritterState = {caught: {bugs: [], fish: [], seaCreatures: []}, donated: {bugs: [], fish: [], seaCreatures: []}};
-const caughtCritterSet: ICritterState = {caught: {bugs: [10, 75], fish: [], seaCreatures: []}, donated: {bugs: [], fish: [], seaCreatures: []}}
-
-
-
 describe('check filtering step', () => {
     const bugResult = filterCritterList(0, hemisphere.north, bugs, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
     const fishResult = filterCritterList(0, hemisphere.north, fish, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
