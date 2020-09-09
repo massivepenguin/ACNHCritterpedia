@@ -12,9 +12,9 @@ const caughtCritterSet: ICritterState = {caught: {bugs: [10, 75], fish: [], seaC
 
 
 describe('check filtering step', () => {
-    const bugResult = filterCritterList(0, hemisphere.north, false, bugs, [], new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
-    const fishResult = filterCritterList(0, hemisphere.north, false, fish, [], new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
-    const seaCreatureResult = filterCritterList(0, hemisphere.north, false, seaCreatures, [], new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const bugResult = filterCritterList(0, hemisphere.north, bugs, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const fishResult = filterCritterList(0, hemisphere.north, fish, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const seaCreatureResult = filterCritterList(0, hemisphere.north, seaCreatures, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
     
     it('matches expected availability length for bugs', () => {
         expect(bugResult.available.length).toEqual(41);
@@ -74,91 +74,87 @@ describe('check sorting step', () => {
 });
 
 describe('availability filtering', () => {
-    const northResultAll = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.alphaAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
-    const northResultCaughtHidden = filterCritters(0, hemisphere.north, caughtCritterSet, true, sortType.entryAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
-    const southResultAll = filterCritters(0, hemisphere.south, blankCritterSet, false, sortType.alphaAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
+    const northResultAll = filterCritters(0, hemisphere.north, sortType.alphaAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
+    const southResultAll = filterCritters(0, hemisphere.south, sortType.alphaAsc, new Date(2020, 6, 16, 10)); // 16th July 2020 10:00:00
     
     it('matches expected availability length for bugs', () => {
-        expect(northResultAll.available.bugs.length).toEqual(38);
-    });
-    it('matches availability length when caught critters are hidden', () =>{
-        expect(northResultCaughtHidden.available.bugs.length).toEqual(36);
+        expect(northResultAll.availableCritters.bugs.length).toEqual(38);
     });
     it('matches expected availability length for the southern hemisphere', () => {
-        expect(southResultAll.available.bugs.length).toEqual(15);
-        expect(southResultAll.available.fish.length).toEqual(24);
-        expect(southResultAll.available.seaCreatures.length).toEqual(16);
+        expect(southResultAll.availableCritters.bugs.length).toEqual(15);
+        expect(southResultAll.availableCritters.fish.length).toEqual(24);
+        expect(southResultAll.availableCritters.seaCreatures.length).toEqual(16);
     });
 });
 
 
 describe('alphabetical sorting test', () => {
-   const alphaAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.alphaAsc);
-   const alphaDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.alphaDesc);
+   const alphaAsc = filterCritters(0, hemisphere.north, sortType.alphaAsc);
+   const alphaDesc = filterCritters(0, hemisphere.north, sortType.alphaDesc);
 
    it('matches known values when critters are sorted alphabetically (ascending)', () => {
-       expect(alphaAsc.all.bugs[0].name).toEqual('Agrias Butterfly');
-       expect(alphaAsc.all.bugs[1].name).toEqual('Ant');
-       expect(alphaAsc.all.bugs[alphaAsc.all.bugs.length - 1].name).toEqual('Yellow Butterfly');
+       expect(alphaAsc.allCritters.bugs[0].name).toEqual('Agrias Butterfly');
+       expect(alphaAsc.allCritters.bugs[1].name).toEqual('Ant');
+       expect(alphaAsc.allCritters.bugs[alphaAsc.allCritters.bugs.length - 1].name).toEqual('Yellow Butterfly');
    });
    it('matches known values wehn critters are sorted alphabetically (descending)', () => {
-       expect(alphaDesc.all.bugs[0].name).toEqual('Yellow Butterfly');
-       expect(alphaDesc.all.bugs[alphaDesc.all.bugs.length - 1].name).toEqual('Agrias Butterfly');
+       expect(alphaDesc.allCritters.bugs[0].name).toEqual('Yellow Butterfly');
+       expect(alphaDesc.allCritters.bugs[alphaDesc.allCritters.bugs.length - 1].name).toEqual('Agrias Butterfly');
    });
 });
 
 describe('index sorting test', () => {
-    const indexAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.entryAsc);
-    const indexDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.entryDesc);
+    const indexAsc = filterCritters(0, hemisphere.north, sortType.entryAsc);
+    const indexDesc = filterCritters(0, hemisphere.north, sortType.entryDesc);
 
     it('matches known values when critters are sorted by critterpedia index (ascending)', () => {
-        expect(indexAsc.all.fish[20].id).toEqual(21);
-        expect(indexAsc.all.seaCreatures[0].name).toEqual('Seaweed');
+        expect(indexAsc.allCritters.fish[20].id).toEqual(21);
+        expect(indexAsc.allCritters.seaCreatures[0].name).toEqual('Seaweed');
     });
     it('matches known values when critters are sorted by critterpedia index (decending)', () => {
-        expect(indexDesc.all.seaCreatures[indexDesc.all.seaCreatures.length - 1].name).toEqual('Seaweed');
-        expect(indexDesc.all.seaCreatures[0].name).toEqual('Venus\' Flower Basket');
+        expect(indexDesc.allCritters.seaCreatures[indexDesc.allCritters.seaCreatures.length - 1].name).toEqual('Seaweed');
+        expect(indexDesc.allCritters.seaCreatures[0].name).toEqual('Venus\' Flower Basket');
     });
 });
 
 describe('value sorting test', () => {
-    const valueAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.valueAsc);
-    const valueDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.valueDesc);
+    const valueAsc = filterCritters(0, hemisphere.north, sortType.valueAsc);
+    const valueDesc = filterCritters(0, hemisphere.north, sortType.valueDesc);
 
     it('matches known values when sorting by value, cheapest first ', () => {
-        expect(valueAsc.all.bugs[0].id).toEqual(31);
-        expect(valueAsc.all.bugs[0].price).toEqual(10);
-        expect(valueAsc.all.fish[valueAsc.all.fish.length - 1].name).toEqual('Coelacanth');
-        expect(valueAsc.all.fish[valueAsc.all.fish.length - 1].price).toEqual(15000);
+        expect(valueAsc.allCritters.bugs[0].id).toEqual(31);
+        expect(valueAsc.allCritters.bugs[0].price).toEqual(10);
+        expect(valueAsc.allCritters.fish[valueAsc.allCritters.fish.length - 1].name).toEqual('Coelacanth');
+        expect(valueAsc.allCritters.fish[valueAsc.allCritters.fish.length - 1].price).toEqual(15000);
     });
     it('matches known values when sorting by value, most expensive first ', () => {
-        expect(valueDesc.all.seaCreatures[0].id).toEqual(18);
-        expect(valueDesc.all.seaCreatures[0].price).toEqual(15000);
-        expect(valueDesc.all.seaCreatures[valueDesc.all.seaCreatures.length - 1].name).toEqual('Sea Anemone');
-        expect(valueDesc.all.seaCreatures[valueDesc.all.seaCreatures.length - 1].price).toEqual(500);
+        expect(valueDesc.allCritters.seaCreatures[0].id).toEqual(18);
+        expect(valueDesc.allCritters.seaCreatures[0].price).toEqual(15000);
+        expect(valueDesc.allCritters.seaCreatures[valueDesc.allCritters.seaCreatures.length - 1].name).toEqual('Sea Anemone');
+        expect(valueDesc.allCritters.seaCreatures[valueDesc.allCritters.seaCreatures.length - 1].price).toEqual(500);
     });
 });
 
 describe('remaining (today) sorting test', () => {
-    const todayAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.todayAsc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
-    const todayDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.todayDesc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const todayAsc = filterCritters(0, hemisphere.north, sortType.todayAsc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const todayDesc = filterCritters(0, hemisphere.north, sortType.todayDesc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
 
     it('matches known values when sorting by time remaining today (shortest first)', () => {
-        expect(todayAsc.available.bugs[0].name).toBe('Queen Alexandra\'s Birdwing');
+        expect(todayAsc.availableCritters.bugs[0].name).toBe('Queen Alexandra\'s Birdwing');
     });
     it('matches known values when sorting by time remaining today (longest first)', () => {
-        expect(todayDesc.available.bugs[0].name).toBe('Saw Stag');
+        expect(todayDesc.availableCritters.bugs[0].name).toBe('Saw Stag');
     });
 });
 
 describe('remaining (year) sorting test', () => {
-    const yearAsc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.yearAsc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
-    const yearDesc = filterCritters(0, hemisphere.north, blankCritterSet, false, sortType.yearDesc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const yearAsc = filterCritters(0, hemisphere.north, sortType.yearAsc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
+    const yearDesc = filterCritters(0, hemisphere.north, sortType.yearDesc, new Date(2020, 7, 3, 13)); // 3rd August 2020 1PM
 
     it('matches known values when sorting by time remaining today (shortest first)', () => {
-        expect(yearAsc.available.bugs[0].name).toBe('Blue Weevil Beetle');
+        expect(yearAsc.availableCritters.bugs[0].name).toBe('Blue Weevil Beetle');
     });
     it('matches known values when sorting by time remaining today (longest first)', () => {
-        expect(yearDesc.available.bugs[0].name).toBe('Fly');
+        expect(yearDesc.availableCritters.bugs[0].name).toBe('Fly');
     });
 });

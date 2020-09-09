@@ -17,9 +17,7 @@ const critterList: ICritterList = { bugs: bugs, fish: fish, seaCreatures: seaCre
  * 
  * @param {number} timeOffset - the difference (positive or negative) between the app and the user's Switch console
  * @param {hemisphere} hemi - the hemisphere in which the user's island is located
- * @param {boolean} hideCaught - whether the user wants to hide critters they've already caught
  * @param {ICritter[]} critterListIn - an array of critters to sort (one of available critterTypes)
- * @param {number[]} caughtArray - an array of numerical IDs belonging to caught critters
  * @param {Date} currentTime - the date we're using as a comparitor (set to the current date if none provided)
  * @returns {ICheckedCritterList} - an object containing the critters that we can catch now, and the ones that are available later
  */
@@ -224,8 +222,6 @@ export const sortCritterList = (critterListIn: ICritter[], timeOffset: number, a
  *
  * @param {number} timeOffset - the difference (positive or negative) between the app and the user's Switch console
  * @param {hemisphere} hemi - the hemisphere in which the user's island is located
- * @param {ICritterState} critters - which critters have been caught and donated 
- * @param {boolean} hideCaught - whether the user wants to hide critters they've already caught
  * @param {sortType} sortBy - how we're sorting the critter list
  * @param {Date} currentTime - the date we're using as a comparitor (set to the current date if none provided)
  * @returns {{allCritters: ICritterList, availableCritters: ICritterList, upcomingCritters: ICritterList}}
