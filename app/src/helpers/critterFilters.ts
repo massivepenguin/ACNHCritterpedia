@@ -227,7 +227,6 @@ export const sortCritterList = (critterListIn: ICritter[], timeOffset: number, a
  * @returns {{allCritters: ICritterList, availableCritters: ICritterList, upcomingCritters: ICritterList}}
  */
 export const filterCritters = (timeOffset: number, hemi: hemisphere, sortBy: sortType, currentDate: Date = new Date()): {allCritters: ICritterList, availableCritters: ICritterList, upcomingCritters: ICritterList} => {
-    console.log("filtering");
     const checkedBugs: ICheckedCritterList = filterCritterList(timeOffset, hemi, critterList.bugs, currentDate);
     const checkedFish: ICheckedCritterList = filterCritterList(timeOffset, hemi, critterList.fish, currentDate);
     const checkedSeaCreatures: ICheckedCritterList = filterCritterList(timeOffset, hemi, critterList.seaCreatures, currentDate);
