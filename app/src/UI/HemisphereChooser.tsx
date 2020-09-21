@@ -4,11 +4,11 @@ import { hemisphere } from '../model/Hemisphere';
 
 function HemisphereChooser() {
     return (
-        <div>
+        <div className="hemisphereChooser">
             <h1>Where is your Island?</h1>
             <ul>
-                <li onClick={() => store.dispatch(changeHemisphere(hemisphere.north))}>Northern Hemisphere</li>
-                <li onClick={() => store.dispatch(changeHemisphere(hemisphere.south))}>Southern Hemisphere</li>
+                <li><button onClick={() => store.dispatch(changeHemisphere(hemisphere.north))}>Northern Hemisphere</button></li>
+                <li><button onClick={() => store.dispatch(changeHemisphere(hemisphere.south))}>Southern Hemisphere</button></li>
             </ul>
         </div>
     );

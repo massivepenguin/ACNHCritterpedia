@@ -42,6 +42,65 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
+.loading-spinner {
+  background-color: #fff;
+  background-image: url(/img/loader.gif);
+  background-size: 160px;
+  background-position: center -45px;
+  position: relative;
+  padding: 60px 2rem 2rem;
+  border-radius: 20px;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hemisphereChooser {
+  text-align: center;
+
+  ul {
+    @include displayList;
+  }
+
+  button {
+    appearance: none;
+    background-color: $darkest;
+    font-family: 'pusabregular';
+    font-weight: normal;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    box-shadow: 0 10px 0 darken($darkest, 10%);
+    outline: none;
+    transition: box-shadow 0.1s ease-in-out;
+
+    &:active {
+      box-shadow: 0 -10px 0 darken($darkest, 10%);
+    }
+  }
+}
+
+.App > .hemisphereChooser {
+  background-color: #fff;
+  position: relative;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 40vw;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 30px 0 rgba(0,0,0,0.5);
+
+  button {
+    width: 90%;
+    padding: 3rem;
+    font-size: 200%;
+    margin: 2rem 0;
+  }
+}
+
 .mainApp {
   display: flex;
   flex-direction: column;

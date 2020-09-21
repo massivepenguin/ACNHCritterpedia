@@ -115,6 +115,83 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
+.loading-spinner {
+  background-color: #fff;
+  background-image: url(/img/loader.gif);
+  background-size: 160px;
+  background-position: center -45px;
+  position: relative;
+  padding: 60px 2rem 2rem;
+  border-radius: 20px;
+  width: 100px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.hemisphereChooser {
+  text-align: center;
+}
+
+.hemisphereChooser ul {
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hemisphereChooser ul > li {
+  margin: 0;
+  padding: 0;
+}
+
+.hemisphereChooser button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #685A53;
+  font-family: 'pusabregular';
+  font-weight: normal;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  -webkit-box-shadow: 0 10px 0 #4c413c;
+          box-shadow: 0 10px 0 #4c413c;
+  outline: none;
+  -webkit-transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: -webkit-box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out;
+  transition: box-shadow 0.1s ease-in-out, -webkit-box-shadow 0.1s ease-in-out;
+}
+
+.hemisphereChooser button:active {
+  -webkit-box-shadow: 0 -10px 0 #4c413c;
+          box-shadow: 0 -10px 0 #4c413c;
+}
+
+.App > .hemisphereChooser {
+  background-color: #fff;
+  position: relative;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 40vw;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.5);
+}
+
+.App > .hemisphereChooser button {
+  width: 90%;
+  padding: 3rem;
+  font-size: 200%;
+  margin: 2rem 0;
+}
+
 .mainApp {
   display: -webkit-box;
   display: -ms-flexbox;

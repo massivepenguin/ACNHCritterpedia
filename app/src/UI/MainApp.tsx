@@ -11,6 +11,7 @@ import ViewSwitch from './ViewSwitch';
 import { IAppState } from '../model/AppState';
 import { useSelector } from 'react-redux';
 import { ICritterList } from '../model/ICritterList';
+import LoadingSpinner from './LoadingSpinner';
 
 const MainApp = () => {
 
@@ -23,19 +24,22 @@ const MainApp = () => {
     
     const emptyCritterList: ICritterList = {bugs: [], fish: [], seaCreatures: []};
 
+    const [loading, setLoading] = useState(true);
     const [all, setAllCritters] = useState(emptyCritterList);
     const [available, setAvailableCritters] = useState(emptyCritterList);
     const [upcoming, setUpcomingCritters] = useState(emptyCritterList);
 
     // only run the filtering step if something changes that will have a material effect on the list of critters
     useEffect(() => {
+        setLoading(true);
         const {allCritters, availableCritters, upcomingCritters} = filterCritters(timeOffset, hemisphere!, activeSort);
         setAllCritters(allCritters);
         setAvailableCritters(availableCritters);
         setUpcomingCritters(upcomingCritters);
+        setLoading(false);
     }, [timeOffset, hemisphere, hideCaught, activeSort, showAll, currentView]);
 
-    return (<div className={'mainApp'}>
+    return (loading ? <LoadingSpinner /> : <div className={'mainApp'}>
         <div className={'controls'}>
             <ListSorter />
             <Checkbox
